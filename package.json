@@ -1,0 +1,32 @@
+{
+  "name": "skrappTest",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.17.0",
+    "geolib": "^2.0.24",
+    "react": "16.0.0-beta.5",
+    "react-native": "0.49.3",
+    "react-native-maps": "^0.17.1",
+    "react-native-router-flux": "^4.0.0-beta.22",
+    "react-native-vector-icons": "^4.4.2"
+  },
+  "devDependencies": {
+    "babel-jest": "21.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "21.2.1",
+    "react-test-renderer": "16.0.0-beta.5"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
