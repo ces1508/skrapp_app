@@ -60,16 +60,17 @@ export default class Menu extends Component {
             />
         <Text style = { styles.text }>MIS FAVORITOS</Text>
       </View>
-      <View style = { styles.item }>
-        <TouchableOpacity onPress=  { () => this.map() }>
-          <Icon 
-            style = { styles.iconMenu } 
-            name = 'map' 
-            size = {32}  
-            color = '#6473e1'/>
-          <Text style = { styles.text }>MAPA</Text>
-        </TouchableOpacity>
-      </View>
+
+      <TouchableOpacity onPress=  { () => this.map() }>
+        <View style = { styles.item }>
+          <Icon
+            style={ styles.iconMenu }
+            name='map'
+            size={25}
+            color='#6473e1' />
+          <Text style={styles.text}>MAPA</Text>
+        </View>
+      </TouchableOpacity>
 
       <TouchableOpacity onPress = {() => this.settings()}>
         <View style = { styles.item }>
@@ -115,13 +116,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  item:{
-    height:( height  - 10)/ 7.6,
+  item: {
+    height: (height - 10) / 7.6,
     justifyContent: 'center',
     alignItems: 'center',
     // borderWidth: 1,
   },
-  imageProfile:{
+  imageProfile: {
     width: 60,
     height: 60,
     borderRadius: 30,
