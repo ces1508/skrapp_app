@@ -10,27 +10,10 @@ export default class DetailCategrory extends Component {
     this.state = ({ 
       data: [], 
       loading: true, 
-      currentPosition: {},
-      errorPosition: true
     })
     this.getData = this.getData.bind(this)
-    this.getCurrentPosition = this.getCurrentPosition.bind(this)
   }
 
-
-  getCurrentPosition () {
-    window.navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position)
-      this.setState({  
-        currentPosition: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        }
-      })
-    }, (error => {
-      this.setState({ errorPosition: true })
-    }), { enableHighAccuracy: true, timeout: 2000, maximumAge: 1000  })
-  }
 
   async getData() {
     let { errorPosition, currentPosition } = this.state
@@ -40,7 +23,6 @@ export default class DetailCategrory extends Component {
 
   componentWillMount() {
     Actions.refresh({onRight: () => this.goToSearch() })
-    this.getCurrentPosition()
   }
   componentDidMount() {
     this.getData()
@@ -52,6 +34,10 @@ export default class DetailCategrory extends Component {
   
   renderContent() {
     let { loading } = this.state
+    let currentPosition = { 
+      latitude: window.position.latitude || '', 
+      longitude: window.position.longitude || ''
+    }
     if (loading ) {
       return(
         <View style = {{ flex:1, justifyContent: 'center' , alignItems: 'center',}}>
@@ -61,7 +47,7 @@ export default class DetailCategrory extends Component {
     } else {
       return (
         <View  > 
-          <ListPlaces  data={this.state.data} handleClick={this.nextPage} position = {this.state.currentPosition }  />
+          <ListPlaces  data={this.state.data} handleClick={this.nextPage} position = { currentPosition }  />
         </View>
       )
     }

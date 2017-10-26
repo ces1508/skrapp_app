@@ -11,6 +11,7 @@ export default class Place extends Component {
   }
 
   calculeDistance () {
+    console.warn('la posicion', this.props.position)
     if (this.props.position.hasOwnProperty('latitude')) {
       let { latitude, longitude } = this.props.data.location
       console.log(this.props)
@@ -20,12 +21,15 @@ export default class Place extends Component {
       }
       let distance =  geolib.getDistance(this.props.position, positionPlace)
       let distanceinKm = geolib.convertUnit('km', distance)
+      console.warn(distanceinKm)
       this.setState({ distance: distanceinKm })
+    } else {
+      this.setState({ distance: '' })
     }
-    this.setState({ distance: '' })
   }
 
   componentWillMount() {
+    console.log(window.position)
     this.calculeDistance()
   }
 

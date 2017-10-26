@@ -30,6 +30,11 @@ export default class Routes extends Component {
 
   componentWillMount() {
     this.requireLogin()
+    window.navigator.geolocation.getCurrentPosition( (position) => {
+      window.position = position.coords
+    }, ( (error) => {
+      alert('error al capturar posicion ', error.message)
+    }),  {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
   }
   async requireLogin () {
     let requireLogin = await AlreadyUser()
@@ -48,19 +53,18 @@ export default class Routes extends Component {
               key = 'login'
               component = { LoginView }
               hideNavBar
-              initial = { true } />
+              initial = { !login } />
               <Scene 
                 key = 'registy'
                 component={RegistryView }
-                hideNavBar
-                initial = {false} />
+                hideNavBar />
             <Scene
               key = "drawer"
               drawer
               contentComponent = { Menu }
               hideNavBar
               drawerImage = { MenuIcon }
-              initial = { false }
+              initial = { login }
               drawerWidth = {250}>
               <Scene
                 key = 'categories'
@@ -102,7 +106,6 @@ export default class Routes extends Component {
               key = 'map'
               title = 'Mapa'
               component = { MapView }
-              initial = { false }
               titleStyle = {{ color: '#fff' }} />
           </Scene>
       </Router>
