@@ -37,7 +37,7 @@ export default class Map extends Component {
           style={{
             height: 300,
             //borderColor: 'rgba(0, 0, 0, 0.07)',
-            //borderWidth: 2,
+            borderWidth: 2,
           }}
           region={this.state.region}
           scrollEnabled = { false }
@@ -54,7 +54,6 @@ export default class Map extends Component {
 
 const styles = StyleSheet.create({
   contentMaps: {
-    borderRadius: 4,
     shadowColor: 'rgba(0,0,0,.15)',
     shadowOpacity: .9,
     shadowOffset: {

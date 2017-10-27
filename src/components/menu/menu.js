@@ -7,6 +7,7 @@ import{
   TouchableOpacity,
   Image,
   Alert,
+  Platform
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import IonicIcon from 'react-native-vector-icons/Ionicons'
@@ -60,16 +61,17 @@ export default class Menu extends Component {
             />
         <Text style = { styles.text }>MIS FAVORITOS</Text>
       </View>
-      <View style = { styles.item }>
-        <TouchableOpacity onPress=  { () => this.map() }>
-          <Icon 
-            style = { styles.iconMenu } 
-            name = 'map' 
-            size = {32}  
-            color = '#6473e1'/>
-          <Text style = { styles.text }>MAPA</Text>
-        </TouchableOpacity>
-      </View>
+
+      <TouchableOpacity onPress=  { () => this.map() }>
+        <View style = { styles.item }>
+          <Icon
+            style={ styles.iconMenu }
+            name='map'
+            size={25}
+            color='#6473e1' />
+          <Text style={styles.text}>MAPA</Text>
+        </View>
+      </TouchableOpacity>
 
       <TouchableOpacity onPress = {() => this.settings()}>
         <View style = { styles.item }>
@@ -114,23 +116,25 @@ const styles = StyleSheet.create({
     height: (height - 10) / 5.5,
     justifyContent: 'center',
     alignItems: 'center',
+    // borderRadius: Platform.OS === 'android' ? 20 : 30,
   },
-  item:{
-    height:( height  - 10)/ 7.6,
+  item: {
+    height: (height - 10) / 7.6,
     justifyContent: 'center',
     alignItems: 'center',
     // borderWidth: 1,
   },
-  imageProfile:{
+  imageProfile: {
     width: 60,
     height: 60,
+    // backgroundColor: 'white',
+    // borderRadius: Platform.OS === 'android' ? 50 : 30,
     borderRadius: 30,
     borderWidth: 3,
     borderColor: '#fff',
     // marginTop: 15,
     // marginBottom: 5,
     marginTop: 30,
-    backgroundColor: 'white'
   },
   textPerfil: {
     color: '#fff',
