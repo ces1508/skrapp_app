@@ -34,7 +34,7 @@ export default class Routes extends Component {
       window.position = position.coords
     }, ( (error) => {
       alert('error al capturar posicion ', error.message)
-    }),  {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
+    }),  {enableHighAccuracy: false, timeout: 2000, maximumAge: 1000})
   }
   async requireLogin () {
     let requireLogin = await AlreadyUser()
@@ -54,7 +54,7 @@ export default class Routes extends Component {
               component = { LoginView }
               hideNavBar
               initial = { !login } />
-              <Scene 
+              <Scene
                 key = 'registy'
                 component={RegistryView }
                 hideNavBar />
