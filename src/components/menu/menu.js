@@ -7,6 +7,7 @@ import{
   TouchableOpacity,
   Image,
   Alert,
+  Platform
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import IonicIcon from 'react-native-vector-icons/Ionicons'
@@ -115,6 +116,7 @@ const styles = StyleSheet.create({
     height: (height - 10) / 5.5,
     justifyContent: 'center',
     alignItems: 'center',
+    // borderRadius: Platform.OS === 'android' ? 20 : 30,
   },
   item: {
     height: (height - 10) / 7.6,
@@ -125,13 +127,14 @@ const styles = StyleSheet.create({
   imageProfile: {
     width: 60,
     height: 60,
+    // backgroundColor: 'white',
+    // borderRadius: Platform.OS === 'android' ? 50 : 30,
     borderRadius: 30,
     borderWidth: 3,
     borderColor: '#fff',
     // marginTop: 15,
     // marginBottom: 5,
     marginTop: 30,
-    backgroundColor: 'white'
   },
   textPerfil: {
     color: '#fff',
