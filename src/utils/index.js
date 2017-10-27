@@ -35,12 +35,14 @@ export const DestroySession = async () => {
 export const getCurrentPosition = () =>  {
   try {
      window.navigator.geolocation.getCurrentPosition((position) => {
-      window.location = position.coords
+      window.position = position.coords
     }, (error => {
-      console.error(error)
+      window.position = {
+        error: true
+      }
+      console.log('error ', error.message)
     }), { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000  })
   } catch (e) {
-    console.error(e)
     alert('error ')
   }
 }

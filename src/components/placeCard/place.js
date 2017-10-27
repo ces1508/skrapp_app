@@ -5,6 +5,7 @@ import Star from '../star'
 
 export default class PlaceCard extends Component {
   render() {
+    console.log('show distance', this.props)
     return(
       <View style = { styles.place }>
         <View style = { styles.content }>
@@ -20,10 +21,14 @@ export default class PlaceCard extends Component {
             <Star type = 'empty' />
           </View>
         </View>
-        <View style = { styles.distance }>
-            <Text style = {styles.textDistance} > { this.props.distance }  </Text>
-            <Text style= {styles.textUnidad} > { this.props.unidad } </Text>
-        </View>
+        {
+          this.props.showDistance?(
+            <View style = { styles.distance }>
+                <Text style = {styles.textDistance} > { this.props.distance }  </Text>
+                <Text style= {styles.textUnidad} > { this.props.unidad } </Text>
+            </View>
+          ): null
+        }
       </View>
     )
   }

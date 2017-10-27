@@ -76,7 +76,7 @@ export default class Search extends Component {
     if (typeSearch === 'categories') {
       return <Categories  data = { filter? filterData : data } />
     }
-    return <ListPlaces data = { filter? filterData : data } />
+    return <ListPlaces data = { filter? filterData : data } currentPosition = { window.position }/>
   }
   render() {
     return(

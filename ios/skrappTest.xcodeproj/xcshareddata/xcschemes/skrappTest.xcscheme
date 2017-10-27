@@ -126,6 +126,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "skrapp"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

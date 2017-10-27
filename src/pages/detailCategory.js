@@ -17,16 +17,22 @@ export default class DetailCategrory extends Component {
 
 
   async getData() {
-    let { errorPosition, currentPosition } = this.state
-    let data = await Api.getItemsByCategory(this.props.id, errorPosition? null : currentPosition )
-    this.setState({ loading: false, data  })
+    let currentPosition = window.position
+    console.log(currentPosition)
+    if (currentPosition.error) {
+      let data = await Api.getItemsByCategory(this.props.id)
+      this.setState({ loading: false, data  })
+    } else {
+      let data = await Api.getItemsByCategory(this.props.id, currentPosition )
+      this.setState({ loading: false, data  })
+    }
   }
 
   componentWillMount() {
-    getCurrentPosition()
     Actions.refresh({onRight: () => this.goToSearch() })
   }
   componentDidMount() {
+    getCurrentPosition()
     this.getData()
   }
 
@@ -36,10 +42,6 @@ export default class DetailCategrory extends Component {
 
   renderContent() {
     let { loading } = this.state
-    let currentPosition = {
-      latitude: window.position.latitude || '',
-      longitude: window.position.longitude || ''
-    }
     if (loading ) {
       return(
         <View style = {{ flex:1, justifyContent: 'center' , alignItems: 'center',}}>
@@ -49,7 +51,7 @@ export default class DetailCategrory extends Component {
     } else {
       return (
         <View  >
-          <ListPlaces  data={this.state.data} handleClick={this.nextPage} position = { currentPosition }  />
+          <ListPlaces  data={this.state.data} handleClick={this.nextPage}  currentPosition = { window.position }  />
         </View>
       )
     }

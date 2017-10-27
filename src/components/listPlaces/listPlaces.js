@@ -17,7 +17,7 @@ export default class ListPlaces extends Component {
       <FlatList
         keyExtractor = { item => item.objectId}
         data = { this.props.data }
-        renderItem = { ({item}) => <Place data =  { item } position = {this.props.position} handleClick = { () => this.nextPage(item) } /> }
+        renderItem = { ({item}) => <Place data =  { item } currentPosition = {this.props.currentPosition} handleClick = { () => this.nextPage(item) } /> }
       />
     )
   }

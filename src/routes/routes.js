@@ -33,7 +33,11 @@ export default class Routes extends Component {
     window.navigator.geolocation.getCurrentPosition( (position) => {
       window.position = position.coords
     }, ( (error) => {
-      alert('error al capturar posicion ', error.message)
+      window.position = {
+        error: true,
+        latitude: 0,
+        longitude: 0
+      }
     }),  {enableHighAccuracy: false, timeout: 2000, maximumAge: 1000})
   }
   async requireLogin () {
@@ -53,6 +57,7 @@ export default class Routes extends Component {
               key = 'login'
               component = { LoginView }
               hideNavBar
+              type = 'modal'
               initial = { !login } />
               <Scene
                 key = 'registy'

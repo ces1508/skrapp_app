@@ -29,7 +29,8 @@ export default class Api {
 
   static async getItemsByCategory(id, location = null)  {
     let where = {}
-    console.log(location)
+    console.log('location', location)
+    console.log('id ', id)
     if (location) {
       where = {
         category: {
@@ -72,17 +73,33 @@ export default class Api {
   }
 
   static async filterPlaceByName (text, categoryId) {
-
+    let where = {} 
     let title = text.toLowerCase()
+    if (window.position.error) {
+      where = {
+        canonical: {
+          $regex: title
+        }
+      }
+    } else {
+      where = {
+        canonical: {
+          $regex: title
+        },
+        location: {
+          "$nearSphere": {
+            "__type": "GeoPoint",
+            "latitude": window.position.latitude,
+            "longitude":  window.position.longitude
+          },
+        }
+      }
+    }
     try {
       let endpoint = `${API_SKRAPP}/classes/Place`
       let request = await axios.get(endpoint, {
         params: {
-          where: {
-            canonical: {
-              $regex: title
-            }
-          }
+          where: where
         },
         headers: {
           "content-type": "application/json",

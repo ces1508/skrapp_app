@@ -7,33 +7,42 @@ export default class Place extends Component {
   constructor(props) {
     super(props)
     this.calculeDistance = this.calculeDistance.bind(this)
-    this.state = { distance: 0 }
+    this.state = { distance: 0, showDistance: false }
   }
 
   calculeDistance () {
-    if (this.props.position.hasOwnProperty('latitude')) {
+    if (this.props.currentPosition) {
       let { latitude, longitude } = this.props.data.location
       let positionPlace = {
         latitude,
         longitude
       }
-      let distance =  geolib.getDistance(this.props.position, positionPlace)
+      let currentPosition = {
+        latitude: this.props.currentPosition.latitude,
+        longitude: this.props.currentPosition.longitude
+      }
+       let distance =  geolib.getDistance(currentPosition, positionPlace)
       let distanceinKm = geolib.convertUnit('km', distance)
-      this.setState({ distance: distanceinKm })
-    } else {
-      this.setState({ distance: '' })
+      console.log(distanceinKm)
+      this.setState({ distance: distanceinKm, showDistance: true })
     }
   }
 
   componentWillMount() {
-    this.calculeDistance()
+    if (this.props.currentPosition.hasOwnProperty('error') === false) {
+      this.calculeDistance()
+    } 
   }
 
   render() {
     let { data } = this.props
     return(
       <Card  data = { data}  handleClick = { this.props.handleClick }>
-          <PlaceCard  address = {data.address} distance = { this.state.distance } unidad = 'km' ranking = {3} />
+          <PlaceCard  
+            address = {data.address}  
+            showDistance = {this.state.showDistance} 
+            distance = { this.state.distance } 
+            unidad = 'km' ranking = {3} />
       </Card>
     )
   }
