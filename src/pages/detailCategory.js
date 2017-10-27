@@ -2,35 +2,19 @@ import React, { Component } from 'react'
 import ListPlaces  from '../components/listPlaces'
 import Api from '../api'
 import { View, Text } from 'react-native'
-import { Actions } from "react-native-router-flux";
+import { Actions } from 'react-native-router-flux'
+import { getCurrentPosition } from '../utils'
 export default class DetailCategrory extends Component {
   constructor(props) {
     super(props)
     this.renderContent = this.renderContent.bind(this)
-    this.state = ({ 
-      data: [], 
-      loading: true, 
-      currentPosition: {},
-      errorPosition: true
+    this.state = ({
+      data: [],
+      loading: true,
     })
     this.getData = this.getData.bind(this)
-    this.getCurrentPosition = this.getCurrentPosition.bind(this)
   }
 
-
-  getCurrentPosition () {
-    window.navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position)
-      this.setState({  
-        currentPosition: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        }
-      })
-    }, (error => {
-      this.setState({ errorPosition: true })
-    }), { enableHighAccuracy: true, timeout: 2000, maximumAge: 1000  })
-  }
 
   async getData() {
     let { errorPosition, currentPosition } = this.state
@@ -39,19 +23,23 @@ export default class DetailCategrory extends Component {
   }
 
   componentWillMount() {
+    getCurrentPosition()
     Actions.refresh({onRight: () => this.goToSearch() })
-    this.getCurrentPosition()
   }
   componentDidMount() {
     this.getData()
   }
-  
+
   goToSearch() {
     Actions.search({ typeSearch: 'places' , categoryId: this.props.id})
   }
-  
+
   renderContent() {
     let { loading } = this.state
+    let currentPosition = {
+      latitude: window.position.latitude || '',
+      longitude: window.position.longitude || ''
+    }
     if (loading ) {
       return(
         <View style = {{ flex:1, justifyContent: 'center' , alignItems: 'center',}}>
@@ -60,13 +48,13 @@ export default class DetailCategrory extends Component {
       )
     } else {
       return (
-        <View  > 
-          <ListPlaces  data={this.state.data} handleClick={this.nextPage} position = {this.state.currentPosition }  />
+        <View  >
+          <ListPlaces  data={this.state.data} handleClick={this.nextPage} position = { currentPosition }  />
         </View>
       )
     }
   }
-  
+
   render() {
     return this.renderContent()
   }

@@ -1,5 +1,5 @@
 import {
-  AsyncStorage  
+  AsyncStorage
 } from 'react-native'
 
 export const  SaveTokens = async  (data) => {
@@ -16,7 +16,7 @@ export const AlreadyUser = async () => {
     let user = await AsyncStorage.getItem('tokens')
     if (user !== null) {
       return true
-    } 
+    }
     return false
   } catch (e) {
     return false
@@ -35,7 +35,7 @@ export const DestroySession = async () => {
 export const getCurrentPosition = () =>  {
   try {
      window.navigator.geolocation.getCurrentPosition((position) => {
-      return position
+      window.location = position.coords
     }, (error => {
       console.error(error)
     }), { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000  })
