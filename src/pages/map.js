@@ -71,9 +71,9 @@ export default class Map extends Component {
             image = { place.category.icon.url }
           >
             <MapView.Callout tooltip >
-              <View style = {{ flexDirection:'row', backgroundColor: '#fff' }}>
+              <View style = { styles.containerTooltip }>
                 <View>
-                    <Image source = {{ uri: place.imageThumb.url }}  style = {{ width: 50, height: 50 }}/>
+                    <Image source = {{ uri: place.imageThumb.url }}  style = {{ width: 50, height: 50, borderRadius: 25,  }}/>
                 </View>
                 <View>
                   <Text style = { styles.titleMarker }> {place.title} </Text>
@@ -92,13 +92,13 @@ export default class Map extends Component {
           identifier = { place.objectId }
         >
           <MapView.Callout tooltip >
-            <View style = {{ flexDirection:'row', backgroundColor: '#fff' }}>
+            <View style = {{ flexDirection:'row', backgroundColor: 'red' }}>
               <View>
-                  <Image source = {{ uri: place.imageThumb.url }}  style = {{ width: 50, height: 50 }}/>
+                  <Image source = {{ uri: place.imageThumb.url }}  style = {{ width: 50, height: 50 , borderWidth: 1, borderColor: '#4d4d4d'}}/>
               </View>
-              <View>
-                <Text style = { styles.titleMarker }> {place.title} </Text>
-                <Text> { place.description } </Text>
+              <View >
+                <Text style = { styles.titleMarker }> { place.title } </Text>
+                <Text style={{ textAlign: 'auto' }}> { place.description } </Text>
               </View>
             </View>
           </MapView.Callout>
@@ -120,7 +120,25 @@ export default class Map extends Component {
 }
 
 const styles = StyleSheet.create({
+  containerTooltip: {
+    flexDirection: 'row', 
+    paddingVertical: 5, 
+    paddingHorizontal: 10, 
+    backgroundColor: '#fefefe', 
+    borderRadius: 2, 
+    flex: 1, 
+    maxWidth: 320,
+    shadowOffset: { width: 0, height: 0, },
+    shadowColor: 'rgba(0,0,0,.1)',
+    shadowOpacity: 1.0,
+    overflow: 'hidden',
+
+  },
   titleMarker: {
-    fontSize: 16
-  }
+    fontSize: 18,
+    fontFamily: 'Roboto-Medium',
+    fontWeight: '400',
+    marginBottom: 5,
+  },
+
 })
