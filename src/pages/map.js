@@ -19,8 +19,10 @@ export default class Map extends Component {
     super(props)
     this.state = {
       initialRegion : {
-        latitude: 2.9564872,
-        longitude: -75.2887927,
+        // latitude: 2.9564872,
+        // longitude: -75.2887927,
+        latitude: 2.9403674,
+        longitude: -75.2880562,
         latitudeDelta:LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       },
@@ -72,12 +74,13 @@ export default class Map extends Component {
           >
             <MapView.Callout tooltip >
               <View style = { styles.containerTooltip }>
-                <View>
-                    <Image source = {{ uri: place.imageThumb.url }}  style = {{ width: 50, height: 50, borderRadius: 25,  }}/>
+                <View style={ styles.containerImage }>
+                    <Image source = {{ uri: place.imageThumb.url }}  
+                    style={ styles.image }/>
                 </View>
-                <View>
+                <View >
                   <Text style = { styles.titleMarker }> {place.title} </Text>
-                  <Text> { place.description } </Text>
+                  <Text style={ styles.descriptionMarker }> { place.description } </Text>
                 </View>
               </View>
             </MapView.Callout>
@@ -92,13 +95,13 @@ export default class Map extends Component {
           identifier = { place.objectId }
         >
           <MapView.Callout tooltip >
-            <View style = {{ flexDirection:'row', backgroundColor: 'red' }}>
-              <View>
-                  <Image source = {{ uri: place.imageThumb.url }}  style = {{ width: 50, height: 50 , borderWidth: 1, borderColor: '#4d4d4d'}}/>
+            <View style={styles.containerTooltip}>
+              <View style = { styles.containerImage }>
+                <Image style={styles.image} source={{ uri: place.imageThumb.url }} />
               </View>
               <View >
                 <Text style = { styles.titleMarker }> { place.title } </Text>
-                <Text style={{ textAlign: 'auto' }}> { place.description } </Text>
+                <Text style={ styles.descriptionMarker}> { place.description } </Text>
               </View>
             </View>
           </MapView.Callout>
@@ -122,23 +125,42 @@ export default class Map extends Component {
 const styles = StyleSheet.create({
   containerTooltip: {
     flexDirection: 'row', 
-    paddingVertical: 5, 
+    alignItems: 'center',
+    paddingVertical: 10, 
     paddingHorizontal: 10, 
     backgroundColor: '#fefefe', 
     borderRadius: 2, 
     flex: 1, 
-    maxWidth: 320,
     shadowOffset: { width: 0, height: 0, },
     shadowColor: 'rgba(0,0,0,.1)',
     shadowOpacity: 1.0,
     overflow: 'hidden',
 
   },
+  containerImage: {
+    marginRight: 5
+  },
+  image: {
+    width: 50, 
+    height: 50, 
+    borderRadius: 25, 
+    borderWidth: 1, 
+    borderColor: 'rgba(0,0,0,.25)',
+    backgroundColor: '#f4f4f4'
+  },
   titleMarker: {
     fontSize: 18,
     fontFamily: 'Roboto-Medium',
-    fontWeight: '400',
+    fontWeight: '500',
     marginBottom: 5,
+    color: '#454545',
+    maxWidth: 280,
   },
+  descriptionMarker: {
+    fontSize: 14, 
+    flexWrap: 'wrap', 
+    maxWidth: 250, 
+    lineHeight: 18
+  }
 
 })
