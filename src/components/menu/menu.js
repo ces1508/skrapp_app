@@ -7,7 +7,8 @@ import{
   TouchableOpacity,
   Image,
   Alert,
-  Platform
+  Platform,
+  ScrollView
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import IonicIcon from 'react-native-vector-icons/Ionicons'
@@ -19,6 +20,9 @@ const { width, height } = Dimensions.get('window')
 export default class Menu extends Component {
   constructor(props) {
     super(props)
+  }
+  myFavorites() {
+    Actions.myFavorites()
   }
 
   about () {
@@ -47,73 +51,82 @@ export default class Menu extends Component {
 
   render() {
    return(
-     <View style={{ backgroundColor: '#2b2631' , flex: 1, paddingVertical: 20,}}>
-      <View style = {[ styles.itemImage,]}>
-        <Image source = {{ uri: 'https://lorempixel.com/120/120/' }} style = { styles.imageProfile } />
-        <Text style = { styles.textPerfil }>PERFIL</Text>
-      </View>
-      
-      <View style = { styles.item }>
-         <Icon 
-            style = { styles.iconMenu }
-            name='heart' 
-            size={25} 
-            color= '#d63636'
-            />
-        <Text style = { styles.text }>MIS FAVORITOS</Text>
-      </View>
-
-      <TouchableOpacity onPress=  { () => this.map()}>
-        <View style = { styles.item }>
-          <Icon
-            style={ styles.iconMenu }
-            name='map'
-            size={25}
-            color='#6473e1' />
-          <Text style={styles.text}>MAPA</Text>
+     <ScrollView contentContainerStyle={styles.container }> 
+      <View style={{ flex: 1, paddingVertical: 20,}}>
+        <View style = {[ styles.itemImage,]}>
+          <Image source = {{ uri: 'https://lorempixel.com/120/120/' }} style = { styles.imageProfile } />
+          <Text style = { styles.textPerfil }>PERFIL</Text>
         </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress = {() => this.settings()}>
-        <View style = { styles.item }>
-          <Icon 
-            style = { styles.iconMenu } 
-            name = 'cog' 
-            size = {25}  
-            color = '#a8a8a8'/>
-          <Text style = { styles.text }>AJUSTES</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress = {() => this.about()} >
-        <View style = { styles.item }>
-           <Icon 
-            style = { styles.iconMenu } 
-            name='info-circle' 
-            size={25} 
-            color= '#ffd39c'/>
-          <Text style = { styles.text }>ACERCA DE SKRAPP</Text>
+        <TouchableOpacity onPress={() => this.myFavorites()}>
+          <View style = { styles.item }>
+            <Icon 
+                style = { styles.iconMenu }
+                name='heart' 
+                size={25} 
+                color= '#d63636'
+                />
+            <Text style = { styles.text }>MIS FAVORITOS</Text>
           </View>
-      </TouchableOpacity>
+         </TouchableOpacity>
 
-      <TouchableOpacity onPress = { () => this.destroySession() }>
-        <View style = { styles.item }>
-         <IonicIcon 
-          style = { styles.iconMenu } 
-          name='md-log-out' 
-          size={25} 
-          color= '#ff5353'/>
-          
-          <Text style = { styles.text }>CERRAR SESIÓN</Text>
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity onPress=  { () => this.map()}>
+          <View style = { styles.item }>
+            <Icon
+              style={ styles.iconMenu }
+              name='map'
+              size={25}
+              color='#6473e1' />
+            <Text style={styles.text}>MAPA</Text>
+          </View>
+        </TouchableOpacity>
 
-    </View>
+        <TouchableOpacity onPress = {() => this.settings()}>
+          <View style = { styles.item }>
+            <Icon 
+              style = { styles.iconMenu } 
+              name = 'cog' 
+              size = {25}  
+              color = '#a8a8a8'/>
+            <Text style = { styles.text }>AJUSTES</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress = {() => this.about()} >
+          <View style = { styles.item }>
+            <Icon 
+              style = { styles.iconMenu } 
+              name='info-circle' 
+              size={25} 
+              color= '#ffd39c'/>
+            <Text style = { styles.text }>ACERCA DE SKRAPP</Text>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress = { () => this.destroySession() }>
+          <View style = { styles.item }>
+          <IonicIcon 
+            style = { styles.iconMenu } 
+            name='md-log-out' 
+            size={25} 
+            color= '#ff5353'/>
+            
+            <Text style = { styles.text }>CERRAR SESIÓN</Text>
+          </View>
+        </TouchableOpacity>
+
+      </View>
+     </ScrollView>
    )
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    backgroundColor: '#2b2631',
+  },
   itemImage: {
     height: (height - 10) / 5.5,
     justifyContent: 'center',
