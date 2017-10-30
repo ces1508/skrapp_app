@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     paddingBottom: 0,
-    alignItems: 'flex-start'    
+    alignItems: 'flex-start',
+    
   },
   text: {
     paddingVertical: Platform.OS === 'android'? 0 : 20,
