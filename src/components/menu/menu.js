@@ -52,6 +52,7 @@ export default class Menu extends Component {
         <Image source = {{ uri: 'https://lorempixel.com/120/120/' }} style = { styles.imageProfile } />
         <Text style = { styles.textPerfil }>PERFIL</Text>
       </View>
+      
       <View style = { styles.item }>
          <Icon 
             style = { styles.iconMenu }
@@ -62,7 +63,7 @@ export default class Menu extends Component {
         <Text style = { styles.text }>MIS FAVORITOS</Text>
       </View>
 
-      <TouchableOpacity onPress=  { () => this.map() }>
+      <TouchableOpacity onPress=  { () => this.map()}>
         <View style = { styles.item }>
           <Icon
             style={ styles.iconMenu }
@@ -94,6 +95,7 @@ export default class Menu extends Component {
           <Text style = { styles.text }>ACERCA DE SKRAPP</Text>
           </View>
       </TouchableOpacity>
+
       <TouchableOpacity onPress = { () => this.destroySession() }>
         <View style = { styles.item }>
          <IonicIcon 

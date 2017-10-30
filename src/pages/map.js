@@ -77,39 +77,15 @@ export default class Map extends Component {
 
   renderMarkers () {
     let { places } = this.state
-    console.log(places.length)
-    if (places.length > 0) {
-
-      return places.map((place, index) => {
-        if (place.category && place.category.icon) {
-          return (
-            <MapView.Marker key = { place.objectId }
-              coordinate = { place.location }
-              title = { place.title }
-              description = { place.description }
-              identifier = { place.objectId }
-              image = { place.category.icon.url }
-            >
-              <MapView.Callout tooltip >
-                <View style = {{ flexDirection:'row', backgroundColor: '#fff' }}>
-                  <View>
-                      <Image source = {{ uri: place.imageThumb.url }}  style = {{ width: 50, height: 50 }}/>
-                  </View>
-                  <View>
-                    <Text style = { styles.titleMarker }> {place.title} </Text>
-                    <Text> { place.description } </Text>
-                  </View>
-                </View>
-              </MapView.Callout>
-            </MapView.Marker>
-          )
-        }
+    return places.map((place, index) => {
+      if (place.category && place.category.icon) {
         return (
           <MapView.Marker key = { place.objectId }
             coordinate = { place.location }
             title = { place.title }
             description = { place.description }
             identifier = { place.objectId }
+            image = { place.category.icon.url }
           >
             <MapView.Callout tooltip >
               <View style = {{ flexDirection:'row', backgroundColor: '#fff' }}>
@@ -124,8 +100,29 @@ export default class Map extends Component {
             </MapView.Callout>
           </MapView.Marker>
         )
-      })
-    }
+      }
+      return (
+        <MapView.Marker key = { place.objectId }
+          coordinate = { place.location }
+          title = { place.title }
+          description = { place.description }
+          identifier = { place.objectId }
+        >
+          <MapView.Callout tooltip >
+            <View style = { styles.containerTooltip }>
+              <View style={ styles.containerImage }>
+                  <Image source = {{ uri: place.imageThumb.url }}  
+                  style={ styles.image }/>
+              </View>
+              <View >
+                <Text style = { styles.titleMarker }> {place.title} </Text>
+                <Text style={ styles.descriptionMarker }> { place.description } </Text>
+              </View>
+            </View>
+          </MapView.Callout>
+        </MapView.Marker>
+      )
+    })
   }
   render() {
 
@@ -142,7 +139,44 @@ export default class Map extends Component {
 }
 
 const styles = StyleSheet.create({
+  containerTooltip: {
+    flexDirection: 'row', 
+    alignItems: 'center',
+    paddingVertical: 10, 
+    paddingHorizontal: 10, 
+    backgroundColor: '#fefefe', 
+    borderRadius: 2, 
+    flex: 1, 
+    shadowOffset: { width: 0, height: 0, },
+    shadowColor: 'rgba(0,0,0,.1)',
+    shadowOpacity: 1.0,
+    overflow: 'hidden',
+
+  },
+  containerImage: {
+    marginRight: 5
+  },
+  image: {
+    width: 50, 
+    height: 50, 
+    borderRadius: 25, 
+    borderWidth: 1, 
+    borderColor: 'rgba(0,0,0,.25)',
+    backgroundColor: '#f4f4f4'
+  },
   titleMarker: {
-    fontSize: 16
+    fontSize: 18,
+    fontFamily: 'Roboto-Medium',
+    fontWeight: '500',
+    marginBottom: 5,
+    color: '#454545',
+    maxWidth: 280,
+  },
+  descriptionMarker: {
+    fontSize: 14, 
+    flexWrap: 'wrap', 
+    maxWidth: 250, 
+    lineHeight: 18
   }
+
 })

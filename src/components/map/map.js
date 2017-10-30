@@ -36,16 +36,16 @@ export default class Map extends Component {
         <MapView
           style={{
             height: 300,
-            //borderColor: 'rgba(0, 0, 0, 0.07)',
-            borderWidth: 2,
           }}
           region={this.state.region}
           scrollEnabled = { false }
         >
+        
           <MapView.Marker 
             title = { this.props.title } 
             description = { this.props.description } 
             coordinate = { this.state.region } />
+
         </MapView>
       </View>
     )
