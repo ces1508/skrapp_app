@@ -29,6 +29,7 @@ export default class Map extends Component {
     }
     this.renderMarkers = this.renderMarkers.bind(this)
     this.getPlaces = this.getPlaces.bind(this)
+    this.onRegionChange = this.onRegionChange.bind(this)
   }
 
   async getPlaces() {
@@ -73,6 +74,10 @@ export default class Map extends Component {
       }
       this.getPlaces()
     })
+  }
+
+  onRegionChange (region) {
+    this.setState({ region })
   }
 
   renderMarkers () {
@@ -131,6 +136,7 @@ export default class Map extends Component {
         style = {{ height, width }}
         initialRegion = { this.state.initialRegion }
         region = { this.state.region.latitude? this.state.region : this.state.initialRegion}
+        onRegionChange = { this.onRegionChange}
       >
        { this.renderMarkers() }
       </MapView>
