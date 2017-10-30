@@ -93,15 +93,16 @@ export default class Map extends Component {
             image = { place.category.icon.url }
           >
             <MapView.Callout tooltip >
-              <View style = {{ flexDirection:'row', backgroundColor: '#fff' }}>
-                <View>
-                    <Image source = {{ uri: place.imageThumb.url }}  style = {{ width: 50, height: 50 }}/>
-                </View>
-                <View>
-                  <Text style = { styles.titleMarker }> {place.title} </Text>
-                  <Text> { place.description } </Text>
-                </View>
+              <View style={styles.containerTooltip}>
+              <View style={styles.containerImage}>
+                <Image source={{ uri: place.imageThumb.url }}
+                  style={styles.image} />
               </View>
+              <View >
+                <Text style={styles.titleMarker}> {place.title} </Text>
+                <Text style={styles.descriptionMarker}> {place.description} </Text>
+              </View>
+            </View>
             </MapView.Callout>
           </MapView.Marker>
         )
@@ -114,14 +115,13 @@ export default class Map extends Component {
           identifier = { place.objectId }
         >
           <MapView.Callout tooltip >
-            <View style = { styles.containerTooltip }>
-              <View style={ styles.containerImage }>
-                  <Image source = {{ uri: place.imageThumb.url }}  
-                  style={ styles.image }/>
+            <View style={styles.containerTooltip}>
+              <View style={styles.containerImage}>
+                <Image style={styles.image} source={{ uri: place.imageThumb.url }} />
               </View>
               <View >
-                <Text style = { styles.titleMarker }> {place.title} </Text>
-                <Text style={ styles.descriptionMarker }> { place.description } </Text>
+                <Text style={styles.titleMarker}> {place.title} </Text>
+                <Text style={styles.descriptionMarker}> {place.description} </Text>
               </View>
             </View>
           </MapView.Callout>
