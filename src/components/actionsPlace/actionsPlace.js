@@ -23,7 +23,7 @@ export default class ActionsPlace extends Component {
       <View style = { styles.container } >
         <Action icon = 'heart' colorIcon = {this.favorite()} text = 'FAVORITOS' handleClick = {this.props.handleFavorite}/>
         <Action icon = 'star' colorIcon = '#4A4A4A' text = 'RESEÑAR' handleClick = {() => null}/>
-        <Action icon='share' colorIcon= '#272d54' text = 'COMPARTIR' handleClick = {() => null}/>
+        <Action icon='share' colorIcon= '#272d54' text = 'COMPARTIR' handleClick = {this.props.onShare}/>
       </View>
     )
   }

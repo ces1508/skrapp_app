@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native'
-
+import { Actions } from 'react-native-router-flux'
 export default class SectionLogin extends Component {
   constructor(props) {
     super(props)
@@ -14,16 +14,14 @@ export default class SectionLogin extends Component {
   }
 
   handlePress() {
-    Alert.alert(
-      'Lo sentimos :/',
-      'aun no tenemos esa funcionalidad'
-    )
+    Actions.login()
+    // alert('enviando a la vista de login')
   }
 
   render() {
     return (
       <View style={styles.login} >
-        <TouchableOpacity onPress={() => this.handlePress()}>
+        <TouchableOpacity onPress={() => Actions.pop() }>
           <Text style={styles.textBtn} > ¿Ya eres parte de Skrapp? Iniciar sesión </Text>
         </TouchableOpacity>
       </View>

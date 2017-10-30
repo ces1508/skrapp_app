@@ -11,6 +11,7 @@ import About from '../pages/about'
 import Search from '../pages/search'
 import Settings from '../pages/settings'
 import MapView from '../pages/map'
+import WebSite from '../pages/website'
 import { AlreadyUser } from '../utils'
 import {
   ActivityIndicator
@@ -33,10 +34,11 @@ export default class Routes extends Component {
     window.navigator.geolocation.getCurrentPosition( (position) => {
       window.position = position.coords
     }, ( (error) => {
+      // throw error
+      console.log(error)
       window.position = {
         error: true,
-        latitude: 0,
-        longitude: 0
+
       }
     }),  {enableHighAccuracy: false, timeout: 2000, maximumAge: 1000})
   }
@@ -60,7 +62,7 @@ export default class Routes extends Component {
               type = 'modal'
               initial = { !login } />
               <Scene
-                key = 'registy'
+                key = 'register'
                 component={RegistryView }
                 hideNavBar />
             <Scene
@@ -112,6 +114,10 @@ export default class Routes extends Component {
               title = 'Mapa'
               component = { MapView }
               titleStyle = {{ color: '#fff' }} />
+              <Scene
+                key = 'website'
+                component = { WebSite }
+                titleStyle = {{ color: '#fff' }} />
           </Scene>
       </Router>
     )

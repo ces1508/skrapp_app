@@ -2,6 +2,7 @@ import setup from '../setup'
 import axios from 'axios'
 
 const { API_SKRAPP, APPLICATION_ID } = setup
+import { getCurrentUser } from '../utils'
 
 export default class Api {
   constructor() {
@@ -29,8 +30,6 @@ export default class Api {
 
   static async getItemsByCategory(id, location = null)  {
     let where = {}
-    console.log('location', location)
-    console.log('id ', id)
     if (location) {
       where = {
         category: {
@@ -128,7 +127,6 @@ export default class Api {
       let data = request.data
       return data
     } catch (e) {
-      console.log(e)
       if (e.message === 'Request failed with status code 404') {
         return {error: true, title: 'Usuario y contraseia incorrectos', message: 'por favor verifica tus credenciales'}
       }
@@ -136,21 +134,25 @@ export default class Api {
   }
 
   static async getPlacesByPosition (location) {
+    let where = {}
+    if (location) {
+      where = {
+        location: {
+          "$nearSphere": {
+            "__type": "GeoPoint",
+            "latitude": location.latitude,
+            "longitude": location.longitude
+          },
+          $maxDistanceInKilometers: 100
+        }
+      }
+    }
     let endpoint = `${API_SKRAPP}/classes/Place`
     try {
       let request = await axios.get(endpoint, {
         params: {
           include: 'category',
-          where: {
-            location: {
-              "$nearSphere": {
-                "__type": "GeoPoint",
-                "latitude": location.latitude,
-                "longitude": location.longitude
-              },
-              $maxDistanceInKilometers: 100
-            }
-          }
+          where: where
         },
         headers: {
           "content-type": "application/json",
@@ -159,11 +161,78 @@ export default class Api {
         }
       })
       let data = request.data
-      console.log('data', data)
       return data.results
     } catch (e) {
-      console.log('error', e)
+      console.log('error', e,response)
       return []
+    }
+  }
+  static async saveUser (data) {
+    let endpoint = `${API_SKRAPP}/users`
+
+    try {
+      let request = await axios.post(endpoint, data, {
+        headers: {
+          'X-Parse-Application-Id': 'rzTRzPoG564M566g',
+          'X-Parse-Revocable-Session': '1',
+          'content-type': 'application/json'
+        },
+      })
+      return { status: 'success', data: request.data }
+    } catch (e) {
+      if (e.response.data.code === 202) {
+        return { status: 'failed', data: e.response.data }
+      } else {
+        return { status: 'failed', data: { code: 500, message: 'estamos presentando problemas con nuestros servidores' } }
+      }
+    }
+  }
+  static async likePlace (place) {
+    let endpoint = `${API_SKRAPP}/functions/likePlace`
+    let currentUser = await getCurrentUser()
+    let data = {
+      placeId: place.objectId
+    }
+    try {
+      let request = await axios.post(endpoint, data, {
+        headers: {
+          'X-Parse-Application-Id': 'rzTRzPoG564M566g',
+          'X-Parse-Session-Token': currentUser.sessionToken,
+          'content-type': 'application/json'
+        },
+      })
+
+      return { status: 'success', data: request.data.result }
+    } catch (e) {
+      if (e.response.data.code >= 400 && e.response.data.code < 500) {
+        return { status: 'failed', data: e.response.data }
+      } else {
+        return { status: 'failed', data: { code: 500, message: 'estamos presentando problemas con nuestros servidores' } }
+      }
+    }
+  }
+
+  static async placeAlradyLiked (place) {
+    let endpoint = `${API_SKRAPP}/functions/isPlaceLiked`
+    let currentUser = await getCurrentUser()
+    let data = {
+      placeId: place.objectId
+    }
+    try {
+      let request = await axios.post(endpoint, data, {
+        headers: {
+          'X-Parse-Application-Id': 'rzTRzPoG564M566g',
+          'X-Parse-Session-Token': currentUser.sessionToken,
+          'content-type': 'application/json'
+        },
+      })
+      return { status: 'success', liked: request.data.result }
+    } catch (e) {
+      if (e.response.data.code >= 400 && e.response.data.code < 500) {
+        return { status: 'failed', data: e.response.data }
+      } else {
+        return { status: 'failed', data: { code: 500, message: 'estamos presentando problemas con nuestros servidores' } }
+      }
     }
   }
 }

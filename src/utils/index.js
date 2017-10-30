@@ -31,18 +31,26 @@ export const DestroySession = async () => {
     return false
   }
 }
+export const getCurrentUser = async () => {
+  try {
+    let currentUser = await AsyncStorage.getItem('tokens')
+    currentUser = JSON.parse(currentUser)
+    return currentUser
+  } catch (e) {
+    return false
+  }
+}
 
 export const getCurrentPosition = () =>  {
   try {
      window.navigator.geolocation.getCurrentPosition((position) => {
-      window.position = position.coords
+       let { latitude, longitude } = window.position
+       if (latitude !== position.coords.latitude || longitude !== position.coords.longitude) {
+         window.position = position.coords
+       }
     }, (error => {
-      window.position = {
-        error: true
-      }
-      console.log('error ', error.message)
-    }), { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000  })
+    }), { enableHighAccuracy: false, timeout: 4000, maximumAge: 1000  })
   } catch (e) {
-    alert('error ')
+    alert('estamos presentando problemas para obetner tu posicion, \n tal vez tu esperiacia en skrapp no se la idea')
   }
 }

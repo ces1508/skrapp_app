@@ -7,6 +7,8 @@ import {
   Alert
 } from 'react-native'
 
+import { Actions } from 'react-native-router-flux'
+
 export default class SectionRegister extends Component {
   constructor(props) {
     super(props)
@@ -14,10 +16,7 @@ export default class SectionRegister extends Component {
   }
 
   handlePress() {
-    Alert.alert(
-      'Lo sentimos :/',
-      'aun no tenemos esa funcionalidad'
-    )
+   Actions.register()
   }
 
   render() {

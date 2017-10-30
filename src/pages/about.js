@@ -3,7 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Image
+  Image,
+  ScrollView
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -14,31 +15,31 @@ export default class About extends Component {
 
   render() {
     return(
-      <View style = { styles.container }>
-        <View style = { styles.containerImage }>
-          <Image style = { styles.image } source = {require('../../assets/images/skrappcolor.png')} />
-        </View>
-        <View style = {{ marginTop: 20 }} > 
-          <Text style = { styles.name }> Skrapp Colombia </Text>
-          <Text style = { styles.version }> Versión 3.2.0 </Text>
-        </View>
-        <View>
-          <Text style = { styles.description }> Finding the perfect learning tool for Flash is a
-            daunting task to any novice web developer. One can find help
-            in a number of ways through books, friends and private tutors.
-          </Text>
-        </View>
-        <View  style = { styles.social }>
-          <Icon name = 'facebook-official' size = {30} color = '#000333'/>
-          <Icon name = 'twitter' size = {30} color = '#000333' />
-          <Icon name = 'instagram' size = {30} color = '#000333' />
-          <Icon name = 'youtube-play' size = {30} color = '#000333' />
-        </View>
-        <View style = { styles.copyright }>
-          <Icon name = 'copyright' size = {20}/>
-          <Text style = { styles.copyrightText }>2017 Todos los derechos reservados.</Text>
-        </View>
-      </View>
+        <ScrollView contentContainerStyle = { styles.container }>
+          <View style = { styles.containerImage }>
+            <Image style = { styles.image } source = {require('../../assets/images/skrappcolor.png')} />
+          </View>
+          <View style = {{ marginTop: 20 }} > 
+            <Text style = { styles.name }> Skrapp Colombia </Text>
+            <Text style = { styles.version }> Versión 3.2.0 </Text>
+          </View>
+          <View>
+            <Text style = { styles.description }> Finding the perfect learning tool for Flash is a
+              daunting task to any novice web developer. One can find help
+              in a number of ways through books, friends and private tutors.
+            </Text>
+          </View>
+          <View  style = { styles.social }>
+            <Icon name = 'facebook-official' size = {30} color = '#000333'/>
+            <Icon name = 'twitter' size = {30} color = '#000333' />
+            <Icon name = 'instagram' size = {30} color = '#000333' />
+            <Icon name = 'youtube-play' size = {30} color = '#000333' />
+          </View>
+          <View style = { styles.copyright }>
+            <Icon name = 'copyright' size = {20}/>
+            <Text style = { styles.copyrightText }>2017 Todos los derechos reservados.</Text>
+          </View>
+        </ScrollView>
     )
   }
 }

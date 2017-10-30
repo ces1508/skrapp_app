@@ -1,12 +1,39 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Linking, Platform } from 'react-native'
 import IconText from '../iconText'
+import Item from './item'
+import { Actions } from 'react-native-router-flux'
 
 export default class PlaceBoxInfo extends Component {
   constructor(props) {
     super(props)
+    this.showMap = this.showMap.bind(this)
   }
 
+  viewWebSite () {
+    let { website } = this.props
+   Actions.website({ websiteUri: website })
+  }
+
+  showMap () {
+    let { latitude, longitude } = this.props.location
+    let url = ''
+    let os = Platform.OS
+    if (os === 'android') {
+      url = `geo:${latitude}, ${longitude}`
+    } else {
+      url = `http://maps.apple.com/?ll=${latitude},${longitude}`
+    }
+    Linking.openURL(url)
+  }
+
+  async callPlace () {
+    let { phone } = this.props
+    phone = String(phone)
+    let canLink = await Linking.canOpenURL(`telprompt:${phone})`)
+    console.log(canLink)
+    // Linking.openURL(`tel:${phone}`)
+  }
   render() {
     return(
       <View  style = { styles.container }>
@@ -14,78 +41,16 @@ export default class PlaceBoxInfo extends Component {
           <Text style = { styles.title }> {this.props.title} </Text>
         </View>
         <View>
-          <View style={styles.containerInfo}>
-
-            <IconText  
-            customStylesIcon = { styles.iconInfo } 
-            color = '#f98d2c' 
-            icon = 'map-marker' 
-            text = ' ' 
-            iconSize = {24} 
-            handleClick = { ()=> null }/>
-
-            <View style = { styles.textContainer }>
-              <Text style = { styles.textInfo } >calle 21 8b 36 Ed San carlos</Text>
-              <Text style={styles.textInfoLast} >Barrio:Tenerife</Text>
-            </View>
-    
-          </View>  
-
-
-
-          <View style={styles.containerInfo}>
-            <IconText 
-              customStylesIcon={styles.iconInfo}
-              color='#f98d2c' 
-              icon='phone' 
-              text='' 
-              iconSize={24} 
-              handleClick={() => null} />
-
-            <View style={styles.textContainer}>
-              <Text style={styles.textInfo} >311 455 6888 </Text>
-              <Text style={styles.textInfoLast} >311 455 6888 </Text>
-            </View>
-
-          </View> 
-
-
-
-          <View style={styles.containerInfo}>
-            <IconText
-              customStylesIcon={styles.iconInfo}
-              color='#f98d2c' 
-              icon='clock-o' 
-              text='' 
-              iconSize={24} 
-              handleClick={() => null} />
-            <View style={styles.textContainer}>
-              <Text style={styles.textInfo} >8:00 AM - 12:00 PM </Text>
-              <Text style={styles.textInfoLast} >2:00 AM - 6:00 PM </Text>
-            </View>
-
-          </View> 
-
-
-
-
-
-          <View style={styles.containerInfo}>
-            <IconText
-              customStylesIcon={styles.iconInfo}
-              color='#f98d2c' 
-              icon='globe' 
-              text='' 
-              iconSize={24} 
-              handleClick={() => null} />
-            <View style={styles.textContainer}>
-              <Text style={styles.textInfoLast} > www.google.com </Text>
-              {
-                //<Text style={styles.textInfoLast} > </Text>
-              }
-            </View>
-          </View> 
-
+          <TouchableOpacity onPress = {() => this.showMap()}>
+            <Item icon = 'map-marker'  text1 = { this.props.address } />
+          </TouchableOpacity>
+          <TouchableOpacity onPress = { () => this.callPlace() } >
+            <Item icon = 'phone'  text1 = { this.props.phone } /> 
+          </TouchableOpacity>
+          <Item icon = 'clock-o'  text1 = '8:00 AM - 12:00 PM ' text2 = '2:00 AM - 6:00 PM'/> 
+          <TouchableOpacity onPress = {() => this.viewWebSite( )}>
+            <Item icon = 'globe'  text1 =  '' text2 = { this.props.website } /> 
+          </TouchableOpacity>
         </View>
       </View>
     )

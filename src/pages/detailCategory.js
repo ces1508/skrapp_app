@@ -4,6 +4,7 @@ import Api from '../api'
 import { View, Text } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { getCurrentPosition } from '../utils'
+import Load from '../components/load'
 export default class DetailCategrory extends Component {
   constructor(props) {
     super(props)
@@ -18,7 +19,6 @@ export default class DetailCategrory extends Component {
 
   async getData() {
     let currentPosition = window.position
-    console.log(currentPosition)
     if (currentPosition.error) {
       let data = await Api.getItemsByCategory(this.props.id)
       this.setState({ loading: false, data  })
@@ -44,8 +44,9 @@ export default class DetailCategrory extends Component {
     let { loading } = this.state
     if (loading ) {
       return(
-        <View style = {{ flex:1, justifyContent: 'center' , alignItems: 'center',}}>
-          <Text style = {{ fontSize: 25, }}> cargando los {this.props.title} ... </Text>
+        <View>
+          <Load />
+          <Load />
         </View>
       )
     } else {

@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import Icons from 'react-native-vector-icons/FontAwesome'
-import Star from '../star'
+import Rating from 'react-native-easy-rating'
 
 export default class PlaceCard extends Component {
   render() {
-    console.log('show distance', this.props)
     return(
       <View style = { styles.place }>
         <View style = { styles.content }>
@@ -13,13 +12,8 @@ export default class PlaceCard extends Component {
             <Icons name='map-marker' size={17} color= '#7d7d7d' />
             <Text style = { styles.text }> { this.props.address } </Text>
           </View>
-          <View style = {{ flexDirection: 'row' }}>
-            <Star type = 'full' />
-            <Star type = 'full' />
-            <Star type = 'full' />
-            <Star type = 'half' />
-            <Star type = 'empty' />
-          </View>
+          <Rating rating = { this.props.ranking } iconWidth = { 20 } iconHeight = { 20 } max = { 5 } onRate = { () => null } /> 
+          
         </View>
         {
           this.props.showDistance?(

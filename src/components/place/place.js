@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Card from '../card'
 import PlaceCard from '../placeCard'
 import geolib from 'geolib'
-
 export default class Place extends Component {
   constructor(props) {
     super(props)
@@ -23,7 +22,6 @@ export default class Place extends Component {
       }
        let distance =  geolib.getDistance(currentPosition, positionPlace)
       let distanceinKm = geolib.convertUnit('km', distance)
-      console.log(distanceinKm)
       this.setState({ distance: distanceinKm, showDistance: true })
     }
   }
@@ -36,13 +34,17 @@ export default class Place extends Component {
 
   render() {
     let { data } = this.props
+    let ranking = 0
+    if (data.ratingCount &&  data.ratingTotal) {
+     ranking =  Math.round(data.ratingTotal / data.ratingCount)
+    }
     return(
       <Card  data = { data}  handleClick = { this.props.handleClick }>
           <PlaceCard  
             address = {data.address}  
             showDistance = {this.state.showDistance} 
             distance = { this.state.distance } 
-            unidad = 'km' ranking = {3} />
+            unidad = 'km' ranking = {ranking} />
       </Card>
     )
   }

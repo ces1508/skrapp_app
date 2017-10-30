@@ -15,7 +15,7 @@ export default class Card extends Component{
         <View style = { styles.main }  >
           <View style = { styles.iconContainer } >
           <View style = { styles.image }>
-              <Image source={{ uri: image.url }}  style = {[ styles.image, { backgroundColor: 'transparent' } ]} />
+              <Image source={{ uri: image.url }}  resizeMethod = 'resize' style = {[ styles.image, { backgroundColor: 'transparent' } ]} />
           </View>
           </View>
           <View style = {{ flexDirection: 'column', flex: 1 }} >

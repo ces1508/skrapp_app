@@ -3,6 +3,7 @@ import Api from '../api'
 import Categories from '../components/categories'
 import { Actions } from 'react-native-router-flux'
 import { View, Text } from 'react-native'
+import Load from '../components/load'
 
 export default class CategoriesView extends Component {
   constructor(props) {
@@ -33,8 +34,9 @@ export default class CategoriesView extends Component {
     let { loading, data } = this.state
     if (loading) {
       return(
-        <View style = {{ flex:1, justifyContent: 'center' , alignItems: 'center'}}>
-          <Text style = {{ fontSize: 25, }}> cargando categories ... </Text>
+        <View>
+          <Load />
+          <Load />
         </View>
       )
     } else {
