@@ -10,22 +10,21 @@ export default class Category extends Component{
   render() {
     let { order } = this.props.data
     return(
-      <Card data = {this.props.data} handleClick = {this.props.handleClick} >
+      <Card data = {this.props.data} onlyTitle = { true} handleClick = {this.props.handleClick} >
         <View style = { styles.category }>
-
           <View style = { styles.content }>
-            <Icons style = {styles.iconmaps} name='map-marker' size={20} /> 
-            <Text style={styles.text}> Disponibles {order}</Text> 
-          </View>
+          {
+            // <Icons style = {styles.iconmaps} name='map-marker' size={20} /> 
+              // <Text style={styles.text}> Disponibles {order}</Text> 
 
+            }
+          </View>
           <View style = { styles.arrowRight }>
             <Icons 
               name='angle-right' 
               size={40} 
               color= '#454545' />
           </View>
-
-          
         </View>
       </Card>
     )
@@ -37,15 +36,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-
   },
   content: {
     flexDirection: 'row',
     flex: 1,
     //borderWidth: 1,
     //borderColor: 'green',
-    //paddingTop: 5
-    
+    //paddingTop: 5    
   },
   arrowRight: {
     marginTop: -20
@@ -57,15 +54,10 @@ const styles = StyleSheet.create({
     color: '#7d7d7d',
     fontFamily: 'Roboto-Regular',
     fontWeight: '400'
-
-    
-    
   },
   iconmaps:{
-    color:'#7d7d7d',
+    // color:'#7d7d7d',
     //paddingLeft: 6,
-
-
   }
 
 })

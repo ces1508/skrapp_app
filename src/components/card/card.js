@@ -15,22 +15,27 @@ export default class Card extends Component{
         <View style = { styles.main }  >
           <View style = { styles.iconContainer } >
           <View style = { styles.image }>
-              <Image source={{ uri: image.url }}  resizeMethod = 'resize' style = {[ styles.image, { backgroundColor: 'transparent' } ]} />
+              <Image source={{ uri: image.url }}  
+                resizeMethod = 'resize'
+                style = {[ styles.image, { backgroundColor: 'transparent' } ]} />
           </View>
           </View>
           <View style = {{ flexDirection: 'column', flex: 1 }} >
-          
             <View  style = { styles.textContainer }>
               <Text 
                 ellipsizeMode = 'tail' 
                 numberOfLines = {1} 
-                style = {styles.text} > 
+                style={[styles.text, this.props.onlyTitle ? {
+                  marginTop: 20,
+                }: null]} > 
                   { title } 
               </Text>
             </View>
-            <View style = {{flex: 1, paddingTop: 5}} >
-              {this.props.children}
-            </View>
+            {
+              <View style = {{flex: 1, paddingTop: 5}} >
+                {this.props.children}
+              </View>
+            }
           </View>
         </View>
       </TouchableOpacity>
@@ -54,43 +59,30 @@ const styles = StyleSheet.create({
       width: -2,
     },
     borderRadius: 4,
-    // marginTop: 10,
     marginBottom:2,
     marginTop: 12,
- 
   },
   iconContainer: {
     height: 100,
     width: 80,
-  //borderRadius: 50,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  //paddingLeft: 10,
-   //borderWidth: 1,
-   //borderColor: 'red',
-
   },
   image:  {
     width: 60,
     height: 60,
     borderRadius: 30,
-    //borderRadius: Platform.OS === 'android' ? 100 : 30,
-    backgroundColor: '#f8f8f6',
-
+    backgroundColor: 'rgba(0,0,0,.18)',
     shadowOffset: { width: 0, height: 0, },
     shadowColor: 'rgba(0,0,0,.18)',
-    shadowOpacity: 1.0,
-    
-    
+    shadowOpacity: 1.0,    
   },
   textContainer:{
     flex: 1,
     flexDirection: 'row',
-    //borderWidth: 1,
-    //borderColor: 'yellow',
     paddingBottom: 0,
-    
+    alignItems: 'flex-start',
     
   },
   text: {

@@ -5,6 +5,7 @@ import DetailCategory from '../pages/detailCategory'
 import PlaceView from '../pages/placeView'
 import LoginView from '../pages/login'
 import RegistryView from '../pages/registry'
+import MyFavoriteView from '../pages/myfavorites'
 import Menu from '../components/menu'
 import IconSearch from '../components/iconSearch'
 import About from '../pages/about'
@@ -98,6 +99,13 @@ export default class Routes extends Component {
                 title = 'Acerca de Skrapp'
                 titleStyle={{color: '#fff'}}
                 leftTitle = ' '/>
+                <Scene 
+                  key = 'myFavorites'
+                  title = 'Mis Favoritos'
+                  titleStyle = {{ color: '#fff'}}
+                  component = { MyFavoriteView }
+                  
+                />
               <Scene
                 hideNavBar
                 key = 'search'
