@@ -17,18 +17,22 @@ const ASPECT_RATIO = width / height
 const LATITUDE_DELTA = 0.009
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 
+const initialRegion = {
+  latitude: 2.9564872,
+  longitude: -75.2887927,
+  latitudeDelta:LATITUDE_DELTA,
+  longitudeDelta: LONGITUDE_DELTA,
+}
+
 export default class Map extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      initialRegion : {
-        latitude: 2.9564872,
-        longitude: -75.2887927,
-        latitudeDelta:LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
-      },
+      loading: true,
       region: {},
-      places: []
+      places: [],
+      ready: false,
+      calcule: initialRegion
     }
     this.renderMarkers = this.renderMarkers.bind(this)
     this.getPlaces = this.getPlaces.bind(this)
@@ -36,9 +40,9 @@ export default class Map extends Component {
   }
 
   async getPlaces() {
-    let { region, initialRegion } = this.state
+    let { region } = this.state
     let places = await Api.getPlacesByPosition(region.latitude? region : initialRegion)
-    this.setState({ places: [...this.state.places, ...places] })
+    this.setState({ places: [...this.state.places, ...places], loading: false })
   }
 
   componentDidMount() {
@@ -50,7 +54,7 @@ export default class Map extends Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
       }
-      this.setState({ region , initialRegion: region})
+      this.setState({ region })
     },
     (error) => {
       Alert.alert(
@@ -69,18 +73,18 @@ export default class Map extends Component {
           }
         })
       } else {
-        this.setState({ region: this.state.initialRegion })
+        this.setState({ region: initialRegion })
       }
     })
     this.getPlaces()
   }
 
   onRegionChange (newRegion) {
-    let { region, initialRegion } = this.state
-    let distance = geolib.getDistance(initialRegion, newRegion)
+    let { region, calcule } = this.state
+    let distance = geolib.getDistance(calcule, newRegion)
     let km = geolib.convertUnit('km', distance)
     if (km > 100) {
-      this.setState({ initialRegion: newRegion })
+      this.setState({ calcule: newRegion })
       this.getPlaces()
     }
     this.setState({ region: newRegion })  
@@ -95,9 +99,7 @@ export default class Map extends Component {
             coordinate = { place.location }
             title = { place.title }
             description = { place.description }
-            
-              /* identifier = { place.objectId } */
-          
+            identifier = { place.objectId }          
             image = { place.category.icon.url }
           >
             <MapView.Callout tooltip >
@@ -120,7 +122,7 @@ export default class Map extends Component {
           coordinate = { place.location }
           title = { place.title }
           description = { place.description }
-          /* identifier = { place.objectId } */
+          identifier = { place.objectId }
         >
           <MapView.Callout tooltip >
             <View style={styles.containerTooltip}>
@@ -144,7 +146,7 @@ export default class Map extends Component {
         loadingEnabled
         loadingIndicatorColor="#666666"
         loadingBackgroundColor="#eeeeee"
-        initialRegion = { this.state.initialRegion }
+        initialRegion = { initialRegion }
         region = { this.state.region.latitude? this.state.region : this.state.initialRegion}
         onRegionChange = { this.onRegionChange }
       >

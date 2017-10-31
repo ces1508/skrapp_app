@@ -17,6 +17,7 @@ export default class Card extends Component{
           <View style = { styles.image }>
               <Image source={{ uri: image.url }}  
                 resizeMethod = 'resize'
+                resizeMode = 'cover'
                 style = {[ styles.image, { backgroundColor: 'transparent' } ]} />
           </View>
           </View>
