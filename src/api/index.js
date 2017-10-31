@@ -215,6 +215,7 @@ export default class Api {
   static async placeAlradyLiked (place) {
     let endpoint = `${API_SKRAPP}/functions/isPlaceLiked`
     let currentUser = await getCurrentUser()
+
     let data = {
       placeId: place.objectId
     }
@@ -233,6 +234,26 @@ export default class Api {
       } else {
         return { status: 'failed', data: { code: 500, message: 'estamos presentando problemas con nuestros servidores' } }
       }
+    }
+  }
+  static async myFavorites () {
+    let endpoint = `${API_SKRAPP}/classes/Place`
+    let currentUser = await getCurrentUser()
+    let user = {...currentUser}
+    delete user._perishable_token 
+    delete user.sessionToken
+    try {
+      let request = await axios.get(endpoint, {
+        params: {
+          where: {
+            likes: user,
+            isApproved: true
+          }
+        }
+      })
+      console.log(request)
+    } catch (e){
+      console.log(e.response)
     }
   }
 }

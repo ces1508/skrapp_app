@@ -10,10 +10,13 @@ import {
 } from 'react-native'
 import MapView from 'react-native-maps'
 import Api from '../api'
+import geolib from 'geolib'
+
 const { width, height } = Dimensions.get('window')
 const ASPECT_RATIO = width / height
 const LATITUDE_DELTA = 0.009
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
+
 export default class Map extends Component {
   constructor (props) {
     super(props)
@@ -33,29 +36,21 @@ export default class Map extends Component {
   }
 
   async getPlaces() {
-    let { region } = this.state
-    let places = []
-    if (region.latitude) {
-      places = await Api.getPlacesByPosition(region)
-    } else {
-      places = await Api.getPlacesByPosition()
-    }
-    this.setState({ places })
+    let { region, initialRegion } = this.state
+    let places = await Api.getPlacesByPosition(region.latitude? region : initialRegion)
+    this.setState({ places: [...this.state.places, ...places] })
   }
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
       let { latitude, longitude } = position.coords
-      latitude = parseFloat(latitude)
-      longitude = parseFloat(longitude)
       let region = {
         latitude,
         longitude,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
       }
-      this.setState({ region })
-      this.getPlaces()
+      this.setState({ region , initialRegion: region})
     },
     (error) => {
       Alert.alert(
@@ -65,19 +60,30 @@ export default class Map extends Component {
         `
       )
       if (window.position.latitude) {
-        this.setState({
-          latitude: window.position.latitude,
-          longitude: window.position.longitude,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA
+        this.setState({ 
+          region: {
+            latitude: window.position.latitude,
+            longitude: window.position.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA
+          }
         })
+      } else {
+        this.setState({ region: this.state.initialRegion })
       }
-      this.getPlaces()
     })
+    this.getPlaces()
   }
 
-  onRegionChange (region) {
-    this.setState({ region })
+  onRegionChange (newRegion) {
+    let { region, initialRegion } = this.state
+    let distance = geolib.getDistance(initialRegion, newRegion)
+    let km = geolib.convertUnit('km', distance)
+    if (km > 100) {
+      this.setState({ initialRegion: newRegion })
+      this.getPlaces()
+    }
+    this.setState({ region: newRegion })  
   }
 
   renderMarkers () {
@@ -89,7 +95,9 @@ export default class Map extends Component {
             coordinate = { place.location }
             title = { place.title }
             description = { place.description }
-            identifier = { place.objectId }
+            
+              /* identifier = { place.objectId } */
+          
             image = { place.category.icon.url }
           >
             <MapView.Callout tooltip >
@@ -112,7 +120,7 @@ export default class Map extends Component {
           coordinate = { place.location }
           title = { place.title }
           description = { place.description }
-          identifier = { place.objectId }
+          /* identifier = { place.objectId } */
         >
           <MapView.Callout tooltip >
             <View style={styles.containerTooltip}>
@@ -130,13 +138,15 @@ export default class Map extends Component {
     })
   }
   render() {
-
     return(
       <MapView
         style = {{ height, width }}
+        loadingEnabled
+        loadingIndicatorColor="#666666"
+        loadingBackgroundColor="#eeeeee"
         initialRegion = { this.state.initialRegion }
         region = { this.state.region.latitude? this.state.region : this.state.initialRegion}
-        onRegionChange = { this.onRegionChange}
+        onRegionChange = { this.onRegionChange }
       >
        { this.renderMarkers() }
       </MapView>

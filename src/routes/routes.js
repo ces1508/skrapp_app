@@ -34,8 +34,6 @@ export default class Routes extends Component {
     window.navigator.geolocation.getCurrentPosition( (position) => {
       window.position = position.coords
     }, ( (error) => {
-      // throw error
-      console.log(error)
       window.position = {
         error: true,
 
