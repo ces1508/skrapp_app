@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View, Text, ActivityIndicator } from 'react-native'
 import Api from '../api' 
 import ListPlaces from '../components/listPlaces'
+import SearchNotFound from '../components/searchnotfound'
+
 export default class MyFavorites extends Component {
   constructor(props){
     super()
@@ -33,7 +35,10 @@ export default class MyFavorites extends Component {
       } else {
         return(
           <View style = {{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-            <Text> Aun no tiene favoritos </Text>
+            {
+              // <Text> Aun no tiene favoritos </Text>
+            }
+            <SearchNotFound />
           </View>
         )
       }
