@@ -74,9 +74,6 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     backgroundColor: 'rgba(0,0,0,.18)',
-    shadowOffset: { width: 0, height: 0, },
-    shadowColor: 'rgba(0,0,0,.18)',
-    shadowOpacity: 1.0,    
   },
   textContainer:{
     flex: 1,
