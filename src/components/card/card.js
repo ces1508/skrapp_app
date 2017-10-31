@@ -15,7 +15,9 @@ export default class Card extends Component{
         <View style = { styles.main }  >
           <View style = { styles.iconContainer } >
           <View style = { styles.image }>
-              <Image source={{ uri: image.url }}  resizeMethod = 'resize' style = {[ styles.image, { backgroundColor: 'transparent' } ]} />
+              <Image source={{ uri: image.url }}  
+                resizeMethod = 'resize'
+                style = {[ styles.image, { backgroundColor: 'transparent' } ]} />
           </View>
           </View>
           <View style = {{ flexDirection: 'column', flex: 1 }} >
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#f8f8f6',
+    backgroundColor: 'rgba(0,0,0,.18)',
     shadowOffset: { width: 0, height: 0, },
     shadowColor: 'rgba(0,0,0,.18)',
     shadowOpacity: 1.0,
