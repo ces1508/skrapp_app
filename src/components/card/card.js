@@ -20,13 +20,13 @@ export default class Card extends Component{
           </View>
           <View style = {{ flexDirection: 'column', flex: 1 }} >
             <View  style = { styles.textContainer }>
-              <Text 
-                ellipsizeMode = 'tail' 
-                numberOfLines = {1} 
+              <Text
+                ellipsizeMode = 'tail'
+                numberOfLines = {1}
                 style={[styles.text, this.props.onlyTitle ? {
                   marginTop: 20,
-                }: null]} > 
-                  { title } 
+                }: null]} >
+                  { title }
               </Text>
             </View>
             {
@@ -74,14 +74,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8f6',
     shadowOffset: { width: 0, height: 0, },
     shadowColor: 'rgba(0,0,0,.18)',
-    shadowOpacity: 1.0,    
+    shadowOpacity: 1.0,
   },
   textContainer:{
     flex: 1,
     flexDirection: 'row',
     paddingBottom: 0,
     alignItems: 'flex-start',
-    
+
   },
   text: {
     paddingVertical: Platform.OS === 'android'? 0 : 20,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Image, StyleSheet, Dimensions } from 'react-native'
-
+import { View, StyleSheet, Dimensions } from 'react-native'
+import  Image from 'react-native-image-progress'
+import { CircleSnail } from 'react-native-progress'
 const { width } = Dimensions.get('window')
 
 
@@ -30,6 +31,7 @@ export default class PlaceBanner extends Component {
       <View style = { styles.container }>
         <Image
           source = {{ uri: this.props.banner }}
+          indicator = { CircleSnail }
           resizeMode = 'cover'
           style = {[ styles.image, { width: this.state.width } ]}
         />
@@ -45,6 +47,6 @@ const styles = StyleSheet.create({
   image: {
     height: 250,
     backgroundColor: '#F8F8F6',
-    
+
   }
 })
