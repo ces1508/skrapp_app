@@ -14,11 +14,23 @@ export default class Card extends Component{
       <TouchableOpacity onPress = {() => typeof(this.props.handleClick) === 'function'? this.props.handleClick(this.props.data) : null}>
         <View style = { styles.main }  >
           <View style = { styles.iconContainer } >
-          <View style = { styles.image }>
-              <Image source={{ uri: image.url }}  
-                resizeMethod = 'resize'
-                style = {[ styles.image, { backgroundColor: 'transparent' } ]} />
-          </View>
+            <View style = { styles.image }>
+                <Image 
+                  // source={{ uri: 'https://lorempixel.com/100/100' }}  
+                  source={{ uri: image.url }}  
+                  
+                  resizeMethod = 'resize'
+                  resizeMode = 'stretch'
+                  
+                  style = { { 
+                    backgroundColor: Platform.OS == 'android' ? 'transparent' : '#b2b2b2' , 
+                    // borderColor: '#b2b2b2',
+                    height: Platform.OS == 'android' ? 50 : 60,
+                    width: Platform.OS == 'android' ? 50 : 60,
+                    borderRadius: Platform.OS == 'android' ? 25 : 30,
+                    overflow: 'hidden'
+                } } />
+            </View>
           </View>
           <View style = {{ flexDirection: 'column', flex: 1 }} >
             <View  style = { styles.textContainer }>
@@ -68,12 +80,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    // borderColor: 'red'
   },
   image:  {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: 'rgba(0,0,0,.18)',
+    height: Platform.OS == 'android' ? 50: 60,
+    width: Platform.OS == 'android' ? 50 : 60,
+    borderRadius: Platform.OS == 'android' ? 25 : 30,
+    // overflow: 'hidden',
   },
   textContainer:{
     flex: 1,
@@ -83,7 +96,7 @@ const styles = StyleSheet.create({
     
   },
   text: {
-    paddingVertical: Platform.OS === 'android'? 0 : 20,
+    paddingVertical: Platform.OS === 'android'? 15 : 20,
     textAlignVertical: 'bottom',
     fontSize: 17,
     color: '#454545',
