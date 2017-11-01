@@ -42,7 +42,7 @@ export default class Api {
             "longitude": location.longitude
           },
           $maxDistanceInKilometers: 100
-        } 
+        }
       }
     } else {
       where = {
@@ -50,7 +50,7 @@ export default class Api {
           __type: "Pointer", className: 'Category',"objectId": id
         }
       }
-    }  
+    }
     try {
       let endpoint = `${API_SKRAPP}/classes/Place`
       let request = await axios.get(endpoint, {
@@ -71,7 +71,7 @@ export default class Api {
   }
 
   static async filterPlaceByName (text, categoryId) {
-    let where = {} 
+    let where = {}
     let title = text.toLowerCase()
     if (window.position.error) {
       where = {
@@ -243,8 +243,6 @@ export default class Api {
       className: "_User",
       __type: 'Pointer'
     }
-    delete user._perishable_token 
-    delete user.sessionToken
     try {
       let request = await axios.get(endpoint, {
         headers: {
@@ -260,6 +258,31 @@ export default class Api {
       })
       return request.data.results
     } catch (e){
+      return { error: true }
+    }
+  }
+
+  static async loginFacebook (auth) {
+    let endpoint = `${API_SKRAPP}/users`
+    let data = {
+      authData: {
+         facebook: {
+          id: auth.userID,
+          access_token: auth.accessToken,
+          expiration_date: auth.expirationTime
+        }
+      }
+    }
+    try {
+      let request = await axios.post(endpoint, data, {
+        headers: {
+          "content-type": "application/json",
+          "X-Parse-Application-Id": APPLICATION_ID
+        }
+      })
+
+      return request.data
+    } catch (e) {
       return { error: true }
     }
   }

@@ -7,7 +7,8 @@ import {
   Dimensions,
   Image,
   TextInput,
-  Platform
+  Platform,
+  StatusBar
 } from 'react-native'
 import LoginForm from '../components/loginForm'
 import ButtomIcon, { Buttom } from '../components/buttom'
@@ -23,6 +24,11 @@ export default class LoginView extends Component {
   render() {
     return(
       <ImageBackground  source = { require('../../assets/images/bglogin.png') } style = { styles.background } >
+         <StatusBar
+            backgroundColor="transparent"
+            barStyle="light-content"
+            translucent={true}
+          />
         <View style = {{ flex: 1 }}>
           <View style = { styles.containerLogo }>
             <Image  style = { styles.logo } source = { require('../../assets/images/skrapp.png') } />
