@@ -15,7 +15,8 @@ export default class About extends Component {
 
   render() {
     return(
-        <ScrollView contentContainerStyle = { styles.container }>
+      <View style = {{ flex: 1 }} >
+        <ScrollView contentContainerStyle = { styles.container } >
           <View style = { styles.containerImage }>
             <Image style = { styles.image } source = {require('../../assets/images/skrappcolor.png')} />
           </View>
@@ -40,13 +41,13 @@ export default class About extends Component {
             <Text style = { styles.copyrightText }>2017 Todos los derechos reservados.</Text>
           </View>
         </ScrollView>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container:{
-    flex: 1,
     alignItems: 'center',
     paddingHorizontal: 20,
     backgroundColor: '#fefefe'

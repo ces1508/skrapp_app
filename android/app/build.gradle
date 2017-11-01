@@ -94,8 +94,8 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         applicationId "com.skrapptest"
@@ -149,6 +149,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fbsdk')
     compile project(':react-native-vector-icons')
     compile project(':react-native-maps')
     compile fileTree(dir: "libs", include: ["*.jar"])

@@ -120,24 +120,21 @@ const styles = StyleSheet.create({
   searchContainer:{
     backgroundColor: '#e79d39',
     paddingTop: Platform.OS === 'android' ? 0 : 20,
-    //borderWidth: 1
-    // marginBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#c7c7c7'
-  
   },
   containerInput:{
     height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
-    
-
   },
   inputIconsBack:{
     marginLeft: 8,
     color: "#4a4a4a",
-    //borderWidth: 1
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 10
   },
   input:{
     flex: 1,
@@ -146,17 +143,14 @@ const styles = StyleSheet.create({
     marginRight: 10,
     backgroundColor: 'white',
     height: 50,
-    fontStyle: 'italic',
-    //borderColor: 'red',
-    //borderWidth: 1,
-    
-
+    fontStyle: 'italic',   
   },
   inputIconClear: {
-    //borderWidth: 1,
-    //borderColor: 'red',
+
     color: '#4a4a4a',
     marginRight: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 15
   }
 
 })

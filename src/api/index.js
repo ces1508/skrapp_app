@@ -42,7 +42,7 @@ export default class Api {
             "longitude": location.longitude
           },
           $maxDistanceInKilometers: 100
-        } 
+        }
       }
     } else {
       where = {
@@ -50,7 +50,7 @@ export default class Api {
           __type: "Pointer", className: 'Category',"objectId": id
         }
       }
-    }  
+    }
     try {
       let endpoint = `${API_SKRAPP}/classes/Place`
       let request = await axios.get(endpoint, {
@@ -60,7 +60,6 @@ export default class Api {
         headers: {
           "content-type": "application/json",
           "X-Parse-Application-Id": APPLICATION_ID
-
         }
       })
       let data = request.data
@@ -72,7 +71,7 @@ export default class Api {
   }
 
   static async filterPlaceByName (text, categoryId) {
-    let where = {} 
+    let where = {}
     let title = text.toLowerCase()
     if (window.position.error) {
       where = {
@@ -215,6 +214,7 @@ export default class Api {
   static async placeAlradyLiked (place) {
     let endpoint = `${API_SKRAPP}/functions/isPlaceLiked`
     let currentUser = await getCurrentUser()
+
     let data = {
       placeId: place.objectId
     }
@@ -233,6 +233,57 @@ export default class Api {
       } else {
         return { status: 'failed', data: { code: 500, message: 'estamos presentando problemas con nuestros servidores' } }
       }
+    }
+  }
+  static async getFavorites () {
+    let endpoint = `${API_SKRAPP}/classes/Place`
+    let { objectId } = await getCurrentUser()
+    let user = {
+      objectId,
+      className: "_User",
+      __type: 'Pointer'
+    }
+    try {
+      let request = await axios.get(endpoint, {
+        headers: {
+          "content-type": "application/json",
+          "X-Parse-Application-Id": APPLICATION_ID
+        },
+        params: {
+          where: {
+            likes: user,
+            isApproved: true
+          }
+        },
+      })
+      return request.data.results
+    } catch (e){
+      return { error: true }
+    }
+  }
+
+  static async loginFacebook (auth) {
+    let endpoint = `${API_SKRAPP}/users`
+    let data = {
+      authData: {
+         facebook: {
+          id: auth.userID,
+          access_token: auth.accessToken,
+          expiration_date: auth.expirationTime
+        }
+      }
+    }
+    try {
+      let request = await axios.post(endpoint, data, {
+        headers: {
+          "content-type": "application/json",
+          "X-Parse-Application-Id": APPLICATION_ID
+        }
+      })
+
+      return request.data
+    } catch (e) {
+      return { error: true }
     }
   }
 }

@@ -43,7 +43,7 @@ export default class LoginForm extends Component {
         signin.message
       )
     } else {
-      let data = { sessionToken: signin.sessionToken, _perishable_token: signin._perishable_token }
+      let data = signin
       let user = await SaveTokens(data)
       Actions.drawer()
     }
