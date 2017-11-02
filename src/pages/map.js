@@ -41,20 +41,20 @@ export default class Map extends Component {
 
   async getPlaces() {
     let { region } = this.state
-    // let places = await Api.getPlacesByPosition(region.latitude? region : initialRegion)
-    // this.setState({ places: [...this.state.places, ...places], loading: false })
+    let places = await Api.getPlacesByPosition(region.latitude? region : initialRegion)
+    this.setState({ places: [...this.state.places, ...places], loading: false })
   }
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
       let { latitude, longitude } = position.coords
-      let region = {
-        latitude,
-        longitude,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA
-      }
-      this.setState({ region })
+      // let region = {
+      //   latitude,
+      //   longitude,
+      //   latitudeDelta: LATITUDE_DELTA,
+      //   longitudeDelta: LONGITUD
+      // }
+      this.setState({ region: initialRegion })
     },
     (error) => {
       Alert.alert(
@@ -80,16 +80,17 @@ export default class Map extends Component {
   }
 
   onRegionChange (region) {
-    // let { region, calcule } = this.state
-    // let distance = geolib.getDistance(calcule, newRegion)
-    // let km = geolib.convertUnit('km', distance)
-    // if (km > 100) {
-    //   this.setState({ calcule: newRegion })
-    //   this.getPlaces()
-    // }
-    region.latitudeDelta = LATITUDE_DELTA
-    region.longitudeDelta =  LONGITUDE_DELTA
-    this.setState({ region });
+    if (!this.state.regionSet) return;
+    this.setState({
+      region
+    });
+    let { calcule } = this.state
+    let distance = geolib.getDistance(calcule, region)
+    let km = geolib.convertUnit('km', distance)
+    if (km > 100) {
+      this.setState({ calcule: reegion })
+      this.getPlaces()
+    }
   }
 
   renderMarkers () {
@@ -149,6 +150,7 @@ export default class Map extends Component {
         loadingIndicatorColor="#666666"
         loadingBackgroundColor="#eeeeee"
         initialRegion = { initialRegion }
+        onMapReady = {() =>  this.setState({ regionSet: true  }) }
         showsUserLocation = {true}
         showsScale = { true }
         region = { this.state.region.latitude? this.state.region : this.state.initialRegion}
