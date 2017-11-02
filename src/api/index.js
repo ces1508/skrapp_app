@@ -263,4 +263,30 @@ export default class Api {
       return { error: true }
     }
   }
+
+  static async loginFacebook (auth) {
+    let endpoint = `${API_SKRAPP}/users`
+    let data = {
+      authData: {
+         facebook: {
+          id: auth.userID,
+          access_token: auth.accessToken,
+          expiration_date: auth.expirationTime
+        }
+      }
+    }
+    try {
+      let request = await axios.post(endpoint, data, {
+        headers: {
+          "content-type": "application/json",
+          "X-Parse-Application-Id": APPLICATION_ID
+        }
+      })
+
+      return request.data
+    } catch (e) {
+      return { error: true }
+    }
+  }
+
 }
