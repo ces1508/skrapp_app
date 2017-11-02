@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native'
-import  Image from 'react-native-image-progress'
+import { View, StyleSheet, Dimensions, Image } from 'react-native'
 import { CircleSnail } from 'react-native-progress'
 const { width } = Dimensions.get('window')
 
