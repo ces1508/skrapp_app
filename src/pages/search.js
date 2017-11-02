@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   inputIconsBack:{
     marginLeft: 8,
     color: "#4a4a4a",
-    borderWidth: 1,
+    // borderWidth: 1,
     paddingVertical: 10,
     paddingHorizontal: 10
   },

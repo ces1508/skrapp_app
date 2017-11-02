@@ -48,17 +48,17 @@ export default class Map extends Component {
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
       let { latitude, longitude } = position.coords
-      let region = {
-        latitude,
-        longitude,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA
-      }
-      this.setState({ region })
+      // let region = {
+      //   latitude,
+      //   longitude,
+      //   latitudeDelta: LATITUDE_DELTA,
+      //   longitudeDelta: LONGITUD
+      // }
+      this.setState({ region: initialRegion })
     },
     (error) => {
       Alert.alert(
-        'lo sentimos',
+        'ocurrio un error',
         `tenemos probelas para obtner tu poscion, por favor revisa tu configuracion gps \m
         tomaremos la ultima posicion registrada
         `
@@ -79,15 +79,18 @@ export default class Map extends Component {
     this.getPlaces()
   }
 
-  onRegionChange (newRegion) {
-    let { region, calcule } = this.state
-    let distance = geolib.getDistance(calcule, newRegion)
+  onRegionChange (region) {
+    if (!this.state.regionSet) return;
+    this.setState({
+      region
+    });
+    let { calcule } = this.state
+    let distance = geolib.getDistance(calcule, region)
     let km = geolib.convertUnit('km', distance)
     if (km > 100) {
-      this.setState({ calcule: newRegion })
+      this.setState({ calcule: reegion })
       this.getPlaces()
     }
-    this.setState({ region: newRegion })  
   }
 
   renderMarkers () {
@@ -147,6 +150,9 @@ export default class Map extends Component {
         loadingIndicatorColor="#666666"
         loadingBackgroundColor="#eeeeee"
         initialRegion = { initialRegion }
+        onMapReady = {() =>  this.setState({ regionSet: true  }) }
+        showsUserLocation = {true}
+        showsScale = { true }
         region = { this.state.region.latitude? this.state.region : this.state.initialRegion}
         onRegionChange = { this.onRegionChange }
       >

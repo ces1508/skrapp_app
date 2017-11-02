@@ -9,6 +9,7 @@ import PlaceBoxSocial from '../components/placeBoxSocial'
 import Map from '../components/map'
 let { width } = Dimensions.get('window')
 import Api from '../api'
+import { Actions } from 'react-native-router-flux'
 export default class PlaceView extends Component {
   constructor(props) {
     super(props)
@@ -16,6 +17,7 @@ export default class PlaceView extends Component {
     this.toogleFavorite = this.toogleFavorite.bind(this)
     this.alreadyLiked = this.alreadyLiked.bind(this)
     this.onShare = this.onShare.bind(this)
+    this.onReview = this.onReview.bind(this)
   }
   
   componentWillMount() {
@@ -52,6 +54,9 @@ export default class PlaceView extends Component {
     })
   }
   
+  onReview() {
+    Actions.review({ place: this.props.data })
+  }
 
   render() {
     let { data } = this.props
@@ -71,6 +76,7 @@ export default class PlaceView extends Component {
               <ActionsPlace
                 handleFavorite = {this.toogleFavorite}
                 onShare = { this.onShare }
+                onReview = { this.onReview }
                 favorited = { this.state.favorited } />
             </View>
             <View style = {{ marginTop: 20 }}>

@@ -24,11 +24,14 @@ export default class LoginView extends Component {
   render() {
     return(
       <ImageBackground  source = { require('../../assets/images/bglogin.png') } style = { styles.background } >
-         <StatusBar
-            backgroundColor="transparent"
-            barStyle="light-content"
-            translucent={true}
-          />
+         { Platform.os === 'android'?
+            <StatusBar
+              backgroundColor="transparent"
+              barStyle="light-content"
+              translucent={true}
+            />
+          : null
+        }
         <View style = {{ flex: 1 }}>
           <View style = { styles.containerLogo }>
             <Image  style = { styles.logo } source = { require('../../assets/images/skrapp.png') } />
