@@ -46,11 +46,10 @@
 		4CCEE91F96AE4DB59EC1CD85 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FABC4421A914A3C8C6471F3 /* Octicons.ttf */; };
 		568C048AC4D94F5A8FF09DB5 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36172A1CEA6449F9B2F023CF /* Roboto-Italic.ttf */; };
 		5F286D09A20E462A9F0ED270 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C94EDC860C1048C4AF81408A /* Ionicons.ttf */; };
-		61B458121FAA7B06004D16FE /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		61B4581B1FAA7D38004D16FE /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B458171FAA7D37004D16FE /* FBSDKShareKit.framework */; };
-		61B4581C1FAA7D38004D16FE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B458181FAA7D37004D16FE /* Bolts.framework */; };
-		61B4581D1FAA7D38004D16FE /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B458191FAA7D37004D16FE /* FBSDKCoreKit.framework */; };
-		61B4581E1FAA7D38004D16FE /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B4581A1FAA7D38004D16FE /* FBSDKLoginKit.framework */; };
+		6162E9711FAB69F7008E854B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6162E96D1FAB69F7008E854B /* FBSDKShareKit.framework */; };
+		6162E9721FAB69F7008E854B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6162E96E1FAB69F7008E854B /* Bolts.framework */; };
+		6162E9731FAB69F7008E854B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6162E96F1FAB69F7008E854B /* FBSDKCoreKit.framework */; };
+		6162E9741FAB69F7008E854B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6162E9701FAB69F7008E854B /* FBSDKLoginKit.framework */; };
 		6B6CE5343780448899BA6340 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC710BD03ED4957A991C447 /* FontAwesome.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9AE6FF4F8E784395B52C34F9 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67E864044F32447494BBB5BA /* MaterialCommunityIcons.ttf */; };
@@ -361,10 +360,10 @@
 		3B0E8E1E40764EF48906F93B /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		5FED45EB63894028A9F0294A /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
-		61B458171FAA7D37004D16FE /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
-		61B458181FAA7D37004D16FE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../../FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
-		61B458191FAA7D37004D16FE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		61B4581A1FAA7D38004D16FE /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		6162E96D1FAB69F7008E854B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		6162E96E1FAB69F7008E854B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../../FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
+		6162E96F1FAB69F7008E854B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		6162E9701FAB69F7008E854B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		67E864044F32447494BBB5BA /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		722735EAFBA74BB9BC56528E /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		7700B61CD65246E2A10D9F8E /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -397,11 +396,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
-				61B458121FAA7B06004D16FE /* libRCTAnimation.a in Frameworks */,
+				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
+				6162E9741FAB69F7008E854B /* FBSDKLoginKit.framework in Frameworks */,
+				6162E9711FAB69F7008E854B /* FBSDKShareKit.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
+				6162E9731FAB69F7008E854B /* FBSDKCoreKit.framework in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				61B4581D1FAA7D38004D16FE /* FBSDKCoreKit.framework in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
@@ -413,6 +415,7 @@
 				61B4581C1FAA7D38004D16FE /* Bolts.framework in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				4370573080A847E2B9DD7FB6 /* libAirMaps.a in Frameworks */,
+				6162E9721FAB69F7008E854B /* Bolts.framework in Frameworks */,
 				3B534A09AE5F477282EA92E7 /* libRNVectorIcons.a in Frameworks */,
 				20B81873B2754EE5ABFA61CA /* libRCTFBSDK.a in Frameworks */,
 			);
@@ -564,6 +567,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6162E9481FAB699D008E854B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6162E96E1FAB69F7008E854B /* Bolts.framework */,
+				6162E96F1FAB69F7008E854B /* FBSDKCoreKit.framework */,
+				6162E9701FAB69F7008E854B /* FBSDKLoginKit.framework */,
+				6162E96D1FAB69F7008E854B /* FBSDKShareKit.framework */,
+			);
+			name = Frameworks;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		6192F38F1FA927A8008F179B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -674,7 +689,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				61B458161FAA7D10004D16FE /* Frameworks */,
+				6162E9481FAB699D008E854B /* Frameworks */,
 				13B07FAE1A68108700A75B9A /* skrappTest */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* skrappTestTests */,

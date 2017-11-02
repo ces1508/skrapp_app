@@ -53,7 +53,7 @@ export default class CategoriesView extends Component {
       <View style = {{ flex: 1 }} >
          <StatusBar
           backgroundColor = 'orange'
-          translucent={false}
+          translucent={true}
           />
         { this.renderContent() }
       </View>
