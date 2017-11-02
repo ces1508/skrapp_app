@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Api from '../api'
 import Categories from '../components/categories'
 import { Actions } from 'react-native-router-flux'
-import { View, Text, StatusBar } from 'react-native'
+import { View, Text, StatusBar, Platform } from 'react-native'
 import Load from '../components/load'
 
 export default class CategoriesView extends Component {
@@ -51,10 +51,14 @@ export default class CategoriesView extends Component {
   render() {
     return (
       <View style = {{ flex: 1 }} >
+      {
+        Platform.OS === 'android'?
          <StatusBar
           backgroundColor = 'orange'
-          translucent={true}
+          translucent={false}
           />
+        : null
+      }
         { this.renderContent() }
       </View>
     )

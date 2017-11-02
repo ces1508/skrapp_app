@@ -14,6 +14,7 @@ import Settings from '../pages/settings'
 import MapView from '../pages/map'
 import WebSite from '../pages/website'
 import { AlreadyUser } from '../utils'
+import Review from '../pages/review'
 import {
   ActivityIndicator
 } from 'react-native'
@@ -58,7 +59,6 @@ export default class Routes extends Component {
               key = 'login'
               component = { LoginView }
               hideNavBar
-              type = 'modal'
               initial = { !login } />
               <Scene
                 key = 'register'
@@ -123,6 +123,10 @@ export default class Routes extends Component {
               <Scene
                 key = 'website'
                 component = { WebSite }
+                titleStyle = {{ color: '#fff' }} />
+              <Scene
+                key = 'review'
+                component = { Review }
                 titleStyle = {{ color: '#fff' }} />
           </Scene>
       </Router>

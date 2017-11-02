@@ -221,7 +221,7 @@ export default class Api {
     try {
       let request = await axios.post(endpoint, data, {
         headers: {
-          'X-Parse-Application-Id': 'rzTRzPoG564M566g',
+          'X-Parse-Application-Id': APPLICATION_ID,
           'X-Parse-Session-Token': currentUser.sessionToken,
           'content-type': 'application/json'
         },
@@ -284,6 +284,22 @@ export default class Api {
       return request.data
     } catch (e) {
       return { error: true }
+    }
+  }
+  static async makeReview (data) {
+    let endpoint = `${API_SKRAPP}/classes/Review`
+    try {
+      let request = await axios.post(endpoint, data, {
+        headers: {
+          'X-Parse-Application-Id':APPLICATION_ID ,
+          'X-Parse-Session-Token': currentUser.sessionToken,
+          'content-type': 'application/json'
+        }
+      })
+      return request.data
+    } catch (e) {
+      console.log(e)
+      return { error: true,  }
     }
   }
 }

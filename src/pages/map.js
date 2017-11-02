@@ -41,8 +41,8 @@ export default class Map extends Component {
 
   async getPlaces() {
     let { region } = this.state
-    let places = await Api.getPlacesByPosition(region.latitude? region : initialRegion)
-    this.setState({ places: [...this.state.places, ...places], loading: false })
+    // let places = await Api.getPlacesByPosition(region.latitude? region : initialRegion)
+    // this.setState({ places: [...this.state.places, ...places], loading: false })
   }
 
   componentDidMount() {
@@ -58,7 +58,7 @@ export default class Map extends Component {
     },
     (error) => {
       Alert.alert(
-        'lo sentimos',
+        'ocurrio un error',
         `tenemos probelas para obtner tu poscion, por favor revisa tu configuracion gps \m
         tomaremos la ultima posicion registrada
         `
@@ -79,15 +79,17 @@ export default class Map extends Component {
     this.getPlaces()
   }
 
-  onRegionChange (newRegion) {
-    let { region, calcule } = this.state
-    let distance = geolib.getDistance(calcule, newRegion)
-    let km = geolib.convertUnit('km', distance)
-    if (km > 100) {
-      this.setState({ calcule: newRegion })
-      this.getPlaces()
-    }
-    this.setState({ region: newRegion })  
+  onRegionChange (region) {
+    // let { region, calcule } = this.state
+    // let distance = geolib.getDistance(calcule, newRegion)
+    // let km = geolib.convertUnit('km', distance)
+    // if (km > 100) {
+    //   this.setState({ calcule: newRegion })
+    //   this.getPlaces()
+    // }
+    region.latitudeDelta = LATITUDE_DELTA
+    region.longitudeDelta =  LONGITUDE_DELTA
+    this.setState({ region });
   }
 
   renderMarkers () {
@@ -147,6 +149,8 @@ export default class Map extends Component {
         loadingIndicatorColor="#666666"
         loadingBackgroundColor="#eeeeee"
         initialRegion = { initialRegion }
+        showsUserLocation = {true}
+        showsScale = { true }
         region = { this.state.region.latitude? this.state.region : this.state.initialRegion}
         onRegionChange = { this.onRegionChange }
       >
