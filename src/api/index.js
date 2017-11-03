@@ -288,6 +288,7 @@ export default class Api {
   }
   static async makeReview (data) {
     let endpoint = `${API_SKRAPP}/classes/Review`
+    let currentUser = await getCurrentUser()
     try {
       let request = await axios.post(endpoint, data, {
         headers: {
@@ -297,6 +298,37 @@ export default class Api {
         }
       })
       return request.data
+    } catch (e) {
+      console.log(e)
+      return { error: true,  }
+    }
+  }
+
+  static async getReviews (placeId) {
+    let endpoint = `${API_SKRAPP}/classes/Review`
+    let currentUser = await getCurrentUser()
+    try {
+      let request = await axios.get(endpoint, {
+        headers: {
+          'X-Parse-Application-Id':APPLICATION_ID ,
+          'X-Parse-Session-Token': currentUser.sessionToken,
+          'content-type': 'application/json'
+        },
+        params: {
+          include: 'userData',
+          order: '-createdAt',
+          limit: 20,
+          where: {
+            place: {
+              __type: 'Pointer', 
+              className: 'Place', 
+              objectId: placeId
+            }, 
+            isInappropriate: false
+          }
+        }
+      })
+      return request.data.results
     } catch (e) {
       console.log(e)
       return { error: true,  }

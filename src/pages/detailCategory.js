@@ -21,19 +21,17 @@ export default class DetailCategrory extends Component {
     let currentPosition = window.position
     if (currentPosition.error) {
       let data = await Api.getItemsByCategory(this.props.id)
-      console.log(data)
       this.setState({ loading: false, data  })
     } else {
       let data = await Api.getItemsByCategory(this.props.id, currentPosition )
-      console.log(data)
       this.setState({ loading: false, data  })
     }
   }
 
   componentWillMount() {
-    console.log('montando el componente')
     Actions.refresh({onRight: () => this.goToSearch() })
   }
+  
   componentDidMount() {
     getCurrentPosition()
     this.getData()
