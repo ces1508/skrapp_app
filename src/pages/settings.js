@@ -3,63 +3,75 @@ import {
   View,
   Text,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  AsyncStorage,
+  ScrollView
 } from 'react-native'
 
 import CheckBox from '../components/checkbox'
 import HeaderProfileUser from '../components/headerProfileUser'
+import { getUnidad, getMapStyle, setMapStyle, setUnidad} from '../utils'
+
 const { width, height } = Dimensions.get('window')
 
 export default class Settings extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      km: true,
-      milla: false,
-      sat: false,
-      normal: true
+      unidad: '',
+      mapStyle: ''
     }
     this.handleChange = this.handleChange.bind(this)
+    this.getValues = this.getValues.bind(this)
   }
 
-  handleChange(med) {
-    this.setState({
-      km: !this.state.km,
-      milla: !this.state.milla
-    })
+  async getValues () {
+    let [unidad, mapStyle] = await Promise.all([getUnidad(), getMapStyle()])
+    this.setState({ unidad, mapStyle })
   }
-  handleChangeMap(type) {
-    this.setState({
-      sat: !this.state.sat,
-      normal: !this.state.normal
-    })
+
+  async handleChange(med) {
+    await setUnidad(med)
+    this.setState({ unidad: med })
+  }
+  async handleChangeMap(type) {
+    await setMapStyle(type)
+    this.setState({ mapStyle: type })
+  }
+
+  componentWillMount () {
+    this.getValues()
   }
 
   render() {
+    let { unidad, mapStyle } = this.state
+
     return(
       <View>
-        <View style = { styles.hedaer } >
-          <HeaderProfileUser height = { height / 3} />
-        </View>
-        <View style = { styles.settings }>
-          <View style = { styles.settingCard }>
-            <View style = { styles.section }>
-              <Text style = { styles.sectionTitle } > Unidad de Distancia </Text>
-                <View style = {{ marginTop: 15}}>
-                  <CheckBox  checked = {this.state.km} title = 'Kilometros' handleClick = {() => this.handleChange('km') }/>
-                  <CheckBox checked = {this.state.milla} title = 'Millas' handleClick = {() => this.handleChange('millas')} />
+        <ScrollView>
+          <View style = { styles.hedaer } >
+            <HeaderProfileUser height = { height / 3} />
+          </View>
+          <View style = { styles.settings }>
+            <View style = { styles.settingCard }>
+              <View style = { styles.section }>
+                <Text style = { styles.sectionTitle } > Unidad de Distancia </Text>
+                  <View style = {{ marginTop: 15}}>
+                    <CheckBox  checked = {unidad === 'km'} title = 'Kilometros' handleClick = {() => this.handleChange('km') }/>
+                    <CheckBox checked = {unidad === 'mi'} title = 'Millas' handleClick = {() => this.handleChange('mi')} />
+                  </View>
+              </View>
+              <View style = { styles.line  }></View>
+              <View style = { styles.section }>
+                <Text style = { styles.sectionTitle } >Estilo del mapa</Text>
+                <View style = {{ marginTop: 15 }}>
+                  <CheckBox  checked = { mapStyle === 'satellite'} title = 'Satelite' handleClick = {() => this.handleChangeMap('satellite') }/>
+                  <CheckBox checked = { mapStyle === 'standard' } title = 'Normal' handleClick = {() => this.handleChangeMap('standard')} />
                 </View>
-            </View>
-            <View style = { styles.line  }></View>
-            <View style = { styles.section }>
-              <Text style = { styles.sectionTitle } >Estilo del mapa</Text>
-              <View style = {{ marginTop: 15 }}>
-                <CheckBox  checked = {this.state.sat} title = 'Satelite' handleClick = {() => this.handleChangeMap('km') }/>
-                <CheckBox checked = {this.state.normal} title = 'Normal' handleClick = {() => this.handleChangeMap('millas')} />
               </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
     )
   }

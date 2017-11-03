@@ -24,7 +24,7 @@ export default class LoginView extends Component {
   render() {
     return(
       <ImageBackground  source = { require('../../assets/images/bglogin.png') } style = { styles.background } >
-         { Platform.os === 'android'?
+         { Platform.OS === 'android'?
             <StatusBar
               backgroundColor="transparent"
               barStyle="light-content"

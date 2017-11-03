@@ -54,3 +54,38 @@ export const getCurrentPosition = () =>  {
     alert('estamos presentando problemas para obetner tu posicion, \n tal vez tu esperiacia en skrapp no se la idea')
   }
 }
+
+export const setUnidad = async (und = 'km') => {
+  try {
+    await AsyncStorage.setItem('@unidad', und)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+export const getUnidad = async () => {
+  try {
+    let unidad = await AsyncStorage.getItem('@unidad')
+    return unidad
+  } catch (e) {
+    return 'km'
+  }
+}
+
+export const setMapStyle = async (style = 'standard') => {
+  try {
+    await AsyncStorage.setItem('@mapStyle', style)
+  } catch (e) {
+    return false   
+  }
+}
+
+export const getMapStyle = async () => {
+  try {
+    let style = await AsyncStorage.getItem('@mapStyle')
+    return style
+  } catch (e) {
+    return 'standard'
+  }
+}

@@ -11,6 +11,7 @@ import {
 import MapView from 'react-native-maps'
 import Api from '../api'
 import geolib from 'geolib'
+import { getMapStyle } from '../utils'
 
 const { width, height } = Dimensions.get('window')
 const ASPECT_RATIO = width / height
@@ -28,8 +29,14 @@ export default class Map extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      style: 'standard',
       loading: true,
-      region: {},
+      region: {
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+      },
       places: [],
       ready: false,
       calcule: initialRegion
@@ -37,12 +44,22 @@ export default class Map extends Component {
     this.renderMarkers = this.renderMarkers.bind(this)
     this.getPlaces = this.getPlaces.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
+    this.getStylesMap = this.getStylesMap.bind(this)
   }
 
   async getPlaces() {
     let { region } = this.state
-    // let places = await Api.getPlacesByPosition(region.latitude? region : initialRegion)
-    // this.setState({ places: [...this.state.places, ...places], loading: false })
+    let places = await Api.getPlacesByPosition(region.latitude? region : initialRegion)
+    this.setState({ places: [...this.state.places, ...places], loading: false })
+  }
+
+  async getStylesMap () {
+    let style = await getMapStyle()
+    this.setState({ style })
+  }
+
+  componentWillMount () {
+    this.getStylesMap()
   }
 
   componentDidMount() {
@@ -58,13 +75,12 @@ export default class Map extends Component {
     },
     (error) => {
       Alert.alert(
-        'ocurrio un error',
-        `tenemos probelas para obtner tu poscion, por favor revisa tu configuracion gps \m
-        tomaremos la ultima posicion registrada
-        `
+        'ups !',
+        `tenemos probelas para obtner tu poscion, por favor revisa tu configuracion gps \n
+        tomaremos la ultima posicion registrada`
       )
       if (window.position.latitude) {
-        this.setState({ 
+        this.setState({
           region: {
             latitude: window.position.latitude,
             longitude: window.position.longitude,
@@ -80,16 +96,17 @@ export default class Map extends Component {
   }
 
   onRegionChange (region) {
-    // let { region, calcule } = this.state
-    // let distance = geolib.getDistance(calcule, newRegion)
-    // let km = geolib.convertUnit('km', distance)
-    // if (km > 100) {
-    //   this.setState({ calcule: newRegion })
-    //   this.getPlaces()
-    // }
-    region.latitudeDelta = LATITUDE_DELTA
-    region.longitudeDelta =  LONGITUDE_DELTA
-    this.setState({ region });
+    if (!this.state.regionSet) return;
+    this.setState({
+      region
+    });
+    let { calcule } = this.state
+    let distance = geolib.getDistance(calcule, region)
+    let km = geolib.convertUnit('km', distance)
+    if (km > 100) {
+      this.setState({ calcule: region })
+      this.getPlaces()
+    }
   }
 
   renderMarkers () {
@@ -101,7 +118,7 @@ export default class Map extends Component {
             coordinate = { place.location }
             title = { place.title }
             description = { place.description }
-            identifier = { place.objectId }          
+            identifier = { place.objectId }
             image = { place.category.icon.url }
           >
             <MapView.Callout tooltip >
@@ -149,10 +166,12 @@ export default class Map extends Component {
         loadingIndicatorColor="#666666"
         loadingBackgroundColor="#eeeeee"
         initialRegion = { initialRegion }
+        onMapReady = {() =>  this.setState({ regionSet: true  }) }
         showsUserLocation = {true}
         showsScale = { true }
-        region = { this.state.region.latitude? this.state.region : this.state.initialRegion}
+        region = { this.state.region}
         onRegionChange = { this.onRegionChange }
+        mapType = { this.state.style }
       >
        { this.renderMarkers() }
       </MapView>
@@ -162,13 +181,13 @@ export default class Map extends Component {
 
 const styles = StyleSheet.create({
   containerTooltip: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10, 
-    paddingHorizontal: 10, 
-    backgroundColor: '#fefefe', 
-    borderRadius: 2, 
-    flex: 1, 
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    backgroundColor: '#fefefe',
+    borderRadius: 2,
+    flex: 1,
     shadowOffset: { width: 0, height: 0, },
     shadowColor: 'rgba(0,0,0,.1)',
     shadowOpacity: 1.0,
@@ -179,10 +198,10 @@ const styles = StyleSheet.create({
     marginRight: 5
   },
   image: {
-    width: 50, 
-    height: 50, 
-    borderRadius: 25, 
-    borderWidth: 1, 
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 1,
     borderColor: 'rgba(0,0,0,.25)',
     backgroundColor: '#f4f4f4'
   },
@@ -195,9 +214,9 @@ const styles = StyleSheet.create({
     maxWidth: 280,
   },
   descriptionMarker: {
-    fontSize: 14, 
-    flexWrap: 'wrap', 
-    maxWidth: 250, 
+    fontSize: 14,
+    flexWrap: 'wrap',
+    maxWidth: 250,
     lineHeight: 18
   }
 
