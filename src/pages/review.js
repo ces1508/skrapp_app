@@ -61,84 +61,44 @@ componentDidMount() {
           <PlacePicture profileImage =  'http://www.lorempixel.com/100/100' />
         </View>
 
-        <View style = {{ 
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: 4,
-          marginHorizontal: 10, 
-          marginTop: 15,
-          
-          shadowColor: 'black',
-          shadowOpacity: .3,
-          shadowOffset: {
-            height: 1,
-            width: -2,
-          },
-          
-        }} >
+        <View style = {styles.containerReview} >
 
-          <View style = {{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingTop: 10,
-            paddingBottom: 15
-          }}>
-            <View style = {{
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flex: 1
-            }}
-              > 
+          <View style = {styles.containerRatingLetraStar}>
+            <View style = {styles.containerRating}> 
               <Text> {this.state.textRating} </Text>
               <Rating 
                 rating={this.state.rating}
                 editable={true} 
-                iconWidth={40} 
-                iconHeight={40}
+                iconWidth={35} 
+                iconHeight={35}
                 max={5} 
                 onRate={this.onRating} /> 
-  
-                <Text
-                  style = {{ paddingTop: 5, fontFamily: 'Roboto-Regular', fontSize: 14,}}
-                > Toca una estrella para calificar </Text>          
+                <Text style = { styles.textStart}> Toca una estrella para calificar </Text>          
             </View>
           </View>
 
           <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'flex-start',
-              // borderWidth: 1,
-              padding: 10,
-            }}  > 
+            style={ styles.containerReviewComment}  > 
               <View >
                 <Image
-                  style = {{ width: 50, height: 50 , borderWidth: 1, borderRadius: 25,}}
+                  style = { styles.ReviewCommentImage}
                   source = {{ uri: 'https://lorempixel.com/100/100' }}
                  />
               </View>
-              <View style={{
-                flex: 1,
-                // padding: 10,
-                paddingBottom: 10,
-                paddingLeft: 5
-              }}
+              <View style={ styles.ReviewCommentComment}
               >
-              <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 17}}> Escribe una breve reseña</Text>      
+              <Text style={ styles.TextTitle}> Escribe una breve reseña</Text>      
                 <TextInput 
                   // value = {this.state.comment }
                   multiline = { true }
                   placeholder = 'Danos tu opinión'
                   // onChangeText = { comment => this.setState({ comment }) }
-                  style={{ height: 60, borderColor: 'rgba(0,0,0,.2)', borderBottomWidth: 1 , paddingLeft: 10 , lineHeight: 20,}}
+                  style={ styles.inputText}
                 />    
 
                 <TouchableOpacity onPress={() => this.props.handlePress()}>
-                <View style={{ borderWidth: 1, backgroundColor: '#f59803', padding: 10, width: 60, height: 60, borderRadius: 50}}>
-                    <Text > Enviar </Text>
+                <View style={ styles.containerButton}>
+                    <Text style = { styles.textButton}> Enviar </Text>
                   </View>
                 </TouchableOpacity>
               </View>      
@@ -161,8 +121,79 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 75,
-    
-
-
+  },
+  containerReview: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 4,
+    marginHorizontal: 10,
+    marginTop: 15,
+    shadowColor: 'black',
+    shadowOpacity: .3,
+    shadowOffset: {
+      height: 1,
+      width: -2,
+    },
+  },
+  textStart: {
+    paddingTop: 5, 
+    fontFamily: 'Roboto-Regular', 
+    fontSize: 13,
+  },
+  containerRatingLetraStar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 10,
+    paddingBottom: 15,
+    // borderWidth: 1,
+  },
+  containerRating: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1
+  },
+  containerReviewComment: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    padding: 10,
+  },
+  ReviewCommentImage: {
+    width: 50, 
+    height: 50, 
+    borderWidth: 1, 
+    borderRadius: 25,
+  },
+  ReviewCommentComment: {
+    flex: 1,
+    paddingBottom: 10,
+    paddingLeft: 5,
+    // borderWidth: 1
+  },
+  TextTitle: {
+    fontFamily: 'Roboto-Regular', 
+    fontSize: 17
+  },
+  inputText: {
+    height: 60, 
+    borderColor: 'rgba(0,0,0,.2)', 
+    borderBottomWidth: 1, 
+    paddingLeft: 10, 
+    lineHeight: 20,
+  },
+  containerButton:{
+    backgroundColor: '#f59803', 
+    marginTop: 15, 
+    padding: 10, 
+    borderRadius: 30, 
+    alignItems: 'center',
+  },
+  textButton: {
+    color: 'white',
+    fontFamily: 'Roboto-Regular',
+    fontSize: 17,
   }
+
 })
