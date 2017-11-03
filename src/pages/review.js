@@ -4,7 +4,8 @@ import {
   Text,
   StyleSheet,
   Image,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from 'react-native'
 import PlaceBanner from '../components/placeBanner'
 import PlacePicture from '../components/placePicture'
@@ -34,15 +35,15 @@ export default class Riew extends Component {
   onRating (rate) {
     let text = ''
     if (rate < 3) {
-      text = 'no me gusta'
+      text = 'No me gusta'
     }
     else if (rate === 3) {
-      text = 'esta bien'
+      text = 'Esta bien'
     }
     else if (rate === 4) {
-      text = 'me encanta'
+      text = 'Ee encanta'
     } else {
-      text = 'es perfecto'
+      text = 'Es perfecto'
     }
     this.setState({ rating: rate, textRating: text, comment: text })
   }
@@ -53,7 +54,9 @@ componentDidMount() {
 
   render() {
     return(
-      <View >
+      <View  style = {{
+        paddingBottom: 20,
+      }}>
         <View style = { styles.container }>
           <PlacePicture profileImage =  'http://www.lorempixel.com/100/100' />
         </View>
@@ -62,17 +65,23 @@ componentDidMount() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          borderWidth: 1,
+          borderRadius: 4,
           marginHorizontal: 10, 
           marginTop: 15,
+          
+          shadowColor: 'black',
+          shadowOpacity: .3,
+          shadowOffset: {
+            height: 1,
+            width: -2,
+          },
+          
         }} >
 
           <View style = {{
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            borderWidth: 1,
-            borderColor: 'red',
             paddingTop: 10,
             paddingBottom: 15
           }}>
@@ -87,13 +96,13 @@ componentDidMount() {
               <Rating 
                 rating={this.state.rating}
                 editable={true} 
-                iconWidth={35} 
-                iconHeight={35}
+                iconWidth={40} 
+                iconHeight={40}
                 max={5} 
                 onRate={this.onRating} /> 
   
                 <Text
-                  style = {{ paddingTop: 5}}
+                  style = {{ paddingTop: 5, fontFamily: 'Roboto-Regular', fontSize: 14,}}
                 > Toca una estrella para calificar </Text>          
             </View>
           </View>
@@ -102,37 +111,43 @@ componentDidMount() {
             style={{
               flexDirection: 'row',
               alignItems: 'flex-start',
-              borderWidth: 1,
+              // borderWidth: 1,
+              padding: 10,
             }}  > 
-              <View>
+              <View >
                 <Image
-                  style = {{ width: 60, height: 60 , borderWidth: 1, borderRadius: 30,}}
+                  style = {{ width: 50, height: 50 , borderWidth: 1, borderRadius: 25,}}
                   source = {{ uri: 'https://lorempixel.com/100/100' }}
                  />
               </View>
               <View style={{
                 flex: 1,
-                padding: 10,
+                // padding: 10,
+                paddingBottom: 10,
+                paddingLeft: 5
               }}
               >
-                <Text> Escribe una breve reseña</Text>      
+              <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 17}}> Escribe una breve reseña</Text>      
                 <TextInput 
-                  value = {this.state.comment }
+                  // value = {this.state.comment }
                   multiline = { true }
                   placeholder = 'Danos tu opinión'
-                  onChangeText = { comment => this.setState({ comment }) }
-                  style={{ height: 40, borderColor: 'gray', borderBottomWidth: 1 , paddingLeft: 10 }}
+                  // onChangeText = { comment => this.setState({ comment }) }
+                  style={{ height: 60, borderColor: 'rgba(0,0,0,.2)', borderBottomWidth: 1 , paddingLeft: 10 , lineHeight: 20,}}
                 />    
+
+                <TouchableOpacity onPress={() => this.props.handlePress()}>
+                <View style={{ borderWidth: 1, backgroundColor: '#f59803', padding: 10, width: 60, height: 60, borderRadius: 50}}>
+                    <Text > Enviar </Text>
+                  </View>
+                </TouchableOpacity>
               </View>      
           </View>
         </View>
-        <View>
-            <Text> Hola Comentario</Text>
-        </View>
-       <View>
-          <Comments comments = {this.state.comments}/>
+          <View style = {{ paddingVertical: 5}} >
+            <Comments comments={this.state.comments} />            
+          </View>
         </View> 
-      </View> 
 
     )
   }
@@ -146,6 +161,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 75,
+    
 
 
   }

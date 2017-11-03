@@ -16,7 +16,7 @@ export default Comment = (props) => {
       </View>
       <View style = { styles.comment }>
         <Rating rating = { props.rating } editable = {false} iconWidth = { 25 } iconHeight = { 25 }/>
-        <Text> {props.comment} </Text>
+        <Text style = {{ flexWrap: 'wrap', lineHeight: 20,}}> {props.comment} </Text>
       </View>
     </View>
   )
@@ -25,17 +25,28 @@ export default Comment = (props) => {
 const styles = StyleSheet.create({
   review: {
     flex: 1, 
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginHorizontal: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    shadowOpacity: .3,
+    borderRadius: 4,
+    shadowOffset: {
+      height: 1,
+      width: -2,
+    },
+    padding: 10,
+
   },
   containerImgProfile: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: 'red',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: 'rgba(0,0,0,.3)',
   }, 
   comment: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'pink'
+    paddingLeft: 10,
   }
 })
