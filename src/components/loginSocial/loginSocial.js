@@ -48,7 +48,10 @@ export default class LoginSocial extends Component {
       }
     } catch(e) {
       console.log(e)
-      Alert.alert(' uups!!! ocurrio un error')
+      Alert.alert(
+        ' uups!!! ocurrio un error',
+        e.message
+      )
     }
   }
   render() {

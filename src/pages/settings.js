@@ -4,7 +4,8 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  AsyncStorage
+  AsyncStorage,
+  ScrollView
 } from 'react-native'
 
 import CheckBox from '../components/checkbox'
@@ -47,28 +48,30 @@ export default class Settings extends Component {
 
     return(
       <View>
-        <View style = { styles.hedaer } >
-          <HeaderProfileUser height = { height / 3} />
-        </View>
-        <View style = { styles.settings }>
-          <View style = { styles.settingCard }>
-            <View style = { styles.section }>
-              <Text style = { styles.sectionTitle } > Unidad de Distancia </Text>
-                <View style = {{ marginTop: 15}}>
-                  <CheckBox  checked = {unidad === 'km'} title = 'Kilometros' handleClick = {() => this.handleChange('km') }/>
-                  <CheckBox checked = {unidad === 'millas'} title = 'Millas' handleClick = {() => this.handleChange('millas')} />
+        <ScrollView>
+          <View style = { styles.hedaer } >
+            <HeaderProfileUser height = { height / 3} />
+          </View>
+          <View style = { styles.settings }>
+            <View style = { styles.settingCard }>
+              <View style = { styles.section }>
+                <Text style = { styles.sectionTitle } > Unidad de Distancia </Text>
+                  <View style = {{ marginTop: 15}}>
+                    <CheckBox  checked = {unidad === 'km'} title = 'Kilometros' handleClick = {() => this.handleChange('km') }/>
+                    <CheckBox checked = {unidad === 'mi'} title = 'Millas' handleClick = {() => this.handleChange('mi')} />
+                  </View>
+              </View>
+              <View style = { styles.line  }></View>
+              <View style = { styles.section }>
+                <Text style = { styles.sectionTitle } >Estilo del mapa</Text>
+                <View style = {{ marginTop: 15 }}>
+                  <CheckBox  checked = { mapStyle === 'satellite'} title = 'Satelite' handleClick = {() => this.handleChangeMap('satellite') }/>
+                  <CheckBox checked = { mapStyle === 'standard' } title = 'Normal' handleClick = {() => this.handleChangeMap('standard')} />
                 </View>
-            </View>
-            <View style = { styles.line  }></View>
-            <View style = { styles.section }>
-              <Text style = { styles.sectionTitle } >Estilo del mapa</Text>
-              <View style = {{ marginTop: 15 }}>
-                <CheckBox  checked = { mapStyle === 'satellite'} title = 'Satelite' handleClick = {() => this.handleChangeMap('satellite') }/>
-                <CheckBox checked = { mapStyle === 'standard' } title = 'Normal' handleClick = {() => this.handleChangeMap('standard')} />
               </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
     )
   }
