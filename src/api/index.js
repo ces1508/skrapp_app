@@ -299,8 +299,7 @@ export default class Api {
       })
       return request.data
     } catch (e) {
-      console.log(e)
-      return { error: true,  }
+      return { error: true, code: e.response.data.code, message: e.response.data.error }
     }
   }
 
