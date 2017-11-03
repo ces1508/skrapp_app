@@ -127,6 +127,7 @@ export default class Routes extends Component {
               <Scene
                 key = 'review'
                 component = { Review }
+                title = 'Reseñar'
                 titleStyle = {{ color: '#fff' }} />
           </Scene>
       </Router>

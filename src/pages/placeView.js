@@ -19,6 +19,7 @@ export default class PlaceView extends Component {
     this.onShare = this.onShare.bind(this)
     this.onReview = this.onReview.bind(this)
   }
+
   
   componentWillMount() {
     this.alreadyLiked()
