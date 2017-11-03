@@ -12,6 +12,8 @@ import PlaceBanner from '../components/placeBanner'
 import PlacePicture from '../components/placePicture'
 import Rating from 'react-native-easy-rating'
 import Comments from '../components/comments'
+import FormReview from '../components/formreview'
+
 import Api from '../api'
 
 export default class Riew extends Component {
@@ -81,49 +83,8 @@ export default class Riew extends Component {
         <View style = { styles.container }>
           <PlacePicture profileImage =  'http://www.lorempixel.com/100/100' />
         </View>
+        <FormReview />
 
-        <View style = {styles.containerReview} >
-          <View style = {styles.containerRatingLetraStar}>
-            <View style = {styles.containerRating}> 
-              <Text> {this.state.textRating} </Text>
-              <Rating 
-                rating={this.state.rating}
-                editable={true} 
-                iconWidth={35} 
-                iconHeight={35}
-                max={5} 
-                onRate={this.onRating} /> 
-                <Text style = { styles.textStart}> Toca una estrella para calificar </Text>          
-            </View>
-          </View>
-
-          <View
-            style={ styles.containerReviewComment}  > 
-              <View >
-                <Image
-                  style = { styles.ReviewCommentImage}
-                  source = {{ uri: 'https://lorempixel.com/100/100' }}
-                 />
-              </View>
-              <View style={ styles.ReviewCommentComment}
-              >
-              <Text style={ styles.TextTitle}> Escribe una breve reseña</Text>      
-                <TextInput 
-                  value = {this.state.comment }
-                  multiline = { true }
-                  placeholder = 'Danos tu opinión'
-                  onChangeText = { comment => this.setState({ comment }) }
-                  style={ styles.inputText}
-                />    
-
-                <TouchableOpacity onPress={() => this.createReview()}>
-                <View style={ styles.containerButton}>
-                    <Text style = { styles.textButton } > Enviar </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>      
-          </View>
-        </View>
           <View style = {{ paddingVertical: 5}} >
             <Comments comments={this.state.comments} />            
           </View>
