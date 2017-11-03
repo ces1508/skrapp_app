@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert,
 } from 'react-native'
 import PlaceBanner from '../components/placeBanner'
 import PlacePicture from '../components/placePicture'
@@ -24,6 +25,7 @@ export default class Riew extends Component {
     }
     this.onRating = this.onRating.bind(this)
     this.getComments = this.getComments.bind(this)
+    this.createReview = this.createReview.bind(this)
   }
 
   async getComments() {
@@ -45,12 +47,33 @@ export default class Riew extends Component {
     } else {
       text = 'Es perfecto'
     }
-    this.setState({ rating: rate, textRating: text, comment: text })
+    this.setState({ rating: rate, textRating: text})
   }
 
-componentDidMount() {
-  this.getComments()
-}
+  componentDidMount() {
+    this.getComments()
+  }
+  async createReview () {
+    let { comment, rating } = this.state
+    if (rating === 0 ) return Alert.alert('ups!', 'debes asignar una puntuacion')
+    let { objectId } = this.props.place
+    let data = {
+      comment,
+      rating,
+      place: {
+        __type: 'Pointer',
+        className: 'Place', 
+        objectId
+      }
+    }
+    let review = await Api.makeReview(data)
+    if (review.error) {
+      Alert.alert(
+        'ups !',
+        review.code === 141? 'tu ya tienes una resenia de este lugar': 'estamosm presentando problemas, por favor intenta mas tarde'
+      )
+    }
+  }
 
   render() {
     return(
@@ -60,7 +83,6 @@ componentDidMount() {
         <View style = { styles.container }>
           <PlacePicture profileImage =  'http://www.lorempixel.com/100/100' />
         </View>
-
         <View style = {{ 
           flexDirection: 'column',
           alignItems: 'center',
@@ -129,14 +151,14 @@ componentDidMount() {
               >
               <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 17}}> Escribe una breve reseña</Text>      
                 <TextInput 
-                  // value = {this.state.comment }
+                  value = {this.state.comment }
                   multiline = { true }
                   placeholder = 'Danos tu opinión'
-                  // onChangeText = { comment => this.setState({ comment }) }
+                  onChangeText = { comment => this.setState({ comment }) }
                   style={{ height: 60, borderColor: 'rgba(0,0,0,.2)', borderBottomWidth: 1 , paddingLeft: 10 , lineHeight: 20,}}
                 />    
 
-                <TouchableOpacity onPress={() => this.props.handlePress()}>
+                <TouchableOpacity onPress={() => this.createReview()}>
                 <View style={{ borderWidth: 1, backgroundColor: '#f59803', padding: 10, width: 60, height: 60, borderRadius: 50}}>
                     <Text > Enviar </Text>
                   </View>
