@@ -17,7 +17,6 @@ export default class Load extends Component{
           </View>
           <View style = {{ flexDirection: 'column', flex: 1, paddingVertical: 20 }} >
             <View style = { styles.title } />
-            <View style = { styles.title } />
           </View>
         </View>
     )
@@ -59,12 +58,15 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0, },
     shadowColor: 'rgba(0,0,0,.18)',
     shadowOpacity: 1.0,
+    marginLeft: 10,
+    marginRight: 5,
   },
+
   title: {
     backgroundColor: '#f4f4f4',
     width: width - 120,
     height: 20,
-    marginBottom: 15,
+    marginTop: 20,
     borderRadius: 10
   }
 })
