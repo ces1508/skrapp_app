@@ -45,7 +45,7 @@ export default class LoginForm extends Component {
     } else {
       let data = signin
       let user = await SaveTokens(data)
-      Actions.drawer()
+      Actions.drawer({ type: 'reset' })
     }
   }
 

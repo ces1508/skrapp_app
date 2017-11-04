@@ -172,7 +172,7 @@ export default class Api {
     try {
       let request = await axios.post(endpoint, data, {
         headers: {
-          'X-Parse-Application-Id': 'rzTRzPoG564M566g',
+          'X-Parse-Application-Id': APPLICATION_ID,
           'X-Parse-Revocable-Session': '1',
           'content-type': 'application/json'
         },
@@ -181,9 +181,10 @@ export default class Api {
     } catch (e) {
       if (e.response.data.code === 202) {
         return { status: 'failed', data: e.response.data }
-      } else {
-        return { status: 'failed', data: { code: 500, message: 'estamos presentando problemas con nuestros servidores' } }
-      }
+      } else if (e.response.status >= 400 && e.response.status < 500) {
+        return { status: 'failed', data: { code: e.response.data.code, message: e.response.data.error } }
+      } 
+      return { status: 'failed', data: { code: 500, message: 'estamos presentando problemas con nuestros servidores' } }      
     }
   }
   static async likePlace (place) {
@@ -195,7 +196,7 @@ export default class Api {
     try {
       let request = await axios.post(endpoint, data, {
         headers: {
-          'X-Parse-Application-Id': 'rzTRzPoG564M566g',
+          'X-Parse-Application-Id': APPLICATION_ID,
           'X-Parse-Session-Token': currentUser.sessionToken,
           'content-type': 'application/json'
         },

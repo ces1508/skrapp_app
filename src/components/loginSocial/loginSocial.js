@@ -37,7 +37,7 @@ export default class LoginSocial extends Component {
         } else {
           let save = await SaveTokens(sigin)
           if (save) {
-            Actions.drawer()
+            Actions.drawer({ type: 'reset' })
           } else {
             Alert.alert(
               'lo sentimos',

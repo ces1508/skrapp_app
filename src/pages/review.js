@@ -7,13 +7,13 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  ScrollView,
+  ActivityIndicator
 } from 'react-native'
 import PlaceBanner from '../components/placeBanner'
 import PlacePicture from '../components/placePicture'
-import Rating from 'react-native-easy-rating'
 import Comments from '../components/comments'
-import FormReview from '../components/formreview'
-
+import FormReview from '../components/formReview'
 import Api from '../api'
 
 export default class Riew extends Component {
@@ -23,17 +23,20 @@ export default class Riew extends Component {
       comment: '',
       rating: 0,
       comments: [],
-      textRating: ''
+      textRating: '',
+      loadingComments: true,
     }
     this.onRating = this.onRating.bind(this)
     this.getComments = this.getComments.bind(this)
     this.createReview = this.createReview.bind(this)
+    this.getComment = this.getComment.bind(this)
+    this.renderComments = this.renderComments.bind(this)
   }
 
   async getComments() {
     let { objectId } = this.props.place
     let comments = await Api.getReviews(objectId)
-    this.setState({ comments })
+    this.setState({ comments , loadingComments: false})
   }
 
   onRating (rate) {
@@ -52,6 +55,9 @@ export default class Riew extends Component {
     this.setState({ rating: rate, textRating: text})
   }
 
+  getComment(comment) {
+    this.setState({ comment })
+  }
   componentDidMount() {
     this.getComments()
   }
@@ -70,26 +76,49 @@ export default class Riew extends Component {
     }
     let review = await Api.makeReview(data)
     if (review.error) {
-      Alert.alert(
+      return Alert.alert(
         'ups !',
         review.code === 141? 'tu ya tienes una resenia de este lugar': 'estamosm presentando problemas, por favor intenta mas tarde'
       )
     }
+    let comments = []
+    comments.push(data)
+    comments.push(...this.state.comments)
+    this.setState({ comments , comment: ''})
+  }
+
+  renderComments() {
+    let { loadingComments, comments } = this.state
+    if (loadingComments) {
+      return <ActivityIndicator color = 'orange' size = {1} />
+    }
+    return <Comments comments={this.state.comments} />   
   }
 
   render() {
+    console.log('props pra image ', this.props.place)
+    let { imageThumb, image, imageTwo } = this.props.place
     return(
-      <View  style = {{ paddingBottom: 20, }}>
+      <ScrollView>
         <View style = { styles.container }>
-          <PlacePicture profileImage =  'http://www.lorempixel.com/100/100' />
+          <PlaceBanner banner = { imageTwo? imageTwo.url: image.url }>
+            <View style = {{ marginTop:100 }} >
+              <PlacePicture profileImage =  { imageThumb.url } />
+            </View>
+          </PlaceBanner>
         </View>
-        <FormReview />
-
-          <View style = {{ paddingVertical: 5}} >
-            <Comments comments={this.state.comments} />            
-          </View>
-        </View> 
-
+        <FormReview 
+          handleInput = { this.getComment } 
+          value = {this.state.comment} 
+          textRating = { this.state.textRating }
+          rating = { this.state.rating }
+          onRating = { this.onRating }
+          submit = { this.createReview }
+          />
+        <View style = {{ paddingVertical: 5}} >
+          {this.renderComments()}    
+        </View>
+      </ScrollView>
     )
   }
 }
@@ -101,80 +130,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 75,
   },
-  containerReview: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 4,
-    marginHorizontal: 10,
-    marginTop: 15,
-    shadowColor: 'black',
-    shadowOpacity: .3,
-    shadowOffset: {
-      height: 1,
-      width: -2,
-    },
-  },
-  textStart: {
-    paddingTop: 5, 
-    fontFamily: 'Roboto-Regular', 
-    fontSize: 13,
-  },
-  containerRatingLetraStar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 10,
-    paddingBottom: 15,
-    // borderWidth: 1,
-  },
-  containerRating: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1
-  },
-  containerReviewComment: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    padding: 10,
-  },
-  ReviewCommentImage: {
-    width: 50, 
-    height: 50, 
-    borderWidth: 1, 
-    borderRadius: 25,
-  },
-  ReviewCommentComment: {
-    flex: 1,
-    paddingBottom: 10,
-    paddingLeft: 5,
-    // borderWidth: 1
-  },
-  TextTitle: {
-    fontFamily: 'Roboto-Regular', 
-    fontSize: 17
-  },
-  inputText: {
-    height: 60, 
-    borderColor: 'rgba(0,0,0,.2)', 
-    borderBottomWidth: 1, 
-    paddingLeft: 10, 
-    lineHeight: 20,
-  },
-  containerButton:{
-    backgroundColor: '#f59803', 
-    marginTop: 15, 
-    padding: 10, 
-    borderRadius: 30, 
-    alignItems: 'center',
-  },
-  textButton: {
-    color: 'white',
-    fontFamily: 'Roboto-Regular',
-    fontSize: 17,
-  }
 
+  
 })
