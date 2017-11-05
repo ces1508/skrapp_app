@@ -78,7 +78,7 @@ export default class Riew extends Component {
     if (review.error) {
       return Alert.alert(
         'ups !',
-        review.code === 141? 'tu ya tienes una resenia de este lugar': 'estamosm presentando problemas, por favor intenta mas tarde'
+        review.code === 141? 'tu ya tienes una resenia de este lugar': 'estamos presentando problemas, por favor intenta mas tarde'
       )
     }
     let comments = []
