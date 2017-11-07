@@ -19,6 +19,7 @@ export default class CategoriesView extends Component {
   }
 
   async componentWillMount() {
+
     Actions.refresh({onRight: () => this.goToSearch() })
    }
 

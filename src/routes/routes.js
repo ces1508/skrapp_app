@@ -56,8 +56,8 @@ export default class Routes extends Component {
       return <ActivityIndicator animating = { true } color = 'orange' />
     }
     return(
-      <Router sceneStyle = {{backgroundColor: '#f4f4f4' }} backAndroidHandler = {this.onBackPress}>
-      <Scene key='root' navigationBarStyle={{ backgroundColor: '#f99800' }} titleStyle = {{ color: '#fff' }}>
+      <Router  backAndroidHandler = {this.onBackPress}>
+      <Scene key='root' navigationBarStyle={{ backgroundColor: '#f99800' }} titleStyle = {{ color: '#fff' }} statusBarStyle = 'red' >
             <Scene
               key = 'login'
               component = { LoginView }
