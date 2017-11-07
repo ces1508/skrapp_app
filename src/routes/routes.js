@@ -90,22 +90,26 @@ export default class Routes extends Component {
               component = { DetailCategory }
               leftTitle = ""
                titleStyle = {{ color: '#fff' }}
-               onRight = {() => alert('buscando dentro de la categoria')}
+               onRight = {() => null}
+               backButtonImage = { BackButtom } 
                renderRightButton = {IconSearch}/>
             <Scene
               key = 'place'
               component = { PlaceView }
+              backButtonImage = { BackButtom } 
               leftTitle = ' '/>
               <Scene
                 key = 'about'
                 component = { About }
                 title = 'Acerca de Skrapp'
                 titleStyle={{color: '#fff'}}
+                backButtonImage = { BackButtom } 
                 leftTitle = ' '/>
                 <Scene
                   key = 'myFavorites'
                   title = 'Mis Favoritos'
                   titleStyle = {{ color: '#fff'}}
+                  backButtonImage = { BackButtom } 
                   component = { MyFavoriteView }
 
                 />
@@ -117,20 +121,25 @@ export default class Routes extends Component {
               key = 'settings'
               component = { Settings }
               title = 'Ajustes'
+              backButtonImage = { BackButtom } 
               titleStyle = {{ color: '#fff' }} />
             <Scene
               key = 'map'
               title = 'Mapa'
               component = { MapView }
+              backButtonImage = { BackButtom } 
               titleStyle = {{ color: '#fff' }} />
               <Scene
                 key = 'website'
                 component = { WebSite }
+                backButtonImage = { BackButtom } 
                 titleStyle = {{ color: '#fff' }} />
               <Scene
                 key = 'review'
                 component = { Review }
                 title = 'Reseñar'
+                backButtonImage = { BackButtom } 
+                leftTitle = ''
                 titleStyle = {{ color: '#fff' }} />
           </Scene>
       </Router>
