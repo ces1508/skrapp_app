@@ -6,12 +6,17 @@ import {
   Alert,
   Text,
   Image,
-  StyleSheet
+  StyleSheet,
+ TouchableOpacity,
+ AsyncStorage
 } from 'react-native'
 import MapView from 'react-native-maps'
 import Api from '../api'
 import geolib from 'geolib'
 import { getMapStyle } from '../utils'
+import { Actions } from 'react-native-router-flux'
+import Marker from '../components/marker'
+import { getCurrentPosition, getLastPosition } from '../utils'
 
 const { width, height } = Dimensions.get('window')
 const ASPECT_RATIO = width / height
@@ -45,11 +50,14 @@ export default class Map extends Component {
     this.getPlaces = this.getPlaces.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
     this.getStylesMap = this.getStylesMap.bind(this)
+    this.goPlace = this.goPlace.bind(this)
+    this._onMapReady = this._onMapReady.bind(this)
+    this.getPosition = this.getPosition.bind(this)
   }
 
   async getPlaces() {
     let { region } = this.state
-    let places = await Api.getPlacesByPosition(region.latitude? region : initialRegion)
+    let places = await Api.getPlacesByPosition(region.latitude !== 0? region : initialRegion)
     this.setState({ places: [...this.state.places, ...places], loading: false })
   }
 
@@ -58,41 +66,32 @@ export default class Map extends Component {
     this.setState({ style })
   }
 
-  componentWillMount () {
-    this.getStylesMap()
+  async getPosition() {
+    let currentPosition = await getCurrentPosition()
+    let lastPosition = await getLastPosition()
+    let region = initialRegion
+    if (!currentPosition.error) {
+      region = currentPosition
+    } else if (!lastPosition.error) {
+      region = lastPosition
+    }
+    region.longitudeDelta = LONGITUDE_DELTA
+    region.latitudeDelta = LATITUDE_DELTA
+    this.setState({ region })
+    this.getPlaces()
   }
 
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      let { latitude, longitude } = position.coords
-      let region = {
-        latitude,
-        longitude,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA
-      }
-      this.setState({ region })
-    },
-    (error) => {
-      Alert.alert(
-        'ups !',
-        `tenemos probelas para obtner tu poscion, por favor revisa tu configuracion gps \n
-        tomaremos la ultima posicion registrada`
-      )
-      if (window.position.latitude) {
-        this.setState({
-          region: {
-            latitude: window.position.latitude,
-            longitude: window.position.longitude,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA
-          }
-        })
-      } else {
-        this.setState({ region: initialRegion })
-      }
-    })
-    this.getPlaces()
+  componentWillMount () {
+    this.getStylesMap()
+    this.getPosition()
+  }
+
+  goPlace(place) {
+    Actions.place({ data: place, title: place.title })
+  }
+
+  _onMapReady() {
+    this.setState({ regionSet: true  })
   }
 
   onRegionChange (region) {
@@ -121,17 +120,8 @@ export default class Map extends Component {
             identifier = { place.objectId }
             image = { place.category.icon.url }
           >
-            <MapView.Callout tooltip >
-              <View style={styles.containerTooltip}>
-              <View style={styles.containerImage}>
-                <Image source={{ uri: place.imageThumb.url }}
-                  style={styles.image} />
-              </View>
-              <View >
-                <Text style={styles.titleMarker}> {place.title} </Text>
-                <Text style={styles.descriptionMarker}> {place.description} </Text>
-              </View>
-            </View>
+            <MapView.Callout tooltip  onPress = { () =>this.goPlace(place)}>
+             <Marker place = { place } />
             </MapView.Callout>
           </MapView.Marker>
         )
@@ -143,16 +133,8 @@ export default class Map extends Component {
           description = { place.description }
           identifier = { place.objectId }
         >
-          <MapView.Callout tooltip >
-            <View style={styles.containerTooltip}>
-              <View style={styles.containerImage}>
-                <Image style={styles.image} source={{ uri: place.imageThumb.url }} />
-              </View>
-              <View >
-                <Text style={styles.titleMarker}> {place.title} </Text>
-                <Text style={styles.descriptionMarker}> {place.description} </Text>
-              </View>
-            </View>
+          <MapView.Callout tooltip onPress = { () =>this.goPlace(place)} >
+          <Marker place = { place } />
           </MapView.Callout>
         </MapView.Marker>
       )
@@ -160,64 +142,24 @@ export default class Map extends Component {
   }
   render() {
     return(
-      <MapView
-        style = {{ height, width }}
-        loadingEnabled
-        loadingIndicatorColor="#666666"
-        loadingBackgroundColor="#eeeeee"
-        initialRegion = { initialRegion }
-        onMapReady = {() =>  this.setState({ regionSet: true  }) }
-        showsUserLocation = {true}
-        showsScale = { true }
-        region = { this.state.region}
-        onRegionChange = { this.onRegionChange }
-        mapType = { this.state.style }
-      >
-       { this.renderMarkers() }
-      </MapView>
+      <View>
+        <MapView
+          style = {{ height, width }}
+          loadingEnabled
+          loadingIndicatorColor="#666666"
+          loadingBackgroundColor="#eeeeee"
+          initialRegion = { initialRegion }
+          onMapReady = { this._onMapReady }
+          showsUserLocation = {true}
+          showsScale = { true }
+          region = { this.state.region}
+          onRegionChange = { this.onRegionChange }
+          mapType = { this.state.style }
+          cacheEnabled = { true }
+        >
+        { this.renderMarkers() }
+        </MapView>
+      </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  containerTooltip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    backgroundColor: '#fefefe',
-    borderRadius: 2,
-    flex: 1,
-    shadowOffset: { width: 0, height: 0, },
-    shadowColor: 'rgba(0,0,0,.1)',
-    shadowOpacity: 1.0,
-    overflow: 'hidden',
-
-  },
-  containerImage: {
-    marginRight: 5
-  },
-  image: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0,.25)',
-    backgroundColor: '#f4f4f4'
-  },
-  titleMarker: {
-    fontSize: 18,
-    fontFamily: 'Roboto-Medium',
-    fontWeight: '500',
-    marginBottom: 5,
-    color: '#454545',
-    maxWidth: 280,
-  },
-  descriptionMarker: {
-    fontSize: 14,
-    flexWrap: 'wrap',
-    maxWidth: 250,
-    lineHeight: 18
-  }
-
-})

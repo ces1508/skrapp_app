@@ -15,15 +15,15 @@ export default class Card extends Component{
         <View style = { styles.main }  >
           <View style = { styles.iconContainer } >
             <View style = { styles.image }>
-                <Image 
-                  // source={{ uri: 'https://lorempixel.com/100/100' }}  
-                  source={{ uri: image.url }}  
-                  
+                <Image
+                  // source={{ uri: 'https://lorempixel.com/100/100' }}
+                  source={{ uri: image.url }}
+
                   resizeMethod = 'resize'
                   resizeMode = 'stretch'
-                  
-                  style = { { 
-                    backgroundColor: Platform.OS == 'android' ? 'transparent' : '#b2b2b2' , 
+
+                  style = { {
+                    backgroundColor: Platform.OS == 'android' ? 'transparent' : '#b2b2b2' ,
                     // borderColor: '#b2b2b2',
                     height: Platform.OS == 'android' ? 50 : 60,
                     width: Platform.OS == 'android' ? 50 : 60,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'bottom',
     fontSize: 17,
     color: '#454545',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
     flex: 1,
     overflow: 'hidden',

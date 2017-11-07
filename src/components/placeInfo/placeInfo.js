@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginTop: 20,
     color: '#454545',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
 
   },
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     color: '#7D7D7D',
     fontFamily: 'Roboto-Regular',
     fontWeight: '400',
-  }, 
+  },
   line: {
     marginTop: 5,
     width: 70,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   containerDescription: {
     paddingHorizontal: 20,
     marginTop: 15,
-    
+
   },
   description: {
     fontSize: 16,
@@ -65,6 +65,6 @@ const styles = StyleSheet.create({
     lineHeight: 25,
     fontFamily: 'Roboto-Regular',
     fontWeight: '400',
-  
+
   },
 })

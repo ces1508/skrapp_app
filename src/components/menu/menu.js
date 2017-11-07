@@ -51,18 +51,21 @@ export default class Menu extends Component {
 
   render() {
    return(
-     <ScrollView contentContainerStyle={styles.container }> 
+     <ScrollView contentContainerStyle={styles.container }>
       <View style={{ flex: 1, paddingVertical: 20,}}>
-        <View style = {[ styles.itemImage,]}>
-          <Image source = {{ uri: 'https://lorempixel.com/120/120/' }} style = { styles.imageProfile } />
-          <Text style = { styles.textPerfil }>PERFIL</Text>
-        </View>
+        {
+
+          // <View style = {[ styles.itemImage,]}>
+          //   <Image source = {{ uri: 'https://lorempixel.com/120/120/' }} style = { styles.imageProfile } />
+          //   <Text style = { styles.textPerfil }>PERFIL</Text>
+          // </View>
+        }
         <TouchableOpacity onPress={() => this.myFavorites()}>
           <View style = { styles.item }>
-            <Icon 
+            <Icon
                 style = { styles.iconMenu }
-                name='heart' 
-                size={25} 
+                name='heart'
+                size={25}
                 color= '#d63636'
                 />
             <Text style = { styles.text }>MIS FAVORITOS</Text>
@@ -82,10 +85,10 @@ export default class Menu extends Component {
 
         <TouchableOpacity onPress = {() => this.settings()}>
           <View style = { styles.item }>
-            <Icon 
-              style = { styles.iconMenu } 
-              name = 'cog' 
-              size = {25}  
+            <Icon
+              style = { styles.iconMenu }
+              name = 'cog'
+              size = {25}
               color = '#a8a8a8'/>
             <Text style = { styles.text }>AJUSTES</Text>
           </View>
@@ -93,10 +96,10 @@ export default class Menu extends Component {
 
         <TouchableOpacity onPress = {() => this.about()} >
           <View style = { styles.item }>
-            <Icon 
-              style = { styles.iconMenu } 
-              name='info-circle' 
-              size={25} 
+            <Icon
+              style = { styles.iconMenu }
+              name='info-circle'
+              size={25}
               color= '#ffd39c'/>
             <Text style = { styles.text }>ACERCA DE SKRAPP</Text>
             </View>
@@ -104,12 +107,12 @@ export default class Menu extends Component {
 
         <TouchableOpacity onPress = { () => this.destroySession() }>
           <View style = { styles.item }>
-          <IonicIcon 
-            style = { styles.iconMenu } 
-            name='md-log-out' 
-            size={25} 
+          <IonicIcon
+            style = { styles.iconMenu }
+            name='md-log-out'
+            size={25}
             color= '#ff5353'/>
-            
+
             <Text style = { styles.text }>CERRAR SESIÓN</Text>
           </View>
         </TouchableOpacity>
@@ -134,7 +137,7 @@ const styles = StyleSheet.create({
     // borderRadius: Platform.OS === 'android' ? 20 : 30,
   },
   item: {
-    height: (height - 10) / 7.6,
+    height: (height - 10) / 5.5,
     justifyContent: 'center',
     alignItems: 'center',
     // borderWidth: 1,
@@ -156,14 +159,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 20,
     marginTop: 15,
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
     letterSpacing: .2
   },
   text: {
     color: '#fff',
     fontSize: 14,
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
     letterSpacing: .5,
     marginTop: 10,

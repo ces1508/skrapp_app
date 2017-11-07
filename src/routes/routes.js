@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Scene, Router, ActionConst } from 'react-native-router-flux'
+import { Scene, Router, ActionConst, Actions } from 'react-native-router-flux'
 import CategoriesView from '../pages/categoriesView'
 import DetailCategory from '../pages/detailCategory'
 import PlaceView from '../pages/placeView'
@@ -18,7 +18,6 @@ import Review from '../pages/review'
 import {
   ActivityIndicator
 } from 'react-native'
-
 import BackButtom from '../../assets/images/back.png'
 import MenuIcon from '../../assets/images/menu.png'
 
@@ -33,19 +32,18 @@ export default class Routes extends Component {
 
   async setValues() {
     await Promise.all([setMapStyle(), setUnidad()])
-  } 
+  }
 
+  onBackPress = (e) => {
+    if (Actions.state.index === 0) {
+      return false
+    }
+    Actions.pop()
+    return true
+}
   componentWillMount() {
     this.setValues()
     this.requireLogin()
-    window.navigator.geolocation.getCurrentPosition( (position) => {
-      window.position = position.coords
-    }, ( (error) => {
-      window.position = {
-        error: true,
-
-      }
-    }),  {enableHighAccuracy: false, timeout: 2000, maximumAge: 1000})
   }
   async requireLogin () {
     let requireLogin = await AlreadyUser()
@@ -58,8 +56,8 @@ export default class Routes extends Component {
       return <ActivityIndicator animating = { true } color = 'orange' />
     }
     return(
-      <Router sceneStyle = {{backgroundColor: '#f4f4f4' }}>
-        <Scene key='root' navigationBarStyle={{ backgroundColor: '#f99800' }} backButtonImage = { BackButtom  } titleStyle = {{ color: '#fff' }}>
+      <Router sceneStyle = {{backgroundColor: '#f4f4f4' }} backAndroidHandler = {this.onBackPress}>
+      <Scene key='root' navigationBarStyle={{ backgroundColor: '#f99800' }} titleStyle = {{ color: '#fff' }}>
             <Scene
               key = 'login'
               component = { LoginView }
@@ -104,12 +102,12 @@ export default class Routes extends Component {
                 title = 'Acerca de Skrapp'
                 titleStyle={{color: '#fff'}}
                 leftTitle = ' '/>
-                <Scene 
+                <Scene
                   key = 'myFavorites'
                   title = 'Mis Favoritos'
                   titleStyle = {{ color: '#fff'}}
                   component = { MyFavoriteView }
-                  
+
                 />
               <Scene
                 hideNavBar

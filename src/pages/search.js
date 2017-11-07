@@ -14,6 +14,7 @@ import Api from '../api'
 
 import Categories from '../components/categories'
 import ListPlaces from '../components/listPlaces'
+import {getCurrentPosition, getLastPosition } from '../utils'
 
 export default class Search extends Component {
   constructor(props) {
@@ -25,12 +26,14 @@ export default class Search extends Component {
       q: '',
       loading: false,
       filter: false,
+      position: {}
     }
     this.renderRows = this.renderRows.bind(this)
     this.filterCategories = this.filterCategories.bind(this)
     this.filterData = this.filterData.bind(this)
     this.filterPlaces = this.filterPlaces.bind(this)
     this.handleInput = this.handleInput.bind(this)
+    this.clearInput = this.clearInput.bind(this)
   }
 
   filterCategories (xt) {
@@ -45,9 +48,18 @@ export default class Search extends Component {
   }
 
   async filterPlaces() {
-    this.setState({ loading: true })
+    let currentPosition = await getCurrentPosition()
+    let lastPosition = await getLastPosition()
+    let position = {}
+    let data = []
+    if (!currentPosition.error) {
+      position = currentPosition
+    }
+    if (!lastPosition.error) {
+      position = lastPosition
+    }
     let filter = await Api.filterPlaceByName(this.state.q, this.props.categoryId)
-    this.setState({ filterData: filter })
+    this.setState({ filterData: filter, position })
   }
 
   handleInput (value) {
@@ -57,6 +69,10 @@ export default class Search extends Component {
     }
     this.setState({ q: value, filter })
     this.filterData()
+  }
+
+  clearInput() {
+    this.setState({ q: '', filterData: [] })
   }
 
   handleBack () {
@@ -76,13 +92,13 @@ export default class Search extends Component {
     if (typeSearch === 'categories') {
       return <Categories  data = { filter? filterData : data } />
     }
-    return <ListPlaces data = { filter? filterData : data } currentPosition = { window.position }/>
+    return <ListPlaces data = { filter? filterData : data } currentPosition = {this.state.position }/>
   }
   render() {
     return(
       <View style = {{ backgroundColor: '#f4f4f4',  paddingBottom: 10}}>
         <View style={styles.searchContainer} >
-          <View style={styles.containerInput} > 
+          <View style={styles.containerInput} >
             <TouchableOpacity onPress = { () => this.handleBack() } >
               <View  style = {{ paddingHorizontal: 8 }}>
                 <Icons
@@ -95,7 +111,7 @@ export default class Search extends Component {
 
             <TextInput
               style = { styles.input }
-              placeholder = 'Search...'
+              placeholder = 'Lo que Necesitas'
               placeholderTextColor = "#d2d5d9"
               autoFocus = { true }
               maxLength = { 50 }
@@ -107,6 +123,7 @@ export default class Search extends Component {
               style = { styles.inputIconClear }
               name = { 'times' }
               size = {20}
+              onPress = { this.clearInput }
             />
           </View>
         </View>
@@ -143,7 +160,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     backgroundColor: 'white',
     height: 50,
-    fontStyle: 'italic',   
+    fontStyle: 'italic',
   },
   inputIconClear: {
 

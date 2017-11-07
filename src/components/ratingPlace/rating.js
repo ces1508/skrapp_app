@@ -16,6 +16,7 @@ export default RatingPlace = (props) => {
           iconWidth={35}
           iconHeight={35}
           max={5}
+          iconSelected = { require('../../../assets/images/star.png') }
           onRate={props.onRating} />
         <Text style={styles.textStart}> Toca una estrella para calificar </Text>
       </View>
@@ -39,8 +40,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   textStart: {
-    paddingTop: 5, 
-    fontFamily: 'Roboto-Regular', 
+    paddingTop: 5,
+    fontFamily: 'Roboto-Regular',
     fontSize: 13,
   },
 

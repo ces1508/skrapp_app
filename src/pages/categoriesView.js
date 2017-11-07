@@ -17,9 +17,10 @@ export default class CategoriesView extends Component {
     let data = await Api.getCategories()
     this.setState({ data  ,loading: false })
   }
-  componentWillMount() {
+
+  async componentWillMount() {
     Actions.refresh({onRight: () => this.goToSearch() })
-  }
+   }
 
   componentDidMount() {
     this.getData()
@@ -27,7 +28,7 @@ export default class CategoriesView extends Component {
 
   goToSearch() {
     let { data }  = this.state
-    Actions.search({ typeSearch: 'categories', data })
+    Actions.search({ typeSearch: 'place' })
   }
 
   renderContent() {

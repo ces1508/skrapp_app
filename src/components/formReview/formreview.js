@@ -18,7 +18,7 @@ export default class FormReview extends Component {
     let { textRating, rating, onRating} = this.props
     return (
       <View style={styles.containerReview}>
-        <Rating  textRating = { textRating } onRating = { onRating } rating = { rating } />
+        <Rating  textRating = { textRating } onRating = { onRating } rating = { rating }  />
         <View style={styles.containerReviewComment}>
           <View style={styles.ReviewCommentComment}>
             <Text style={styles.TextTitle}> Escribe una breve reseña</Text>
@@ -26,7 +26,7 @@ export default class FormReview extends Component {
               value={this.props.value}
               multiline={true}
               placeholder='Danos tu opinión'
-              onChangeText={comment => this.props.handleInput(comment)} 
+              onChangeText={comment => this.props.handleInput(comment)}
               style={styles.inputText}
             />
             <Buttom text = 'Enviar' styleButtom = { styles.containerButton  } handlePress = { this.props.submit } styleText = { styles.textButton } />
@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   ReviewCommentImage: {
-    width: 50, 
-    height: 50, 
-    borderWidth: 1, 
+    width: 50,
+    height: 50,
+    borderWidth: 1,
     borderRadius: 25,
   },
   ReviewCommentComment: {
@@ -69,22 +69,22 @@ const styles = StyleSheet.create({
     // borderWidth: 1
   },
   TextTitle: {
-    fontFamily: 'Roboto-Regular', 
+    fontFamily: 'Roboto-Regular',
     fontSize: 17,
     textAlign: 'center'
   },
   inputText: {
-    height: 60, 
-    borderColor: 'rgba(0,0,0,.2)', 
-    borderBottomWidth: 1, 
-    paddingLeft: 10, 
+    height: 60,
+    borderColor: 'rgba(0,0,0,.2)',
+    borderBottomWidth: 1,
+    paddingLeft: 10,
     lineHeight: 20,
   },
   containerButton:{
-    backgroundColor: '#f59803', 
-    marginTop: 15, 
-    padding: 10, 
-    borderRadius: 30, 
+    backgroundColor: '#f59803',
+    marginTop: 15,
+    padding: 10,
+    borderRadius: 30,
     alignItems: 'center',
   },
   textButton: {

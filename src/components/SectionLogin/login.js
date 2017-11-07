@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'transparent',
     textAlignVertical: 'center',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
   },
 })

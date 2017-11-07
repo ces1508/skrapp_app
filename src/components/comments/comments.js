@@ -7,11 +7,9 @@ export default class Comments extends Component {
   }
 
   render() {
-    console.log(this.props.comments)
     return <FlatList
       data ={this.props.comments}
       renderItem = {({item}) => {
-        console.log(item)
         return <Comment {...item } />
       }}
     />

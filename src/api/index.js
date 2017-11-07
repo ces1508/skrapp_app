@@ -70,10 +70,10 @@ export default class Api {
     }
   }
 
-  static async filterPlaceByName (text, categoryId) {
+  static async filterPlaceByName (text, categoryId, position ) {
     let where = {}
     let title = text.toLowerCase()
-    if (window.position.error) {
+    if (!position) {
       where = {
         canonical: {
           $regex: title
@@ -87,8 +87,8 @@ export default class Api {
         location: {
           "$nearSphere": {
             "__type": "GeoPoint",
-            "latitude": window.position.latitude,
-            "longitude":  window.position.longitude
+            "latitude": position.latitude,
+            "longitude":  position.longitude
           },
         }
       }
@@ -142,7 +142,7 @@ export default class Api {
             "latitude": location.latitude,
             "longitude": location.longitude
           },
-          $maxDistanceInKilometers: 100
+          $maxDistanceInKilometers: 150
         }
       }
     }
@@ -183,8 +183,8 @@ export default class Api {
         return { status: 'failed', data: e.response.data }
       } else if (e.response.status >= 400 && e.response.status < 500) {
         return { status: 'failed', data: { code: e.response.data.code, message: e.response.data.error } }
-      } 
-      return { status: 'failed', data: { code: 500, message: 'estamos presentando problemas con nuestros servidores' } }      
+      }
+      return { status: 'failed', data: { code: 500, message: 'estamos presentando problemas con nuestros servidores' } }
     }
   }
   static async likePlace (place) {
@@ -320,15 +320,33 @@ export default class Api {
           limit: 20,
           where: {
             place: {
-              __type: 'Pointer', 
-              className: 'Place', 
+              __type: 'Pointer',
+              className: 'Place',
               objectId: placeId
-            }, 
+            },
             isInappropriate: false
           }
         }
       })
       return request.data.results
+    } catch (e) {
+      console.log(e)
+      return { error: true,  }
+    }
+  }
+  static async getProfile() {
+    let endpoint = `${API_SKRAPP}/users/me`
+    let currentUser = await getCurrentUser()
+    try {
+      let request = await axios.get(endpoint, {
+        headers: {
+          'X-Parse-Application-Id':APPLICATION_ID ,
+          'X-Parse-Session-Token': currentUser.sessionToken,
+          'content-type': 'application/json'
+        },
+      })
+      console.log(request.data)
+      return request.data
     } catch (e) {
       console.log(e)
       return { error: true,  }

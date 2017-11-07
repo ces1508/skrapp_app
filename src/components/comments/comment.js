@@ -8,14 +8,14 @@ import {
 import Rating from 'react-native-easy-rating'
 
 export default Comment = (props) => {
-  console.log('props ', props)
   return(
     <View style = { styles.review }>
       <View style = { styles.containerImgProfile } >
-        <Image source = {{uri: 'https://lorempixel.com/150/150'}} />
+        <Image source = {require('../../../assets/images/avatar.png')} style = { styles.image } />
       </View>
       <View style = { styles.comment }>
-        <Rating rating = { props.rating } editable = {false} iconWidth = { 25 } iconHeight = { 25 }/>
+        <Text>{props.userData.name}</Text>
+        <Rating rating = { props.rating }  iconSelected = { require('../../../assets/images/star.png') } editable = {false} iconWidth = { 25 } iconHeight = { 25 }/>
         <Text style = {{ flexWrap: 'wrap', lineHeight: 20,}}> {props.comment} </Text>
       </View>
     </View>
@@ -24,7 +24,7 @@ export default Comment = (props) => {
 
 const styles = StyleSheet.create({
   review: {
-    flex: 1, 
+    flex: 1,
     flexDirection: 'row',
     marginHorizontal: 10,
     marginTop: 10,
@@ -43,10 +43,14 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     backgroundColor: 'rgba(0,0,0,.3)',
-  }, 
+  },
   comment: {
     flex: 1,
     flexDirection: 'column',
     paddingLeft: 10,
+  },
+  image: {
+    height: 50,
+    width: 50
   }
 })

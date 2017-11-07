@@ -7,11 +7,11 @@ import {
   AsyncStorage,
   ScrollView
 } from 'react-native'
-
+import Api from '../api'
 import CheckBox from '../components/checkbox'
 import HeaderProfileUser from '../components/headerProfileUser'
 import { getUnidad, getMapStyle, setMapStyle, setUnidad} from '../utils'
-
+import Avatar from '../../assets/images/avatar.png'
 const { width, height } = Dimensions.get('window')
 
 export default class Settings extends Component {
@@ -19,7 +19,8 @@ export default class Settings extends Component {
     super(props)
     this.state = {
       unidad: '',
-      mapStyle: ''
+      mapStyle: '',
+      'username': ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.getValues = this.getValues.bind(this)
@@ -30,6 +31,10 @@ export default class Settings extends Component {
     this.setState({ unidad, mapStyle })
   }
 
+  async getProfile() {
+    let profile = await Api.getProfile()
+    this.setState({ username: profile.username })
+  }
   async handleChange(med) {
     await setUnidad(med)
     this.setState({ unidad: med })
@@ -43,6 +48,10 @@ export default class Settings extends Component {
     this.getValues()
   }
 
+  componentDidMount() {
+    this.getProfile()
+  }
+
   render() {
     let { unidad, mapStyle } = this.state
 
@@ -50,7 +59,7 @@ export default class Settings extends Component {
       <View>
         <ScrollView>
           <View style = { styles.hedaer } >
-            <HeaderProfileUser height = { height / 3} />
+            <HeaderProfileUser height = { height / 3}  username = { this.state.username } avatar = { Avatar }/>
           </View>
           <View style = { styles.settings }>
             <View style = { styles.settingCard }>
@@ -97,7 +106,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#454545',
     textAlign: 'left',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500'
   },
   line: {

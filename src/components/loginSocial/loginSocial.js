@@ -76,9 +76,10 @@ export default class LoginSocial extends Component {
 const styles = StyleSheet.create({
   container: {
     height: height / 3,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   btnSocial: {
+    marginTop: 20,
     width: width- 40,
     height: 40,
     justifyContent: 'center',

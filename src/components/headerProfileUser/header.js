@@ -19,11 +19,11 @@ export default class HeaderProfile extends Component {
     return(
       <View style = {[ styles.header, this.defaulStyles]}>
         <View style = { styles.containerImage }>
-          <Image style = {[ styles.containerImage, styles.image ]}  source = {{uri: 'https://lorempixel.com/300/300/'}} />
+          <Image style = {[ styles.containerImage, styles.image ]}  source = { this.props.avatar }  />
         </View>
         <View>
-          <Text style = {[ styles.text, styles.name ]}>Juan Lizcano</Text>
-          <Text style = { styles.text }> Neiva, Hu </Text>
+          <Text style = {[ styles.text, styles.name ]}> { this.props.username }</Text>
+          <Text style = { styles.text }> {this.props.address} </Text>
         </View>
       </View>
     )
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f08300',
     alignItems: 'center',
     justifyContent: 'center',
-    
+
   },
   text: {
     color: 'white',
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 20,
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
   },
   containerImage: {

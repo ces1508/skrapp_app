@@ -16,11 +16,11 @@ export default class PlaceBoxSocial extends Component {
 
         <View>
           <View style = { styles.containerSocial }>
-            <IconText 
+            <IconText
               customStylesIcon = {styles.iconSocial}
-              icon = 'facebook' 
-              text = '' 
-              iconSize = {25} 
+              icon = 'facebook'
+              text = ''
+              iconSize = {25}
               handleClick = {() => null} />
 
             <View style = { styles.containerText }>
@@ -32,9 +32,9 @@ export default class PlaceBoxSocial extends Component {
           <View style = {styles.containerSocial}>
 
             <IconText
-              customStylesIcon = {styles.iconSocial} 
-              icon = 'instagram' 
-              text = '' 
+              customStylesIcon = {styles.iconSocial}
+              icon = 'instagram'
+              text = ''
               iconSize = {25}
               handleClick = {() => null} />
 
@@ -48,15 +48,15 @@ export default class PlaceBoxSocial extends Component {
           <View style = { styles.containerSocial }>
             <IconText
             customStylesIcon = { styles.iconSocial }
-            icon = 'twitter' 
+            icon = 'twitter'
             text = ''
             iconSize = {25}
             handleClick = {() => null} />
-            
+
             <View style = { styles.containerText }>
                 <Text style = { styles.textSocial }> @christianseguras </Text>
             </View>
-            
+
           </View>
 
 
@@ -90,9 +90,9 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     textAlignVertical: 'center',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
-    
+
   },
   containerSocial: {
     //borderWidth: 1,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     textAlign: 'center'
-    
+
   },
   containerText: {
     borderBottomWidth: 1,

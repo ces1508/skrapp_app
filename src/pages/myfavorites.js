@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { View, Text, ActivityIndicator } from 'react-native'
-import Api from '../api' 
+import Api from '../api'
 import ListPlaces from '../components/listPlaces'
 import SearchNotFound from '../components/searchnotfound'
-
+import { getCurrentPosition, getLastPosition } from '../utils'
 export default class MyFavorites extends Component {
   constructor(props){
     super()
@@ -11,14 +11,28 @@ export default class MyFavorites extends Component {
       places: [],
       loading: true,
       error: false,
-      currentPosition: window.position
+      currentPosition: {error: true}
     }
     this.renderContent = this.renderContent.bind(this)
+    this.getPosition = this.getPosition.bind(this)
   }
 
   async getFavorites() {
+    this.getPosition()
     let favorites = await Api.getFavorites()
     this.setState({ loading: false, places: favorites })
+  }
+
+  async getPosition() {
+    let position = {error: true}
+    let currentPosition = await getCurrentPosition()
+    let lastPosition = await getLastPosition()
+    if (!currentPosition.error) {
+      position = currentPosition
+    } else if(!lastPosition.error) {
+      position = lastPosition
+    }
+    this.setState({ currentPosition: position })
   }
 
   componentDidMount() {
@@ -35,10 +49,7 @@ export default class MyFavorites extends Component {
       } else {
         return(
           <View style = {{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-            {
-              // <Text> Aun no tiene favoritos </Text>
-            }
-            <SearchNotFound />
+            <SearchNotFound text = 'aun no tienes favoritos'/>
           </View>
         )
       }

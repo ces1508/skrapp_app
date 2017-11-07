@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Platform } from 'react-native'
 import Icons from 'react-native-vector-icons/FontAwesome'
 import Rating from 'react-native-easy-rating'
 
@@ -12,11 +12,19 @@ export default class PlaceCard extends Component {
             <Icons name='map-marker' size={17} color= '#7d7d7d' />
             <Text style = { styles.text }
               ellipsizeMode='tail'
-              numberOfLines={1} 
+              numberOfLines={1}
             > { this.props.address } </Text>
           </View>
-          <Rating rating = { this.props.ranking } editable = {false} iconWidth = { 20 } iconHeight = { 20 } max = { 5 } onRate = { () => null } /> 
-          
+          <Rating
+            rating = { this.props.ranking }
+            editable = {false}
+            iconWidth = { 20 }
+            iconHeight = { 20 }
+            max = { 5 }
+            onRate = { () => null }
+            iconSelected = { require('../../../assets/images/star.png') }
+            />
+
         </View>
         {
           this.props.showDistance?(
@@ -35,6 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    marginTop: Platform.OS === 'android'? -12: 0
   },
   content: {
     flexDirection: 'column',
@@ -45,9 +54,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     textAlign: 'center',
-    paddingLeft: 4,
+    paddingLeft: 3,
+    marginRight: 5,
     color:'#7d7d7d',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '400',
   },
   textDistance: {
@@ -55,12 +65,12 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#5a5a5a',
     textAlign: 'center',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500'
   },
   textUnidad:{
     color: '#9f9f9f',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
     textAlign: 'center'
   }

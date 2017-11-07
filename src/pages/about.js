@@ -20,7 +20,7 @@ export default class About extends Component {
           <View style = { styles.containerImage }>
             <Image style = { styles.image } source = {require('../../assets/images/skrappcolor.png')} />
           </View>
-          <View style = {{ marginTop: 20 }} > 
+          <View style = {{ marginTop: 20 }} >
             <Text style = { styles.name }> Skrapp Colombia </Text>
             <Text style = { styles.version }> Versión 3.2.0 </Text>
           </View>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   name: {
     color: '#454545',
     fontSize: 20,
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
     letterSpacing: .25,
     marginTop: 10,
@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   copyrightText: {
-    
-    fontFamily: 'Roboto-Medium',
+
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
     letterSpacing: .25,
     color: '#454545',

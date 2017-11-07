@@ -25,7 +25,7 @@ export default class SectionRegister extends Component {
         <TouchableOpacity onPress = {() => this.handlePress()}>
           <Text style = { styles.textBtn } > ¿Aun no eres parte de Skrapp? Unete Ahora </Text>
         </TouchableOpacity>
-      </View> 
+      </View>
     )
   }
 }
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'transparent',
     textAlignVertical: 'center',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
   },
 })

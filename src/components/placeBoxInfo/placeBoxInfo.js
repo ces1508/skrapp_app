@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Linking, Platform } from 'rea
 import IconText from '../iconText'
 import Item from './item'
 import { Actions } from 'react-native-router-flux'
+import { phonecall } from 'react-native-communications'
 
 export default class PlaceBoxInfo extends Component {
   constructor(props) {
@@ -27,12 +28,9 @@ export default class PlaceBoxInfo extends Component {
     Linking.openURL(url)
   }
 
-  async callPlace () {
+  callPlace () {
     let { phone } = this.props
-    phone = String(phone)
-    let canLink = await Linking.canOpenURL(`telprompt:${phone})`)
-    console.log(canLink)
-    // Linking.openURL(`tel:${phone}`)
+    phonecall(phone, false)
   }
   render() {
     return(
@@ -45,11 +43,11 @@ export default class PlaceBoxInfo extends Component {
             <Item icon = 'map-marker'  text1 = { this.props.address } />
           </TouchableOpacity>
           <TouchableOpacity onPress = { () => this.callPlace() } >
-            <Item icon = 'phone'  text1 = { this.props.phone } /> 
+            <Item icon = 'phone'  text1 = { this.props.phone } />
           </TouchableOpacity>
-          <Item icon = 'clock-o'  text1 = '8:00 AM - 12:00 PM ' text2 = '2:00 AM - 6:00 PM'/> 
+          {/*<Item icon = 'clock-o'  text1 = '8:00 AM - 12:00 PM ' text2 = '2:00 AM - 6:00 PM'/> */}
           <TouchableOpacity onPress = {() => this.viewWebSite( )}>
-            <Item icon = 'globe'  text1 =  '' text2 = { this.props.website } /> 
+            <Item icon = 'globe'  text1 =  '' text2 = { this.props.website } />
           </TouchableOpacity>
         </View>
       </View>
@@ -75,8 +73,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
-    
-    
+
+
   },
   title: {
     fontSize: 20,
@@ -84,9 +82,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     paddingTop: 10,
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
-    
+
   },
   containerInfo: {
     //borderWidth: 1,

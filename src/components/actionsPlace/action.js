@@ -23,14 +23,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
-  }, 
+  },
   text: {
     color: '#5A5A5A',
     //fontWeight: 'medium',
     textAlign: 'center',
     textAlignVertical: 'center',
     paddingTop: 5,
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'RobotoCondensed',
     fontWeight: '500',
   }
 })
