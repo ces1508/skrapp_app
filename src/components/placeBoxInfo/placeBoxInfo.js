@@ -21,9 +21,9 @@ export default class PlaceBoxInfo extends Component {
     let url = ''
     let os = Platform.OS
     if (os === 'android') {
-      url = `geo:${latitude}, ${longitude}`
+      url = `http://maps.google.com/?daddr=${latitude},${longitude}`
     } else {
-      url = `http://maps.apple.com/?ll=${latitude},${longitude}`
+      url = `http://maps.apple.com/?daddr=${latitude},${longitude}`
     }
     Linking.openURL(url)
   }

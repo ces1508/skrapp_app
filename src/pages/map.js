@@ -155,7 +155,6 @@ export default class Map extends Component {
           region = { this.state.region}
           onRegionChange = { this.onRegionChange }
           mapType = { this.state.style }
-          cacheEnabled = { true }
         >
         { this.renderMarkers() }
         </MapView>
