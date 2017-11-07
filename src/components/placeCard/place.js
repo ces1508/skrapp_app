@@ -8,7 +8,7 @@ export default class PlaceCard extends Component {
     return(
       <View style = { styles.place }>
         <View style = { styles.content }>
-          <View style =  {{ flexDirection: 'row' }}>
+          <View style =  {{ flexDirection: 'row',}}>
             <Icons name='map-marker' size={17} color= '#7d7d7d' />
             <Text style = { styles.text }
               ellipsizeMode='tail'
@@ -18,11 +18,12 @@ export default class PlaceCard extends Component {
           <Rating
             rating = { this.props.ranking }
             editable = {false}
-            iconWidth = { 20 }
-            iconHeight = { 20 }
+            iconWidth = { 15 }
+            iconHeight = { 15 }
             max = { 5 }
             onRate = { () => null }
             iconSelected = { require('../../../assets/images/star.png') }
+            style = {{ marginTop: 4,}}
             />
 
         </View>
@@ -43,11 +44,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginTop: Platform.OS === 'android'? -12: 0
+    marginTop: Platform.OS === 'android'? -12: -3,
   },
   content: {
     flexDirection: 'column',
-    flex: 1,
+    flex: 1,    
   },
   distance: {
   },

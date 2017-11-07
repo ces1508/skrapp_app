@@ -49,7 +49,7 @@ export default class MyFavorites extends Component {
       } else {
         return(
           <View style = {{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-            <SearchNotFound text = 'aun no tienes favoritos'/>
+            <SearchNotFound text = 'Aun no tienes Favoritos'/>
           </View>
         )
       }

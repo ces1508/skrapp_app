@@ -16,7 +16,7 @@ export default class About extends Component {
 
   render() {
     return(
-      <View style = {{ flex: 1 }} >
+      <View style = {{ flex: 1 , }} >
         <ScrollView contentContainerStyle = { styles.container } >
           <View style = { styles.containerImage }>
             <Image style = { styles.image } source = {require('../../assets/images/skrappcolor.png')} />
@@ -32,10 +32,10 @@ export default class About extends Component {
             </Text>
           </View>
           <View  style = { styles.social }>
-            <Icon name = 'facebook-official' size = {30} color = '#000333'/>
-            <Icon name = 'twitter' size = {30} color = '#000333' />
-            <Icon name = 'instagram' size = {30} color = '#000333' />
-            <Icon name = 'youtube-play' size = {30} color = '#000333' />
+            <Icon name = 'facebook-official' size = {30} color = '#4c4c4c'/>
+            <Icon name = 'twitter' size = {30} color = '#4c4c4c' />
+            <Icon name = 'instagram' size = {30} color = '#4c4c4c' />
+            <Icon name = 'youtube-play' size = {30} color = '#4c4c4c' />
           </View>
           <View style = { styles.copyright }>
             <Icon name = 'copyright' size = {20}/>
@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
   container:{
     alignItems: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#fefefe'
+    backgroundColor: '#fefefe',
+    paddingBottom: 25,
   },
   name: {
     color: '#454545',
