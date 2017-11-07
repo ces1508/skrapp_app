@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Platform } from 'react-native'
 import IconText from '../iconText'
 
 export default class PlaceBoxSocial extends Component {
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     textAlignVertical: 'center',
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
 
   },

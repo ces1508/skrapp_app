@@ -4,7 +4,8 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert
+  Alert,
+  Platform
 } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 export default class SectionLogin extends Component {
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'transparent',
     textAlignVertical: 'center',
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
   },
 })

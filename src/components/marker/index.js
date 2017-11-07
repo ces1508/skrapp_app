@@ -3,7 +3,8 @@ import {
   View,
   Text,
   Image,
-  StyleSheet
+  StyleSheet,
+  Platform
 } from 'react-native'
 
 
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   },
   titleMarker: {
     fontSize: 18,
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
     marginBottom: 5,
     color: '#454545',

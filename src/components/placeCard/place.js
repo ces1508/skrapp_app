@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     paddingLeft: 3,
     marginRight: 5,
     color:'#7d7d7d',
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '400',
   },
   textDistance: {
@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#5a5a5a',
     textAlign: 'center',
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500'
   },
   textUnidad:{
     color: '#9f9f9f',
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
     textAlign: 'center'
   }

@@ -3,7 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 const Action = (props) => {
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     paddingTop: 5,
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
   }
 })

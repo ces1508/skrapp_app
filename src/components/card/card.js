@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'bottom',
     fontSize: 17,
     color: '#454545',
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
     flex: 1,
     overflow: 'hidden',

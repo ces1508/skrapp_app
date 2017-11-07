@@ -3,7 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Image
+  Image,
+  Platform
 } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#454545',
     marginBottom: 30,
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
 
   },

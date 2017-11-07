@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Dimensions,
   AsyncStorage,
-  ScrollView
+  ScrollView,
+  Platform
 } from 'react-native'
 import Api from '../api'
 import CheckBox from '../components/checkbox'
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#454545',
     textAlign: 'left',
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500'
   },
   line: {

@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     paddingTop: 10,
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
 
   },

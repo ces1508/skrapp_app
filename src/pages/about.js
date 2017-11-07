@@ -4,7 +4,8 @@ import {
   Text,
   StyleSheet,
   Image,
-  ScrollView
+  ScrollView,
+  Platform
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   name: {
     color: '#454545',
     fontSize: 20,
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
     letterSpacing: .25,
     marginTop: 10,
@@ -95,8 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   copyrightText: {
-
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
     letterSpacing: .25,
     color: '#454545',

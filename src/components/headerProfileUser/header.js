@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 20,
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
   },
   containerImage: {

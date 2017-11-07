@@ -159,14 +159,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 20,
     marginTop: 15,
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
     letterSpacing: .2
   },
   text: {
     color: '#fff',
     fontSize: 14,
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
     letterSpacing: .5,
     marginTop: 10,

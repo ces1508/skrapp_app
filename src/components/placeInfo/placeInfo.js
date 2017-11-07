@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Platform } from 'react-native'
 
 export default class PlaceInfo extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginTop: 20,
     color: '#454545',
-    fontFamily: 'RobotoCondensed',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
 
   },
