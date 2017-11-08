@@ -16,7 +16,7 @@ export default Item = (props) => {
       icon = { props.icon } 
       text = ' ' 
       iconSize = {24} 
-      handleClick = { ()=> props.handleClick() || null }/>
+      click = { ()=>  null }/>
 
       <View style = { styles.textContainer }>
         {props.text1? <Text style = {[ styles.text ]} >{ props.text1 } </Text>: null }
