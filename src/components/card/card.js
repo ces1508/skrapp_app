@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     color: '#454545',
     fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '500',
+    marginRight: 14,
     flex: 1,
     overflow: 'hidden',
   }
