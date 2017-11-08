@@ -98,11 +98,11 @@ android {
     buildToolsVersion "25.0.0"
 
     defaultConfig {
-        applicationId "com.skrapptest"
+        applicationId "com.voiicegroup.skrapp"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "3.2.3"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
