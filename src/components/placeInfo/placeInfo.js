@@ -15,7 +15,7 @@ export default class PlaceInfo extends Component {
           <Text style =  {[ styles.location, styles.textColor ]}> { address }  </Text>
         </View>
         <View style = { styles.containerDescription }>
-          <Text style = {[ styles.description, styles.textColor ]}>
+          <Text numberOfLines = {6} ellipsizeMode = 'tail' style = {[ styles.description, styles.textColor ]}>
             { description }
           </Text>
         </View>

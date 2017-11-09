@@ -26,9 +26,14 @@ export default class About extends Component {
             <Text style = { styles.version }> Versión 3.2.0 </Text>
           </View>
           <View>
-            <Text style = { styles.description }> Finding the perfect learning tool for Flash is a
-              daunting task to any novice web developer. One can find help
-              in a number of ways through books, friends and private tutors.
+            <Text style = { styles.description }>
+            SKRAPP COLOMBIA es una red comercial virtual conformada por App (ANDROID -IOS), PAGINA WEB, FAN PAGE e INSTAGRAM. Con el desarrollo de esta plataforma, se busca que la población tenga a la mano información detallada de establecimientos y servicios ofrecidos en los diferentes municipios del territorio colombiano, de forma fácil y rápida.
+
+            Nuestro Plan tiene la finalidad de fortalecer y mejorar el servicio que brindan las empresas y los prestadores de servicios que ingresen a nuestra plataforma, para esto presentamos un conjunto de estrategias orientadas a incrementar la popularidad con el fin de lograr estándares de balance comercial, además de beneficiar a los usuarios con los distintos opciones y beneficios que brinda SKRAPP COLOMBIA dentro de nuestro territorio. Nuestro objetivo es captar como público a toda la población residente en nuestro país sean estos nacionales o extranjeros para que puedan disfrutar, y encontrar de manera fácil y rápida todo lo que necesiten.
+
+            Nos enfocamos también en una estrategia de difusión y posicionamiento de la marca SKRAPP COLOMBIA, con un Plan de Marketing desarrollado de acuerdo a las exigencias de un país moderno y globalizado, poniendo énfasis en la calidad del servicio que brindamos a través de nuestra plataforma.
+
+            Nuestra misión está basada en la potenciación de las estrategias empleadas dentro y fuera de nuestra plataforma y su modalidad de operación, también la de incrementar y fortalecer las estrategias de vínculo con los usuarios a quienes debemos mantener dentro de este plan de marketing para generar los mecanismos de satisfacción necesaria, atraerlos masivamente y tener un gran comunidad skrappdependiente.
             </Text>
           </View>
           <View  style = { styles.social }>
@@ -83,6 +88,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontFamily: 'Roboto-Regular',
     fontWeight: '400',
+    textAlign: 'justify',
     lineHeight: 25,
   },
   social: {

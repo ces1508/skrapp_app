@@ -10,16 +10,16 @@ export default class IconText extends Component {
   render(){
     let { handleClick } = this.props
     return(
-      <View style = { styles.container } >
-        <TouchableOpacity onPress = { () => this.props.click() }>
+      <TouchableOpacity onPress = { () => this.props.handleClick() }>
+        <View style = { styles.container } >
           <Icon name = { this.props.icon }
             size = { this.props.iconSize }
             color = { typeof(this.props.color) !== 'undefined'? this.props.color :  'white' }
             style={ this.props.customStylesIcon || styles.text  }
             />
           <Text style = { this.props.customStylesText || styles.text } > { this.props.text } </Text>
+      </View>
       </TouchableOpacity>
-        </View>
     )
   }
 }
