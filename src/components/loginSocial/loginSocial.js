@@ -29,6 +29,9 @@ export default class LoginSocial extends Component {
       let fbTokens = await AccessToken.getCurrentAccessToken()
 
       let sigin = await Api.loginFacebook(fbTokens)
+      // let request = await fetch(`https://graph.facebook.com/v2.9/me?access_token=${fbTokens.accessToken}&fields=id,email,location, about,name,picture=&format=json&method=get&pretty=0&suppress_http_code=1`)
+      // let fbProfiele = await request.json()
+      // console.log(fbProfiele)
       if (sigin.error) {
           Alert.alert(
             'lo sentimos',
@@ -37,6 +40,7 @@ export default class LoginSocial extends Component {
         } else {
           let save = await SaveTokens(sigin)
           if (save) {
+            console.log(fbTokens)
             Actions.drawer({ type: 'reset' })
           } else {
             Alert.alert(

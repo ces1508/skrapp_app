@@ -50,7 +50,7 @@ export default class Search extends Component {
   async filterPlaces() {
     let currentPosition = await getCurrentPosition()
     let lastPosition = await getLastPosition()
-    let position = {}
+    let position = { error: true}
     let data = []
     if (!currentPosition.error) {
       position = currentPosition
