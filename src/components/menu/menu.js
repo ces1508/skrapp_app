@@ -51,7 +51,7 @@ export default class Menu extends Component {
 
   render() {
    return(
-     <ScrollView contentContainerStyle={styles.container }>
+     <ScrollView contentContainerStyle={styles.container} style={{ backgroundColor: '#2b2631'}}>
       <View style={{ flex: 1, paddingVertical: 20,}}>
           <View style = {[ styles.itemImage,]}>
             <Image source = {{ uri: 'https://lorempixel.com/120/120/' }} style = { styles.imageProfile } />
