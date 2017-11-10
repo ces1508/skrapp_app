@@ -345,7 +345,6 @@ export default class Api {
           'content-type': 'application/json'
         },
       })
-      console.log(request.data)
       return request.data
     } catch (e) {
       console.log(e)

@@ -21,7 +21,9 @@ export default class Settings extends Component {
     this.state = {
       unidad: '',
       mapStyle: '',
-      'username': ''
+      'username': '',
+      profileImage: '',
+      social: false,
     }
     this.handleChange = this.handleChange.bind(this)
     this.getValues = this.getValues.bind(this)
@@ -34,7 +36,15 @@ export default class Settings extends Component {
 
   async getProfile() {
     let profile = await Api.getProfile()
-    this.setState({ username: profile.username })
+    if (profile.authData) {
+        let { access_token } = profile.authData.facebook
+        let request = await fetch(`https://graph.facebook.com/v2.9/me?access_token=${access_token}&fields=id,email,name,picture{url}`)
+        let fbProfile = await request.json()
+        this.setState({ username: fbProfile.name , profileImage: fbProfile.picture.data.url, social: true})
+    } else {
+      this.setState({ username: profile.username })
+
+    }
   }
   async handleChange(med) {
     await setUnidad(med)
@@ -55,12 +65,11 @@ export default class Settings extends Component {
 
   render() {
     let { unidad, mapStyle } = this.state
-
     return(
       <View>
         <ScrollView>
           <View style = { styles.hedaer } >
-            <HeaderProfileUser height = { height / 3}  username = { this.state.username } avatar = { Avatar }/>
+            <HeaderProfileUser height = { height / 3}  username = { this.state.username } avatar = { this.state.social? {uri: this.state.profileImage} : Avatar}/>
           </View>
           <View style = { styles.settings }>
             <View style = { styles.settingCard }>

@@ -10,16 +10,22 @@ export default class HeaderProfile extends Component {
   constructor(props) {
     super(props)
     this.defaulStyles = {
-      height: this.props.height || null
+      height: this.props.height || null,
+      image: '',
     }
+    this.state = {loadImage :false }
   }
 
 
   render() {
     return(
       <View style = {[ styles.header, this.defaulStyles]}>
-        <View style = { styles.containerImage }>
-          <Image style = {[ styles.containerImage, styles.image ]}  source = { this.props.avatar }  />
+        <View style = { styles.containerImage }>       
+          <Image style = {[ styles.containerImage, styles.image ]}  
+          source = { this.props.avatar }
+          onLoadEnd = { () => this.setState({ loadImage: true }) }
+          defaultSource = {require('../../../assets/images/avatar.png') } 
+          />
         </View>
         <View>
           <Text style = {[ styles.text, styles.name ]}> { this.props.username }</Text>
@@ -35,7 +41,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f08300',
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   text: {
     color: 'white',
