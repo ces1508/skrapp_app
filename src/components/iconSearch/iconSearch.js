@@ -1,5 +1,5 @@
 import React from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/Ionicons'
 import {
   View,
   StyleSheet,
@@ -9,16 +9,18 @@ const IconSearch = (props) => {
   return(
     <View style = { styles.iconContainer }>
       <TouchableOpacity onPress = {() => props.onRight() }> 
-        <Icon name = 'search' size = {20} color = '#fff'/>
+        <Icon name= 'ios-search' size = {30} color = '#fff'/>
       </TouchableOpacity>
     </View>
   )
 }
 const styles = StyleSheet.create({
   iconContainer: {
-    paddingLeft: 25, 
-    paddingRight: 15, 
-    paddingVertical: 10,
+    paddingLeft: 0, 
+    paddingRight: 20, 
+    paddingVertical: 5,
+    paddingTop: 10,
+    // borderWidth: 1,
   }
 }) 
 export default IconSearch

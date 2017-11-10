@@ -8,6 +8,7 @@ import RegistryView from '../pages/registry'
 import MyFavoriteView from '../pages/myfavorites'
 import Menu from '../components/menu'
 import IconSearch from '../components/iconSearch'
+import IconBack from '../components/iconBack'
 import About from '../pages/about'
 import Search from '../pages/search'
 import Settings from '../pages/settings'
@@ -92,24 +93,29 @@ export default class Routes extends Component {
                titleStyle = {{ color: '#fff' }}
                onRight = {() => null}
                backButtonImage = { BackButtom } 
+               renderBackButton={IconBack}                
                renderRightButton = {IconSearch}/>
             <Scene
               key = 'place'
               component = { PlaceView }
               backButtonImage = { BackButtom } 
+              renderBackButton = { IconBack} 
+              
               leftTitle = ' '/>
               <Scene
                 key = 'about'
                 component = { About }
                 title = 'Acerca de Skrapp'
                 titleStyle={{color: '#fff'}}
-                backButtonImage = { BackButtom } 
+                backButtonImage = { BackButtom }
+                renderBackButton = { IconBack} 
                 leftTitle = ' '/>
                 <Scene
                   key = 'myFavorites'
                   title = 'Mis Favoritos'
                   titleStyle = {{ color: '#fff'}}
                   backButtonImage = { BackButtom } 
+                  renderBackButton= { IconBack } 
                   component = { MyFavoriteView }
 
                 />
@@ -122,23 +128,27 @@ export default class Routes extends Component {
               component = { Settings }
               title = 'Ajustes'
               backButtonImage = { BackButtom } 
+              renderBackButton={IconBack} 
               titleStyle = {{ color: '#fff' }} />
             <Scene
               key = 'map'
               title = 'Mapa'
               component = { MapView }
               backButtonImage = { BackButtom } 
+              renderBackButton={IconBack} 
               titleStyle = {{ color: '#fff' }} />
               <Scene
                 key = 'website'
                 component = { WebSite }
                 backButtonImage = { BackButtom } 
+                renderBackButton = { IconBack } 
                 titleStyle = {{ color: '#fff' }} />
               <Scene
                 key = 'review'
                 component = { Review }
                 title = 'Reseñar'
                 backButtonImage = { BackButtom } 
+                renderBackButton = { IconBack }                 
                 leftTitle = ''
                 titleStyle = {{ color: '#fff' }} />
           </Scene>

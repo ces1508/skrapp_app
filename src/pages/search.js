@@ -8,7 +8,7 @@ import {
   Platform
 
 } from 'react-native'
-import Icons from 'react-native-vector-icons/FontAwesome'
+import Icons from 'react-native-vector-icons/Ionicons'
 import { Actions } from 'react-native-router-flux'
 import Api from '../api'
 
@@ -96,15 +96,15 @@ export default class Search extends Component {
   }
   render() {
     return(
-      <View style = {{ backgroundColor: '#f4f4f4',  paddingBottom: 10}}>
+      <View style={{ backgroundColor: '#e9e9ef',  paddingBottom: 10}}>
         <View style={styles.searchContainer} >
           <View style={styles.containerInput} >
             <TouchableOpacity onPress = { () => this.handleBack() } >
               <View  style = {{ paddingHorizontal: 8 }}>
                 <Icons
                   style={ styles.inputIconsBack }
-                  name = 'arrow-left'
-                  size = { 18 }
+                  name='ios-arrow-round-back-outline'
+                  size = { 40 }
                 />
               </View>
             </TouchableOpacity>
@@ -121,8 +121,8 @@ export default class Search extends Component {
 
             <Icons
               style = { styles.inputIconClear }
-              name = { 'times' }
-              size = {20}
+              name={ 'ios-close-outline' }
+              size = {40}
               onPress = { this.clearInput }
             />
           </View>
@@ -137,21 +137,23 @@ const styles = StyleSheet.create({
   searchContainer:{
     backgroundColor: '#e79d39',
     paddingTop: Platform.OS === 'android' ? 0 : 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#c7c7c7'
+    // borderBottomWidth: 1,
+    // borderBottomColor: '#c7c7c7'
   },
   containerInput:{
     height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
+    paddingHorizontal: 5,
   },
   inputIconsBack:{
     marginLeft: 8,
     color: "#4a4a4a",
+    paddingTop: 5,
     // borderWidth: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 10
+    // paddingVertical: 10,
+    // paddingHorizontal: 10
   },
   input:{
     flex: 1,
@@ -166,8 +168,11 @@ const styles = StyleSheet.create({
 
     color: '#4a4a4a',
     marginRight: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 15
+    // paddingVertical: 10,
+    paddingHorizontal: 15,
+    paddingTop: 5,
+    // borderWidth: 1,
+    // paddingRight: 20,
   }
 
 })
