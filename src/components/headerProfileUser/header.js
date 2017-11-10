@@ -16,15 +16,15 @@ export default class HeaderProfile extends Component {
     this.state = {loadImage :false }
   }
 
+
   render() {
-    let image = this.state.loadImage? this.props.avatar : require('../../../assets/images/avatar.png')
-    console.log(image)
     return(
       <View style = {[ styles.header, this.defaulStyles]}>
-        <View style = { styles.containerImage }>
+        <View style = { styles.containerImage }>       
           <Image style = {[ styles.containerImage, styles.image ]}  
-          source = { image } 
-          onLoadEnd = {() =>  this.setState({ loadImage: true })}
+          source = { this.props.avatar }
+          onLoadEnd = { () => this.setState({ loadImage: true }) }
+          defaultSource = {require('../../../assets/images/avatar.png') } 
           />
         </View>
         <View>
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f08300',
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   text: {
     color: 'white',
