@@ -19,7 +19,7 @@ export default class LoginSocial extends Component {
 
   async handleFacebookLogin() {
     try {
-      let result = await LoginManager.logInWithReadPermissions(['public_profile', 'email'])
+      let result = await LoginManager.logInWithReadPermissions(['public_profile', 'email', 'user_about_me', 'user_birthday'])
       if (result.isCancelled) {
       Alert.alert(
         'lo sentimos',
@@ -27,11 +27,10 @@ export default class LoginSocial extends Component {
       )
       } else {
       let fbTokens = await AccessToken.getCurrentAccessToken()
-
-      let sigin = await Api.loginFacebook(fbTokens)
-      // let request = await fetch(`https://graph.facebook.com/v2.9/me?access_token=${fbTokens.accessToken}&fields=id,email,location, about,name,picture=&format=json&method=get&pretty=0&suppress_http_code=1`)
-      // let fbProfiele = await request.json()
-      // console.log(fbProfiele)
+      let request = await fetch(`https://graph.facebook.com/v2.11/me?fields=name,about,address,birthday,age_range,email,gender,hometown&access_token=${fbTokens.accessToken}`)
+      let fbProfiele = await request.json()
+      delete fbProfiele.id
+      let sigin = await Api.loginFacebook(fbTokens, fbProfiele)
       if (sigin.error) {
           Alert.alert(
             'lo sentimos',
@@ -40,8 +39,7 @@ export default class LoginSocial extends Component {
         } else {
           let save = await SaveTokens(sigin)
           if (save) {
-            console.log(fbTokens)
-            Actions.drawer({ type: 'reset' })
+            // Actions.drawer({ type: 'reset' })
           } else {
             Alert.alert(
               'lo sentimos',

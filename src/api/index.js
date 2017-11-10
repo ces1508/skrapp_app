@@ -263,9 +263,10 @@ export default class Api {
     }
   }
 
-  static async loginFacebook (auth) {
+  static async loginFacebook (auth, profile) {
     let endpoint = `${API_SKRAPP}/users`
     let data = {
+      profile,
       authData: {
          facebook: {
           id: auth.userID,
