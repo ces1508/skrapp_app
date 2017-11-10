@@ -55,16 +55,14 @@ export default class Menu extends Component {
       <View style={{ flex: 1, paddingVertical: 20,}}>
           <View style = {[ styles.itemImage,]}>
             <Image source = {{ uri: 'https://lorempixel.com/120/120/' }} style = { styles.imageProfile } />
-            {
-              // <Text style = { styles.textPerfil }>PERFIL</Text>
-            }
+            <Text style = { styles.textPerfil }>JUAN LIZCANO</Text>
           </View>
         <TouchableOpacity onPress={() => this.myFavorites()}>
           <View style = { styles.item }>
             <IonicIcon
                 style = { styles.iconMenu }
                 name='md-heart'
-                size={30}
+                size={27}
                 color= '#d63636'
                 />
             <Text style = { styles.text }>MIS FAVORITOS</Text>
@@ -134,12 +132,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     // borderRadius: Platform.OS === 'android' ? 20 : 30,
+    // borderWidth: 1
   },
   item: {
-    height: (height - 10) / 5.5,
+    height: (height - 10) / 7.4,
     justifyContent: 'center',
     alignItems: 'center',
     // borderWidth: 1,
+    // borderColor: 'white'
   },
   imageProfile: {
     width: 60,
@@ -150,16 +150,16 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: '#fff',
     // marginTop: 15,
-    // marginBottom: 5,
-    marginTop: 30,
+    marginBottom: 5,
+    marginTop: 60,
   },
   textPerfil: {
     color: '#fff',
-    fontSize: 15,
-    marginBottom: 20,
-    marginTop: 15,
+    fontSize: 14,
+    marginBottom: 60,
+    marginTop: 5,
     fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
-    fontWeight: '500',
+    fontWeight: '400',
     letterSpacing: .2
   },
   text: {

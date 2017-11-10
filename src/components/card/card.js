@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
 
   },
   text: {
-    paddingVertical: Platform.OS === 'android'? 15 : 20,
+    paddingVertical: Platform.OS === 'android'? 20 : 20,
     textAlignVertical: 'bottom',
     fontSize: 17,
     color: '#454545',
