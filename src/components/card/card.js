@@ -19,16 +19,16 @@ export default class Card extends Component{
                   // source={{ uri: 'https://lorempixel.com/100/100' }}
                   source={{ uri: image.url }}
 
-                  resizeMethod = 'resize'
+                  // resizeMethod= 'resize'
                   resizeMode = 'stretch'
-
                   style = { {
                     backgroundColor: Platform.OS == 'android' ? 'transparent' : '#b2b2b2' ,
                     // borderColor: '#b2b2b2',
                     height: Platform.OS == 'android' ? 50 : 60,
                     width: Platform.OS == 'android' ? 50 : 60,
-                    borderRadius: Platform.OS == 'android' ? 25 : 30,
-                    overflow: 'hidden'
+                    borderRadius: Platform.OS == 'android' ? 100 : 30,
+                    // overflow: 'hidden',
+                    // borderWidth: 2,
                 } } />
             </View>
           </View>
@@ -80,13 +80,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    // borderWidth: 1,
     // borderColor: 'red'
   },
   image:  {
     height: Platform.OS == 'android' ? 50: 60,
     width: Platform.OS == 'android' ? 50 : 60,
-    borderRadius: Platform.OS == 'android' ? 25 : 30,
-    // overflow: 'hidden',
+    // borderRadius: Platform.OS == 'android' ? 25 : 30,
+    // borderWidth: 1,
+    // borderColor: 'red',
+    overflow: 'hidden',
+    backgroundColor: 'white'
   },
   textContainer:{
     flex: 1,

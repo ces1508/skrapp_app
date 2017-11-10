@@ -53,19 +53,18 @@ export default class Menu extends Component {
    return(
      <ScrollView contentContainerStyle={styles.container }>
       <View style={{ flex: 1, paddingVertical: 20,}}>
-        {
-
-          // <View style = {[ styles.itemImage,]}>
-          //   <Image source = {{ uri: 'https://lorempixel.com/120/120/' }} style = { styles.imageProfile } />
-          //   <Text style = { styles.textPerfil }>PERFIL</Text>
-          // </View>
-        }
+          <View style = {[ styles.itemImage,]}>
+            <Image source = {{ uri: 'https://lorempixel.com/120/120/' }} style = { styles.imageProfile } />
+            {
+              // <Text style = { styles.textPerfil }>PERFIL</Text>
+            }
+          </View>
         <TouchableOpacity onPress={() => this.myFavorites()}>
           <View style = { styles.item }>
-            <Icon
+            <IonicIcon
                 style = { styles.iconMenu }
-                name='heart'
-                size={25}
+                name='md-heart'
+                size={30}
                 color= '#d63636'
                 />
             <Text style = { styles.text }>MIS FAVORITOS</Text>
@@ -166,8 +165,8 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: 14,
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
-    fontWeight: '500',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'RobotoCondensed-Regular',
+    fontWeight: '400',
     letterSpacing: .5,
     marginTop: 10,
   },
