@@ -21,7 +21,7 @@ const IconBack = (props) => {
 const styles = StyleSheet.create({
   iconContainer: {
     paddingLeft: 18, 
-    paddingRight: 0, 
+    paddingRight: 25, 
     // paddingVertical: 10,
     // borderWidth: 1,
     paddingTop: 5,

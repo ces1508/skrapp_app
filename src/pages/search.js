@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     // borderWidth: 1,
     // paddingVertical: 10,
-    // paddingHorizontal: 10
+    paddingHorizontal: 15,  
   },
   input:{
     flex: 1,
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     color: '#4a4a4a',
     marginRight: 10,
     // paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingHorizontal: 20,
     paddingTop: 5,
     // borderWidth: 1,
     // paddingRight: 20,
