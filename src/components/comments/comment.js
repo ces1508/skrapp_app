@@ -14,7 +14,7 @@ export default Comment = (props) => {
         <Image source = {require('../../../assets/images/avatar.png')} style = { styles.image } />
       </View>
       <View style = { styles.comment }>
-        <Text>{props.userData.name}</Text>
+        <Text>{props.userData? props.userData.name: ''}</Text>
         <Rating rating = { props.rating }  iconSelected = { require('../../../assets/images/star.png') } editable = {false} iconWidth = { 25 } iconHeight = { 25 }/>
         <Text style = {{ flexWrap: 'wrap', lineHeight: 20,}}> {props.comment} </Text>
       </View>

@@ -14,12 +14,17 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import IonicIcon from 'react-native-vector-icons/Ionicons'
 import { Actions } from 'react-native-router-flux'
 import { DestroySession } from '../../utils'
+import { getProfile } from '../../utils'
 
 
 const { width, height } = Dimensions.get('window')
 export default class Menu extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      username: '',
+      picture: require('../../../assets/images/avatar.png')
+    }
   }
   myFavorites() {
     Actions.myFavorites()
@@ -33,6 +38,11 @@ export default class Menu extends Component {
     Actions.settings()
   }
 
+  async componentWillMount() {
+    let profile = await getProfile()
+    let picture = profile.picture? { uri:  profile.picture.data.url  } : this.state.picture
+    this.setState({ username: profile.name, picture })
+  }
   async destroySession () {
     let out = await DestroySession()
     if (out) {
@@ -53,9 +63,9 @@ export default class Menu extends Component {
    return(
      <ScrollView contentContainerStyle={styles.container} style={{ backgroundColor: '#2b2631'}}>
       <View style={{ flex: 1, paddingVertical: 20,}}>
-          <View style = {[ styles.itemImage,]}>
-            <Image source = {{ uri: 'https://lorempixel.com/120/120/' }} style = { styles.imageProfile } />
-            <Text style = { styles.textPerfil }>JUAN LIZCANO</Text>
+          <View style = {[ styles.itemImage]}>
+            <Image source = { this.state.picture } style = { styles.imageProfile } defaultSource = {require('../../../assets/images/avatar.png')}/>
+            <Text style = { styles.textPerfil }> { this.state.username } </Text>
           </View>
         <TouchableOpacity onPress={() => this.myFavorites()}>
           <View style = { styles.item }>

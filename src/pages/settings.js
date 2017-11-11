@@ -43,7 +43,6 @@ export default class Settings extends Component {
         this.setState({ username: fbProfile.name , profileImage: fbProfile.picture.data.url, social: true})
     } else {
       this.setState({ username: profile.username })
-
     }
   }
   async handleChange(med) {

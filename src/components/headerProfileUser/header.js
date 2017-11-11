@@ -11,7 +11,6 @@ export default class HeaderProfile extends Component {
     super(props)
     this.defaulStyles = {
       height: this.props.height || null,
-      image: '',
     }
     this.state = {loadImage :false }
   }
@@ -20,11 +19,11 @@ export default class HeaderProfile extends Component {
   render() {
     return(
       <View style = {[ styles.header, this.defaulStyles]}>
-        <View style = { styles.containerImage }>       
-          <Image style = {[ styles.containerImage, styles.image ]}  
+        <View style = { styles.containerImage }>
+          <Image style = {[ styles.containerImage, styles.image ]}
           source = { this.props.avatar }
           onLoadEnd = { () => this.setState({ loadImage: true }) }
-          defaultSource = {require('../../../assets/images/avatar.png') } 
+          defaultSource = {require('../../../assets/images/avatar.png') }
           />
         </View>
         <View>

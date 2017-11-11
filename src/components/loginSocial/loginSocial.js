@@ -29,9 +29,16 @@ export default class LoginSocial extends Component {
       let fbTokens = await AccessToken.getCurrentAccessToken()
       let request = await fetch(`https://graph.facebook.com/v2.11/me?fields=name,about,address,birthday,age_range,email,gender,hometown&access_token=${fbTokens.accessToken}`)
       let fbProfiele = await request.json()
+      delete fbProfiele.email
       delete fbProfiele.id
       let sigin = await Api.loginFacebook(fbTokens, fbProfiele)
       if (sigin.error) {
+          if (sigin.code === 203) {
+           return Alert.alert(
+             'Lo sentimos, no hemos podido completar tu registro',
+             'el correo ya se encutra registrado'
+            )
+          }
           Alert.alert(
             'lo sentimos',
             'ocurrio un error inesperado, por favor intenta mas tarde'
@@ -39,7 +46,7 @@ export default class LoginSocial extends Component {
         } else {
           let save = await SaveTokens(sigin)
           if (save) {
-            // Actions.drawer({ type: 'reset' })
+            Actions.drawer({ type: 'reset' })
           } else {
             Alert.alert(
               'lo sentimos',
@@ -91,7 +98,6 @@ const styles = StyleSheet.create({
     paddingLeft: Platform.OS === 'android' ? 20 : 0,
   },
   btnLoginGoogle: {
-
     backgroundColor: '#fff',
     alignItems: 'flex-start',
     paddingRight: 30,

@@ -263,19 +263,19 @@ export default class Api {
     }
   }
 
-  static async loginFacebook (auth, profile) {
+  static async loginFacebook (auth, profile = {}) {
     let endpoint = `${API_SKRAPP}/users`
-    let data = {
-      profile,
-      authData: {
-         facebook: {
-          id: auth.userID,
-          access_token: auth.accessToken,
-          expiration_date: auth.expirationTime
+    try {
+      let data = {
+        ...profile,
+        authData: {
+           facebook: {
+            id: auth.userID,
+            access_token: auth.accessToken,
+            expiration_date: auth.expirationTime
+          }
         }
       }
-    }
-    try {
       let request = await axios.post(endpoint, data, {
         headers: {
           "content-type": "application/json",
@@ -285,7 +285,7 @@ export default class Api {
 
       return request.data
     } catch (e) {
-      return { error: true }
+      return { error: true, code: e.response.data.code, message: e.response.data.error }
     }
   }
   static async makeReview (data) {

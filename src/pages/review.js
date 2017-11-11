@@ -89,10 +89,8 @@ export default class Riew extends Component {
         review.code === 141? 'tu ya tienes una resenia de este lugar': 'estamos presentando problemas, por favor intenta mas tarde'
       )
     }
-    let comments = []
-    comments.push(data)
-    comments.push(...this.state.comments)
-    this.setState({ comments , comment: ''})
+    this.setState({ comment: '', rating: 0 })
+    this.getComments()
   }
 
   renderComments() {
