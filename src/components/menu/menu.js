@@ -49,8 +49,8 @@ export default class Menu extends Component {
       return Actions.reset('login')
     }
     return Alert.alert(
-      'lo sentmimos :(',
-      'tenemos un problema para cerrar tu sesion, por favor intentalo mas tarde'
+      'Lo sentmimos :(',
+      'tenemos un problema para cerrar tu sesión, por favor intentalo más tarde'
     )
   }
 
@@ -65,7 +65,7 @@ export default class Menu extends Component {
       <View style={{ flex: 1, paddingVertical: 20,}}>
           <View style = {[ styles.itemImage]}>
             <Image source = { this.state.picture } style = { styles.imageProfile } defaultSource = {require('../../../assets/images/avatar.png')}/>
-            <Text style = { styles.textPerfil }> { this.state.username } </Text>
+           <Text style={styles.textPerfil}> {this.state.username.toUpperCase() } </Text>
           </View>
         <TouchableOpacity onPress={() => this.myFavorites()}>
           <View style = { styles.item }>
@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
     height: (height - 10) / 5.5,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 10
     // borderRadius: Platform.OS === 'android' ? 20 : 30,
     // borderWidth: 1
   },
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
     marginBottom: 60,
-    marginTop: 5,
+    marginTop: 10,
     fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
     fontWeight: '400',
     letterSpacing: .2

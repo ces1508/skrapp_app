@@ -50,19 +50,22 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 20,
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
-    fontWeight: '500',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'RobotoCondensed-Regular',
+    fontWeight: '400',
+    marginTop: 14,
   },
   containerImage: {
     width: 106,
     height: 106,
     borderRadius: 53,
-    backgroundColor: 'gray',
-    marginBottom: 10
+    marginBottom: 10,
+
   },
   image: {
     backgroundColor: Platform.OS === 'ios'? 'gray': 'transparent',
     borderWidth: 6,
-    borderColor: '#fff'
+    borderColor: '#fff',
+    marginTop: 17
+
   }
 })
