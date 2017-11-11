@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, StyleSheet, Dimensions, Share} from 'react-native'
+import { View, ScrollView, StyleSheet, Dimensions, Share, Text} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PlaceHeeader from '../components/placeHeader'
 import ActionsPlace from '../components/actionsPlace'
@@ -89,7 +89,10 @@ export default class PlaceView extends Component {
                 phone = { data.phone } />
               {/* <PlaceBoxSocial title = 'Redes Sociales' /> */}
             </View>
-            <Map title = { data.title } location = { data.location } description = { data.description } />
+            <View>
+              <Map title = { data.title } location = { data.location } description = { data.description } />
+              <Text style = {{ position: 'absolute', marginTop: 20, width: 60, height: 40, right: 0}} > iniciar </Text>
+            </View>
         </View>
 
       </ScrollView>

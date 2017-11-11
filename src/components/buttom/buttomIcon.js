@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, Dimensions } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import PropTypes from 'prop-types'
 
 export default class ButtomIcon extends Component {
   constructor(props) {
@@ -53,3 +54,6 @@ const styles = StyleSheet.create({
     })
   },
 })
+ButtomIcon.PropsTypes = {
+  colorIcon: PropTypes.string.isRequired
+}
