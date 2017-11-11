@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
     })
   },
 })
-ButtomIcon.PropsTypes = {
-  colorIcon: PropTypes.string.isRequired
+ButtomIcon.propTypes = {
+  colorIcon: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  iconSize: PropTypes.number.isRequired,
+  icon: PropTypes.string.isRequired
 }

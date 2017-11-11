@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, StyleSheet, Dimensions, Share, Text} from 'react-native'
+import { View, ScrollView, StyleSheet, Dimensions, Share, TouchableOpacity, Platform} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PlaceHeeader from '../components/placeHeader'
 import ActionsPlace from '../components/actionsPlace'
@@ -10,6 +10,8 @@ import Map from '../components/map'
 let { width } = Dimensions.get('window')
 import Api from '../api'
 import { Actions } from 'react-native-router-flux'
+import { ButtomIcon } from '../components/buttom'
+import { LaunchMap } from '../utils'
 export default class PlaceView extends Component {
   constructor(props) {
     super(props)
@@ -20,11 +22,16 @@ export default class PlaceView extends Component {
     this.onReview = this.onReview.bind(this)
   }
 
-  
   componentWillMount() {
     this.alreadyLiked()
   }
   
+  showMap () {
+    let { location } = this.props.data
+    LaunchMap(location)
+  }
+
+
   async toogleFavorite() {
     let like = await Api.likePlace(this.props.data)
     if (like.status === 'success') {
@@ -91,7 +98,11 @@ export default class PlaceView extends Component {
             </View>
             <View>
               <Map title = { data.title } location = { data.location } description = { data.description } />
-              <Text style = {{ position: 'absolute', marginTop: 20, width: 60, height: 40, right: 0}} > iniciar </Text>
+              <View style = {{ position: 'absolute', right: 5, top: 10 }}>
+              <TouchableOpacity  onPress = { () => this.showMap() }>
+                <ButtomIcon iconSize = {20} text = 'indicaciones' icon = 'street-view' colorIcon = 'white' styleBtn = { styles.styleBtn  }/>
+              </TouchableOpacity>
+              </View>
             </View>
         </View>
 
@@ -105,5 +116,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 20,
     backgroundColor: '#f4f4f4'
+  },
+  styleBtn: {
+    width: 150, 
+    height: 40,
+    backgroundColor: '#BDBDBD',
+    shadowColor: 'rgba(0,0,0,.15)',
+    shadowOpacity: .9,
+    shadowOffset: {
+      height: 0,
+      width: 0,
+    },
+    elevation: 3,
   }
 })

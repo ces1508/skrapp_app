@@ -1,5 +1,7 @@
 import {
-  AsyncStorage
+  AsyncStorage, 
+  Platform,
+  Linking
 } from 'react-native'
 import Api from '../api'
 export const  SaveTokens = async  (data) => {
@@ -130,4 +132,16 @@ export const getProfile = async () => {
     return fbProfile
   }
   return profile
+}
+
+export const LaunchMap = (location) => {
+  let { latitude, longitude } = location
+  let url = ''
+  let os = Platform.OS
+  if (os === 'android') {
+    url = `http://maps.google.com/?daddr=${latitude},${longitude}`
+  } else {
+    url = `http://maps.apple.com/?daddr=${latitude},${longitude}`
+  }
+  Linking.openURL(url)
 }
