@@ -16,7 +16,7 @@ const IconSearch = (props) => {
 }
 const styles = StyleSheet.create({
   iconContainer: {
-    paddingLeft: 0, 
+    paddingLeft: 25, 
     paddingRight: 20, 
     paddingVertical: 5,
     paddingTop: 10,
