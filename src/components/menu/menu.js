@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     height: (height - 10) / 5.5,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10
+    marginTop: 35
     // borderRadius: Platform.OS === 'android' ? 20 : 30,
     // borderWidth: 1
   },
