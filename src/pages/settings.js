@@ -98,7 +98,8 @@ export default class Settings extends Component {
 const styles = StyleSheet.create({
   hedaer: {
     height: (height )/ 3,
-    backgroundColor: 'gray'
+    backgroundColor: 'gray',
+    
   },
   settings: {
     padding: 10
@@ -107,9 +108,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fefefe',
     paddingVertical: 10,
     paddingHorizontal: 20,
+    
   },
   section: {
-    marginTop: 15
+    marginTop: 15,
+
   },
   sectionTitle: {
     fontSize: 20,

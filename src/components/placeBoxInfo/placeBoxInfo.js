@@ -36,7 +36,7 @@ export default class PlaceBoxInfo extends Component {
     return(
       <View  style = { styles.container }>
         <View style = { styles.containerTitle }>
-          <Text style = { styles.title }> {this.props.title} </Text>
+          <Text style={styles.title}> {this.props.title.toUpperCase()} </Text>
         </View>
         <View>
           <TouchableOpacity onPress = {() => this.showMap()}>
@@ -77,13 +77,13 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
     color: 'white',
     textAlign: 'center',
     textAlignVertical: 'center',
     paddingTop: 10,
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
-    fontWeight: '500',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'RobotoCondensed-Regular',
+    fontWeight: '400',
 
   },
   containerInfo: {
