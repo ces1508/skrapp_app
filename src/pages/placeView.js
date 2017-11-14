@@ -100,7 +100,7 @@ export default class PlaceView extends Component {
               <Map title = { data.title } location = { data.location } description = { data.description } />
               <View style = {{ position: 'absolute', right: 5, top: 10 }}>
               <TouchableOpacity  onPress = { () => this.showMap() }>
-                <ButtomIcon iconSize = {20} text = 'indicaciones' icon = 'street-view' colorIcon = 'white' styleBtn = { styles.styleBtn  }/>
+                <ButtomIcon iconSize = {20} text = 'Indicaciones' icon = 'location-arrow' colorIcon = 'white' styleBtn = { styles.styleBtn  }/>
               </TouchableOpacity>
               </View>
             </View>
@@ -118,9 +118,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4f4f4'
   },
   styleBtn: {
+    justifyContent: 'center',
     width: 150, 
     height: 40,
-    backgroundColor: '#BDBDBD',
+    backgroundColor: '#4285f4',
     shadowColor: 'rgba(0,0,0,.15)',
     shadowOpacity: .9,
     shadowOffset: {
@@ -128,5 +129,7 @@ const styles = StyleSheet.create({
       width: 0,
     },
     elevation: 3,
+    fontSize: 20,
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
   }
 })
