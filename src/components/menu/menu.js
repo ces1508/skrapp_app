@@ -40,6 +40,7 @@ export default class Menu extends Component {
 
   async componentWillMount() {
     let profile = await getProfile()
+    console.log(profile)
     let picture = profile.picture? { uri:  profile.picture.data.url  } : this.state.picture
     this.setState({ username: profile.name, picture })
   }
