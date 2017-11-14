@@ -8,13 +8,12 @@ import {
 } from 'react-native'
 
 const IconBack = (props) => {
-  console.log(props)
   return(
-    <View style = { styles.iconContainer }>
-      <TouchableOpacity onPress = { () => Actions.pop() }> 
+    <TouchableOpacity onPress = { () => Actions.pop() }> 
+      < View style = { styles.iconContainer }>
         <Icon name= 'ios-arrow-back-outline' size = {35} color = '#fff'/>
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   )
 }
 
@@ -22,8 +21,6 @@ const styles = StyleSheet.create({
   iconContainer: {
     paddingLeft: 18, 
     paddingRight: 25, 
-    // paddingVertical: 10,
-    // borderWidth: 1,
     paddingTop: 5,
   }
 }) 

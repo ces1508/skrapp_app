@@ -7,11 +7,11 @@ import {
 } from 'react-native'
 const IconSearch = (props) => {
   return(
-    <View style = { styles.iconContainer }>
       <TouchableOpacity onPress = {() => props.onRight() }> 
-        <Icon name= 'ios-search' size = {30} color = '#fff'/>
-      </TouchableOpacity>
-    </View>
+        <View style = { styles.iconContainer }>
+          <Icon name= 'ios-search' size = {30} color = '#fff'/>
+        </View>
+    </TouchableOpacity>
   )
 }
 const styles = StyleSheet.create({
