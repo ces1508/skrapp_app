@@ -14,7 +14,7 @@ export default class WebSite extends Component {
     }
   }
   loadEnd () {
-    console.log('load')
+    // console.log('load')
     this.setState({ loading: false })
   }
 
@@ -43,8 +43,8 @@ export default class WebSite extends Component {
             startInLoadingState = { true }
             source = {{ uri: websiteUri }}
             onLoadEnd = {() =>  this.loadEnd() }
-            onError = { (error)=> { console.log('error ', error) } }
-            onLoadStart = { () => console.log('inicio la carga') }
+            // onError = { (error)=> { console.log('error ', error) } }
+            // onLoadStart = { () => console.log('inicio la carga') }
           />
           {// this.renderLoading()
           }

@@ -42,7 +42,7 @@ export default class RegistryForm extends Component{
       city: ''
     }
     let signup = await Api.saveUser(data)
-    console.log(signup)
+    // console.log(signup)
     if (signup.status === 'success') {
       let save = await SaveTokens(signup.data)
       if (save) {

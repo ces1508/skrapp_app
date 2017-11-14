@@ -65,7 +65,7 @@ export default class Menu extends Component {
       <View style={{ flex: 1, paddingVertical: 20,}}>
           <View style = {[ styles.itemImage]}>
             <Image source = { this.state.picture } style = { styles.imageProfile } defaultSource = {require('../../../assets/images/avatar.png')}/>
-           <Text style={styles.textPerfil}> {this.state.username.toUpperCase() } </Text>
+           <Text style={styles.textPerfil}> {this.state.username } </Text>
           </View>
         <TouchableOpacity onPress={() => this.myFavorites()}>
           <View style = { styles.item }>
