@@ -8,7 +8,6 @@ import {
 } from 'react-native'
 
 const IconBack = (props) => {
-  console.log(props)
   return(
     <View style = { styles.iconContainer }>
       <TouchableOpacity onPress = { () => Actions.pop() }> 

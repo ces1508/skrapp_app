@@ -40,20 +40,23 @@ const styles = StyleSheet.create({
 
   },
   containerImage: {
-    marginRight: 5
+    marginRight: 5,
+    backgroundColor: 'rgba(0,0,0,.2)',
+    borderRadius: Platform.OS === 'android' ? 50 : 25,
+    overflow: 'hidden',
   },
   image: {
     width: 50,
     height: 50,
-    borderRadius: 25,
-    borderWidth: 1,
+    borderRadius: Platform.OS === 'android' ? 50 : 25,
+    borderWidth: 2,
     borderColor: 'rgba(0,0,0,.25)',
-    backgroundColor: '#f4f4f4'
+    overflow: 'hidden'
   },
   titleMarker: {
     fontSize: 18,
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
-    fontWeight: '500',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed' : 'Roboto Condensed',
+    fontWeight: '400',
     marginBottom: 5,
     color: '#454545',
     maxWidth: 280,
