@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: 14,
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'RobotoCondensed-Regular',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
     letterSpacing: .5,
     marginTop: 10,

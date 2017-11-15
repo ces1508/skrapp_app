@@ -24,8 +24,8 @@ export default class Card extends Component{
                   style = { {
                     backgroundColor: Platform.OS == 'android' ? 'transparent' : '#b2b2b2' ,
                     // borderColor: '#b2b2b2',
-                    height: Platform.OS == 'android' ? 50 : 60,
-                    width: Platform.OS == 'android' ? 50 : 60,
+                    height: Platform.OS == 'android' ? 60 : 60,
+                    width: Platform.OS == 'android' ? 60 : 60,
                     borderRadius: Platform.OS == 'android' ? 100 : 30,
                     // overflow: 'hidden',
                     // borderWidth: 2,
@@ -84,8 +84,8 @@ const styles = StyleSheet.create({
     // borderColor: 'red'
   },
   image:  {
-    height: Platform.OS == 'android' ? 50: 60,
-    width: Platform.OS == 'android' ? 50 : 60,
+    height: Platform.OS == 'android' ? 60: 60,
+    width: Platform.OS == 'android' ? 60 : 60,
     // borderRadius: Platform.OS == 'android' ? 25 : 30,
     // borderWidth: 1,
     // borderColor: 'red',

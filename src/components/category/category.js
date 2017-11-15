@@ -23,7 +23,7 @@ export default class Category extends Component{
             <Icons 
               name='angle-right' 
               size={40} 
-              color= '#454545' />
+              color= '#404040' />
           </View>
         </View>
       </Card>

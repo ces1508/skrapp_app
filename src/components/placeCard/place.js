@@ -23,7 +23,7 @@ export default class PlaceCard extends Component {
             max = { 5 }
             onRate = { () => null }
             iconSelected = { require('../../../assets/images/star.png') }
-            style = {{ marginTop: 5,}}
+            style={{ marginTop: Platform.OS === 'android' ? 3 : 5,}}
             />
 
         </View>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginTop: Platform.OS === 'android'? -12: -8,
+    marginTop: Platform.OS === 'android'? -6: -8,
     // borderWidth: 1,    
   },
   content: {

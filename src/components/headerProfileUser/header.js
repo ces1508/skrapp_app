@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 20,
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'RobotoCondensed-Regular',
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
     marginTop: 14,
   },

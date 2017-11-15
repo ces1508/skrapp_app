@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     textAlignVertical: 'center',
-    paddingTop: 10,
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'RobotoCondensed-Regular',
+    paddingTop: Platform.OS === 'android' ? 7 : 7,
+    fontFamily: Platform.OS === 'android'? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
 
   },
