@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 18,
     color: '#7D7D7D',
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
   },
   line: {
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#454545',
     lineHeight: 25,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
     textAlign: 'center'
 

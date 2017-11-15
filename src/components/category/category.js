@@ -1,5 +1,5 @@
 import React, { Component  } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet , Platform} from 'react-native'
 import Icons from 'react-native-vector-icons/FontAwesome'
 import Card from '../card'
 export default class Category extends Component{
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingLeft: 5,
     color: '#7d7d7d',
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400'
   },
   iconmaps:{

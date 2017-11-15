@@ -5,7 +5,8 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native'
 import Rating from '../ratingPlace'
 import { Buttom } from '../buttom'
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1
   },
   TextTitle: {
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontSize: 17,
     textAlign: 'center'
   },
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
   },
   textButton: {
     color: 'white',
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontSize: 17,
   }
 

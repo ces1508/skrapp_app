@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 4,
     paddingLeft: 20,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
     marginBottom: 15,
   }, 
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'transparent',
     textAlignVertical: 'center',
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '500',
   },
 })

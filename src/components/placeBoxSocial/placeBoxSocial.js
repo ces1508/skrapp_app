@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     lineHeight: 25,
     marginTop: 25,
     paddingBottom: 20,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
 
 

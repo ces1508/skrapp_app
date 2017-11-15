@@ -2,7 +2,8 @@ import React from 'react'
 import {
   Text,
   View,
-  StyleSheet
+  StyleSheet,
+  Platform
 } from 'react-native'
 import Rating from 'react-native-easy-rating'
 export default RatingPlace = (props) => {
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
   },
   textStart: {
     paddingTop: 5,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontSize: 13,
   },
 

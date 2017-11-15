@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#454545',
     paddingBottom: 5,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
   },
   textInfoLast: {
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#454545',
     paddingBottom: 15,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
   },
 

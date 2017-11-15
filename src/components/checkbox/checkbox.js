@@ -3,7 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native'
 
 export default class Checkbox extends Component {
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     color: '#39393a',
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
   }
 })

@@ -5,7 +5,9 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  Platform
+  Platform,
+  TouchableOpacity,
+  Linking
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -14,6 +16,26 @@ export default class About extends Component {
     super(props)
   }
 
+  socialFacebook(){
+    const fb = 'https://www.facebook.com/skrappco/'
+    Linking.openURL(fb)
+  }
+  socialInstagram() {
+    const instagram = 'https://www.instagram.com/skrappco/'
+    Linking.openURL(instagram)
+  }
+
+  socialTwitter() {
+    const twitter = 'https://twitter.com/Skrappco'
+    Linking.openURL(twitter)
+  }
+
+  socialYoutube() {
+    const youtube = 'https://www.youtube.com/channel/UCZko4avVGIxY7v4bbAgsQ-A'
+    Linking.openURL(youtube)
+  }
+
+  
   render() {
     return(
       <View style = {{ flex: 1 , }} >
@@ -37,10 +59,22 @@ export default class About extends Component {
             </Text>
           </View>
           <View  style = { styles.social }>
-            <Icon name = 'facebook-official' size = {30} color = '#4c4c4c'/>
-            <Icon name = 'twitter' size = {30} color = '#4c4c4c' />
-            <Icon name = 'instagram' size = {30} color = '#4c4c4c' />
-            <Icon name = 'youtube-play' size = {30} color = '#4c4c4c' />
+            <TouchableOpacity onPress={() => this.socialFacebook()}>
+              <Icon name = 'facebook-official' size = {30} color = '#4c4c4c'/>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => this.socialTwitter()}>
+              <Icon name = 'twitter' size = {30} color = '#4c4c4c' />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => this.socialInstagram()}>
+              <Icon name = 'instagram' size = {30} color = '#4c4c4c' />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => this.socialYoutube()}>
+              <Icon name = 'youtube-play' size = {30} color = '#4c4c4c' />
+            </TouchableOpacity>
+
           </View>
           <View style = { styles.copyright }>
             <Icon name = 'copyright' size = {20}/>
@@ -71,7 +105,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: '#7d7d7d',
     textAlign: 'center',
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
     fontSize: 17,
     letterSpacing: .25,
@@ -92,13 +126,13 @@ const styles = StyleSheet.create({
     color: '#454545',
     fontSize: 17,
     marginTop: 20,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
     textAlign: 'justify',
     lineHeight: 25,
   },
   social: {
-    marginTop: 20,
+    marginTop: 25,
     flexDirection: 'row',
     paddingHorizontal: 10,
     justifyContent: 'space-between',

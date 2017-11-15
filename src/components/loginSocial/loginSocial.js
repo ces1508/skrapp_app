@@ -108,13 +108,13 @@ const styles = StyleSheet.create({
   textBtnGoogle: {
     color: '#454545',
     paddingLeft: 10,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
   },
   textBtn: {
     color: '#fff',
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '500',
   }
 })

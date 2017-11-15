@@ -7,7 +7,7 @@ import {
   Platform,
   Text,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native'
 import { Buttom } from '../buttom'
 import { Actions, ActionConst } from 'react-native-router-flux'
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 4,
     paddingLeft: 20,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
   },
   btnSubmit: {
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'transparent',
     textAlignVertical: 'center',
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '500',
   },
   remember: {
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     textAlign:'center',
     backgroundColor: 'transparent',
     textAlignVertical: 'center',
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
 
   },

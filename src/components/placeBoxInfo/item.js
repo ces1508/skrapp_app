@@ -2,7 +2,8 @@ import React from 'react'
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Platform
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#454545',
     paddingBottom: 15,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
     paddingBottom: 5,
   },
