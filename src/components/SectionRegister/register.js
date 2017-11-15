@@ -24,7 +24,10 @@ export default class SectionRegister extends Component {
     return(
       <View style = { styles.register } >
         <TouchableOpacity onPress = {() => this.handlePress()}>
-          <Text style = { styles.textBtn } > ¿Aun no eres parte de Skrapp? Unete Ahora </Text>
+          <View style = { styles.row}> 
+            <Text style = { styles.textBtn } > ¿Aun no eres parte de Skrapp?</Text>
+            <Text style={[styles.textBtn, styles.textBtnua]} > Unete Ahora </Text>
+          </View>
         </TouchableOpacity>
       </View>
     )
@@ -43,13 +46,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  row: {
+    flexDirection: 'row',
+  },
   textBtn: {
-    fontSize: 16,
+    fontSize: 17,
     color: '#fff',
     textAlign: 'center',
     backgroundColor: 'transparent',
     textAlignVertical: 'center',
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
-    fontWeight: '500',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
+    fontWeight: '400',
   },
+  textBtnua: {
+    fontWeight: 'bold',
+  }
 })

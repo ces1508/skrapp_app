@@ -23,7 +23,10 @@ export default class SectionLogin extends Component {
     return (
       <View style={styles.login} >
         <TouchableOpacity onPress={() => Actions.pop() }>
-          <Text style={styles.textBtn} > ¿Ya eres parte de Skrapp? Iniciar sesión </Text>
+          <View style = { styles.row }>
+            <Text style={ styles.textBtn } > ¿Ya eres parte de Skrapp?  </Text>
+            <Text style={ [styles.textBtn, styles.textBtnis]}> Iniciar sesión </Text>
+          </View>
         </TouchableOpacity>
       </View>
     )
@@ -42,13 +45,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  row:{
+    flexDirection: 'row'
+  },
   textBtn: {
-    fontSize: 16,
+    fontSize: 17,
     color: '#fff',
     textAlign: 'center',
     backgroundColor: 'transparent',
     textAlignVertical: 'center',
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
-    fontWeight: '500',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
+    fontWeight: '400',
   },
+  textBtnis: {
+    fontWeight: 'bold',
+    // letterSpacing: .5,
+  }
 })

@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     ...Platform.select({
       ios: {
-        paddingTop: 13
+        paddingTop: 11
       },
     }),
   },

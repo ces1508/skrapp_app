@@ -167,12 +167,12 @@ const styles = StyleSheet.create({
   },
   textPerfil: {
     color: '#fff',
-    fontSize: 14,
+    fontSize: 17,
     marginBottom: 60,
     marginTop: 10,
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
-    letterSpacing: .2
+    // letterSpacing: .2
   },
   text: {
     color: '#fff',

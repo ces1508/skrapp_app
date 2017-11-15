@@ -83,7 +83,7 @@ export default class Settings extends Component {
               <View style = { styles.section }>
                 <Text style = { styles.sectionTitle } >Estilo del mapa</Text>
                 <View style = {{ marginTop: 15 }}>
-                  <CheckBox  checked = { mapStyle === 'satellite'} title = 'Satelite' handleClick = {() => this.handleChangeMap('satellite') }/>
+                  <CheckBox checked={mapStyle === 'satellite'} title = 'Satélite' handleClick = {() => this.handleChangeMap('satellite') }/>
                   <CheckBox checked = { mapStyle === 'standard' } title = 'Normal' handleClick = {() => this.handleChangeMap('standard')} />
                 </View>
               </View>
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#454545',
     textAlign: 'left',
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '500'
   },
   line: {

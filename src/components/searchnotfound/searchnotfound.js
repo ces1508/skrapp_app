@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#454545',
     marginBottom: 30,
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '500',
 
   },

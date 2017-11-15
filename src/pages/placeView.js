@@ -89,7 +89,7 @@ export default class PlaceView extends Component {
             </View>
             <View style = {{ marginTop: 20 }}>
               <PlaceBoxInfo 
-                title = 'Mas Información' 
+                title = 'Más Información' 
                 location = {data.location } 
                 address = { data.address }  
                 website = { data.website }  

@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
   },
   name: {
     color: '#454545',
-    fontSize: 20,
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
+    fontSize: 25,
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '500',
     letterSpacing: .25,
     marginTop: 10,
@@ -73,14 +73,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Roboto-Regular',
     fontWeight: '400',
+    fontSize: 17,
     letterSpacing: .25,
   },
   containerImage: {
-    marginTop: 60
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f08300',
+    height: 250,
+    width: 400,
   },
   image: {
-    width: 200,
-    height: 200
+    width: 180,
+    height: 180
   },
   description: {
     color: '#454545',
@@ -103,10 +109,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   copyrightText: {
-    fontFamily: Platform.OS === 'android'? 'RobotoCondensed' : 'Roboto Condensed',
-    fontWeight: '500',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
+    fontWeight: '400',
     letterSpacing: .25,
     color: '#454545',
     marginLeft: 10,
+    fontSize: 17, 
   }
 })

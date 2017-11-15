@@ -40,7 +40,7 @@ export default class LoginSocial extends Component {
             )
           }
           Alert.alert(
-            'lo sentimos',
+            'Lo sentimos',
             'ocurrio un error inesperado, por favor intenta mas tarde'
           )
         } else {
@@ -49,7 +49,7 @@ export default class LoginSocial extends Component {
             Actions.drawer({ type: 'reset' })
           } else {
             Alert.alert(
-              'lo sentimos',
+              'Lo sentimos',
               'ocurrio un error inesperado, por favor intenta mas tarde'
             )
           }
@@ -85,7 +85,10 @@ export default class LoginSocial extends Component {
 const styles = StyleSheet.create({
   container: {
     height: height / 3,
-    alignItems: 'center'
+    alignItems: 'center',
+    // borderWidth: 1,
+    marginTop: 15,
+    
   },
   btnSocial: {
     marginTop: 20,
