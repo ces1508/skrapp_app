@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: Platform.OS === 'android' ? 50 : 25,
-    borderWidth: 2,
-    borderColor: 'rgba(0,0,0,.25)',
+    borderWidth: 1,
+    borderColor: 'gray',
     overflow: 'hidden'
   },
   titleMarker: {
