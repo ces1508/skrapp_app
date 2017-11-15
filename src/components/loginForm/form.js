@@ -70,7 +70,7 @@ export default class LoginForm extends Component {
     return(
       <View style = { styles.form }>
         <TextInput
-          placeholder = 'Correo Electronico'
+          placeholder = 'Correo Electrónico'
           style = { styles.input }
           placeholderTextColor = '#ffffff'
           underlineColorAndroid = 'transparent'
@@ -91,9 +91,11 @@ export default class LoginForm extends Component {
         <View>
           {this.renderButtom()}
         </View>
-        <View>
-          <Text style = { styles.remember }> ¿No recuerdas tu Contraseña? </Text>
-        </View>
+        {
+          // <View>
+            // <Text style = { styles.remember }> ¿No recuerdas tu Contraseña? </Text>
+          // </View>
+        }
       </View>
     )
   }
@@ -101,8 +103,10 @@ export default class LoginForm extends Component {
 
 const styles = StyleSheet.create({
   form: {
-    height: ( height/3 ),
+    height: ( height / 3 ),
     alignItems: 'center',
+    justifyContent: 'center',
+    // borderWidth: 1,
   },
   input: {
     backgroundColor: 'rgba(255, 255, 255, 0.17)',
@@ -113,6 +117,9 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
+    // borderWidth: 1,
+    // borderColor: 'red',
+    marginVertical: 10,
   },
   btnSubmit: {
     backgroundColor: '#f98d2c',

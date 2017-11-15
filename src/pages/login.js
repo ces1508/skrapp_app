@@ -54,15 +54,18 @@ const styles = StyleSheet.create({
   },
   containerLogo: {
     flexDirection: 'row',
+    // borderWidth: 1,
 
     height: ( height/3  ),
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
+    paddingBottom: 11,
   },
   logo: {
     width: 150,
     zIndex: 100,
     height: 150,
+    // borderWidth: 1,
   },
   form: {
     height: ( height/3 ),
