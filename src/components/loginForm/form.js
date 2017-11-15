@@ -70,7 +70,7 @@ export default class LoginForm extends Component {
     return(
       <View style = { styles.form }>
         <TextInput
-          placeholder = 'Correo Electrónico'
+          placeholder = 'Correo electrónico'
           style = { styles.input }
           placeholderTextColor = '#ffffff'
           underlineColorAndroid = 'transparent'
