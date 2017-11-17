@@ -68,7 +68,7 @@ export default class LoginSocial extends Component {
       <View style = { styles.container }>
         <Line text = 'o' />
         <TouchableOpacity onPress = {() => this.handleFacebookLogin()}>
-          <ButtomIcon  styleBtn = { styles.btnSocial }  styleText = { styles.textBtn } icon = 'facebook-official' text = 'Iniciar sesión con Facebook' onPress = { this.handleFacebookLogin } />
+          <ButtomIcon  styleBtn = { styles.btnSocial } iconSize = { 25 } colorIcon = "#fff" styleText = { styles.textBtn } icon = 'facebook-official' text = 'Iniciar sesión con Facebook' onPress = { this.handleFacebookLogin } />
         </TouchableOpacity>
         {
           // <ButtomIcon
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // borderWidth: 1,
     marginTop: 15,
-    
+
   },
   btnSocial: {
     marginTop: 20,
