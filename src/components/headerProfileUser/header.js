@@ -40,32 +40,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#f08300',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 25,
   },
   text: {
     color: 'white',
     fontSize: 17,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 5
   },
   name: {
     fontSize: 20,
     fontFamily: Platform.OS === 'android'? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
-    marginTop: 14,
   },
   containerImage: {
     width: 106,
     height: 106,
     borderRadius: 53,
-    marginBottom: 10,
-
+    marginBottom: 5,
   },
   image: {
     backgroundColor: Platform.OS === 'ios'? 'gray': 'transparent',
     borderWidth: 6,
     borderColor: '#fff',
-    marginTop: 17
-
   }
 })

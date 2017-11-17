@@ -81,7 +81,7 @@ export default class RegistryForm extends Component{
           selectionColor='black'
         />
         <TextInput
-          placeholder='Correo electronico'
+          placeholder='Correo electrónico'
           style={styles.input}
           placeholderTextColor='#ffffff'
           underlineColorAndroid='transparent'
