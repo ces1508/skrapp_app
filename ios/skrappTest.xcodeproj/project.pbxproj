@@ -1471,7 +1471,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.skrapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.voiice.skrapp;
 				PRODUCT_NAME = skrappTest;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1506,7 +1506,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.skrapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.voiice.skrapp;
 				PRODUCT_NAME = skrappTest;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";

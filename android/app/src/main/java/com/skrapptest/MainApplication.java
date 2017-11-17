@@ -42,7 +42,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new ReactNativeOneSignalPackage(),
-            new ReactNativeOneSignalPackage(),
             new OrientationPackage(),
             new VectorIconsPackage(),
             new MapsPackage(),
