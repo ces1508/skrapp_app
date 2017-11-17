@@ -39,6 +39,7 @@ export default class LoginSocial extends Component {
              'el correo ya se encutra registrado'
             )
           }
+          // console.log('error ', sigin)
           Alert.alert(
             'Lo sentimos',
             'ocurrio un error inesperado, por favor intenta mas tarde'
@@ -48,6 +49,7 @@ export default class LoginSocial extends Component {
           if (save) {
             Actions.drawer({ type: 'reset' })
           } else {
+            console.log('error save tokens ' , save)
             Alert.alert(
               'Lo sentimos',
               'ocurrio un error inesperado, por favor intenta mas tarde'

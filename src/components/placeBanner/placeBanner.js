@@ -31,7 +31,7 @@ export default class PlaceBanner extends Component {
         <ImageBackground
           source = {{ uri: this.props.banner }}
           indicator = { CircleSnail }
-          resizeMode = 'cover'
+          resizeMode = 'stretch'
           style = {[ styles.image, { width: this.state.width } ]}
         >
           {this.props.children}
@@ -47,9 +47,10 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 250,
-    backgroundColor: '#F8F8F6',
+    backgroundColor: '#b2b2b2',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    // borderWidth: 1,
 
   }
 })
