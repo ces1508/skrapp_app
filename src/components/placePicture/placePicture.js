@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
   image: {
     borderWidth: 6, 
     marginTop: 0,
-    borderColor: '#fff'
+    borderColor: '#fff',
+
   },
   shadow: {
     ...Platform.select({

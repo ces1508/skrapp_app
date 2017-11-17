@@ -53,10 +53,12 @@ const styles = StyleSheet.create({
   },
   containerLogo: {
     flexDirection: 'row',
+    // borderWidth: 1,
+    paddingBottom: 6,
 
     height: (height / 3.1),
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   logo: {
     width: 150,
