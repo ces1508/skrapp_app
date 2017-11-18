@@ -101,8 +101,8 @@ android {
         applicationId "com.voiicegroup.skrapp"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 3
-        versionName "3.2.3"
+        versionCode 5
+        versionName "3.2.4"
         manifestPlaceholders = [onesignal_app_id: "a3d9ee39-98f0-4b52-b4bc-b45a65f3aaaa",
                                 onesignal_google_project_number: "REMOTE"]
         ndk {
