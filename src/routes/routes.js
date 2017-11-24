@@ -12,6 +12,7 @@ import IconBack from '../components/iconBack'
 import About from '../pages/about'
 import Search from '../pages/search'
 import Settings from '../pages/settings'
+import Vip from '../pages/vip'
 import MapView from '../pages/map'
 import WebSite from '../pages/website'
 import { AlreadyUser, setMapStyle, setUnidad } from '../utils'
@@ -62,8 +63,9 @@ export default class Routes extends Component {
             <Scene
               key = 'login'
               component = { LoginView }
-              hideNavBar
-              initial = { !login } />
+              hideNavBar 
+              // initial = { !login } />
+              />
               <Scene
                 key = 'register'
                 component={RegistryView }
@@ -74,7 +76,7 @@ export default class Routes extends Component {
               contentComponent = { Menu }
               hideNavBar
               drawerImage = { MenuIcon }
-              initial = { login }
+              // initial = { login }
               drawerWidth = {250}>
               <Scene
                 key = 'categories'
@@ -124,6 +126,14 @@ export default class Routes extends Component {
                 key = 'search'
                 component = { Search }/>
             <Scene
+              key = 'myVIP'
+              title = 'VIP'
+              titleStyle = {{ color: '#fff'}}
+              backButtonImage = { BackButtom } 
+              renderBackButton= { IconBack }
+              initial = {true} 
+              component = { Vip }/>
+            <Scene
               key = 'settings'
               component = { Settings }
               title = 'Ajustes'
@@ -137,6 +147,7 @@ export default class Routes extends Component {
               backButtonImage = { BackButtom } 
               renderBackButton={IconBack} 
               titleStyle = {{ color: '#fff' }} />
+            
               <Scene
                 key = 'website'
                 component = { WebSite }

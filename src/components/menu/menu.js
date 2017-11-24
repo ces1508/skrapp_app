@@ -29,7 +29,9 @@ export default class Menu extends Component {
   myFavorites() {
     Actions.myFavorites()
   }
-
+  myVIP() {
+    Actions.myVIP()
+  }
   about () {
     Actions.about()
   }
@@ -84,11 +86,23 @@ export default class Menu extends Component {
             <Icon
               style={ styles.iconMenu }
               name='map'
-              size={25}
+              size={27}
               color='#6473e1' />
             <Text style={styles.text}>MAPA</Text>
           </View>
         </TouchableOpacity>
+
+         <TouchableOpacity onPress={() => this.myVIP()}>
+           <View style={styles.item}>
+             <Icon
+               style={styles.iconMenu}
+               name='gift'
+               size={27}
+               color='#e8bf41'
+             />
+             <Text style={styles.text}>VIP</Text>
+           </View>
+         </TouchableOpacity>
 
         <TouchableOpacity onPress = {() => this.settings()}>
           <View style = { styles.item }>

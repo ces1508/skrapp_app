@@ -19,7 +19,7 @@ export default class LoginSocial extends Component {
 
   async handleFacebookLogin() {
     try {
-      let result = await LoginManager.logInWithReadPermissions(['public_profile', 'email', 'user_about_me', 'user_birthday'])
+      let result = await LoginManager.logInWithReadPermissions(['public_profile'])
       if (result.isCancelled) {
       Alert.alert(
         'lo sentimos',
@@ -27,7 +27,7 @@ export default class LoginSocial extends Component {
       )
       } else {
       let fbTokens = await AccessToken.getCurrentAccessToken()
-      let request = await fetch(`https://graph.facebook.com/v2.11/me?fields=name,about,address,birthday,age_range,email,gender,hometown&access_token=${fbTokens.accessToken}`)
+      let request = await fetch(`https://graph.facebook.com/v2.11/me?fields=name,email,access_token=${fbTokens.accessToken}`)
       let fbProfiele = await request.json()
       delete fbProfiele.email
       delete fbProfiele.id
