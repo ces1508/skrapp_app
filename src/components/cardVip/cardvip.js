@@ -8,62 +8,78 @@ import {
   Platform,
   TouchableOpacity,
   FlatList,
-} from 'react-native'
 
+} from 'react-native'
+import { Actions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Rating from 'react-native-easy-rating'
+
+const vip = {
+  porciento: ' 50%',
+  img: 'https://lorempixel.com/600/400/',
+  before: '$40.000',
+  after: '$20.000',
+  nameplace: 'DEPORTES ALDANA',
+}
+
 
 export default class CardVip extends Component {
   constructor(props) {
     super(props)
   }
 
+  descriptionOfert() {
+    Actions.descriptionOfert()
+  }
   render() {
-    const { porciento, img, title, discount, before, after, nameplace } = this.props.vip
+    const { title } = this.props.data
+    
     return (
-      <View style={styles.containerCard}>
+      <TouchableOpacity onPress={() => this.descriptionOfert()}>
+        <View style={styles.containerCard}>
 
-        <View style={styles.containerHeader}>
-          <View style={styles.discount}>
-            <Text style={styles.textDiscount} > {porciento} </Text>
+          <View style={styles.containerHeader}>
+            <View style={styles.discount}>
+              <Text style={styles.textDiscount} > {vip.porciento} </Text>
+            </View>
+            <View style={styles.containerImage}>
+              <Image
+                style={styles.image}
+                source={{ uri: vip.img }}
+              />
+            </View>
           </View>
-          <View style={styles.containerImage}>
-            <Image
-              style={styles.image}
-              source={{ uri: img }}
+
+          <View style={styles.containerInfo} >
+            <Text style={styles.title} numberOfLines = { 2 }> {title}</Text>
+
+            <View style={styles.containerBeforeAfter}>
+              <Text style={styles.before}> {vip.before}</Text>
+              <Text style={styles.after}> {vip.after}</Text>
+            </View>
+
+            <View style={styles.containerTagPlace}>
+              <Icon
+                style={styles.iconTag}
+                name='tag'
+                size={16}
+                color='#dcb539' />
+              <Text style={styles.namePlace} > {vip.nameplace}</Text>
+            </View>
+
+            <Rating
+              rating={this.props.ranking}
+              editable={false}
+              iconWidth={15}
+              iconHeight={15}
+              max={5}
+              onRate={() => null}
+              iconSelected={require('../../../assets/images/star.png')}
+              style={styles.ratingstar}
             />
           </View>
-        </View>
-
-        <View style={styles.containerInfo} >
-          <Text style={styles.title}> {title}</Text>
-
-          <View style={styles.containerBeforeAfter}>
-            <Text style={styles.before}> {before}</Text>
-            <Text style={styles.after}> {after}</Text>
-          </View>
-
-          <View style={styles.containerTagPlace}>
-            <Icon
-              style={styles.iconTag}
-              name='tag'
-              size={16}
-              color='#dcb539' />
-            <Text style={styles.namePlace} > {nameplace}</Text>
-          </View>
-
-          <Rating
-            rating={this.props.ranking}
-            editable={false}
-            iconWidth={15}
-            iconHeight={15}
-            max={5}
-            onRate={() => null}
-            iconSelected={require('../../../assets/images/star.png')}
-            style={styles.ratingstar}
-          />
-        </View>
-      </View> 
+        </View> 
+      </TouchableOpacity>
     )
   }
 }
@@ -120,7 +136,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 170,
-    height: 120,
+    height: 130,
     backgroundColor: 'black',
 
   },
@@ -160,10 +176,10 @@ const styles = StyleSheet.create({
     color: '#4A4A4A',
     fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontSize: 14,
+    paddingTop: 5,
   },
   ratingstar: {
-    paddingVertical: 2,
-
+    paddingTop: 5,
   },
 
 })

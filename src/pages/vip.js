@@ -15,42 +15,42 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Rating from 'react-native-easy-rating'
 import CardVip from '../components/cardVip/'
 import ProductSlider from '../components/productSlider'
+import ListOferts from '../components/listOferts'
+
+// para despues eliminar
+import axios from 'axios'
+let makeRequest = async () => {
+  try {
+    let r = await axios('https://jsonplaceholder.typicode.com/posts')
+    console.log(r)
+    return r.data
+  } catch (e) {
+    console.log('error ', e.message)
+  }
+}
 
 const { width } = Dimensions.get('window')
 
-const vip = {
-  porciento: ' 50%',
-  img: 'https://lorempixel.com/600/400/',
-  title: 'It is often frustrating to attempt to plan meals that are designed for one.',
-  discount: '50%',
-  before: '$40.000',
-  after: '$20.000',
-  nameplace: 'DEPORTES ALDANA',
-}
-
-const vips = Array(100).fill(vip);
+// const vips = Array(100).fill(vip);
 
 export default class Vip extends Component {
   constructor(props){
     super(props)
+    this.state = { data: [] }
   }
 
+  async componentDidMount() {
+    let data = await makeRequest()
+    this.setState({ data })
+  }
   render(){
     return(
       <View style = { styles.container }> 
         <View style = { styles.wrapperContainer }> 
           <ProductSlider />
         </View>
+        <ListOferts data = {this.state.data} mode = { false } />
 
-        <FlatList
-          data = { vips }
-          // horizontal = { true }
-          numColumns = { 2 }
-          renderItem = {({ item }) => {
-            return (
-              <CardVip vip = { vip }/>
-            )
-          }} />
       </View>
     )
   }
@@ -59,7 +59,6 @@ export default class Vip extends Component {
 
 const styles =  StyleSheet.create({
   container: {
-    borderColor: 'red',
     alignItems: 'center',
   },
   wrapperContainer: {

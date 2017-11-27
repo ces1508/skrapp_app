@@ -13,6 +13,7 @@ import About from '../pages/about'
 import Search from '../pages/search'
 import Settings from '../pages/settings'
 import Vip from '../pages/vip'
+import DescriptionOfert from '../components/descriptionOfert'
 import MapView from '../pages/map'
 import WebSite from '../pages/website'
 import { AlreadyUser, setMapStyle, setUnidad } from '../utils'
@@ -59,110 +60,121 @@ export default class Routes extends Component {
     }
     return(
       <Router  backAndroidHandler = {this.onBackPress}>
-      <Scene key='root' navigationBarStyle={{ backgroundColor: '#f99800' }} titleStyle = {{ color: '#fff' }} statusBarStyle = 'red' >
-            <Scene
-              key = 'login'
-              component = { LoginView }
-              hideNavBar 
-              // initial = { !login } />
-              />
-              <Scene
-                key = 'register'
-                component={RegistryView }
-                hideNavBar />
-            <Scene
-              key = "drawer"
-              drawer
-              contentComponent = { Menu }
-              hideNavBar
-              drawerImage = { MenuIcon }
-              // initial = { login }
-              drawerWidth = {250}>
-              <Scene
-                key = 'categories'
-                component = { CategoriesView }
-                title = 'Categorias'
-                hideBackImage = { true }
-                titleStyle={{alignSelf: 'center' , color: '#fff'}}
-                renderRightButton = {IconSearch}
-                onRight = { () => alert('hola') }
-              />
-            </Scene>
-            <Scene
-              key = 'detailCategory'
-              component = { DetailCategory }
-              leftTitle = ""
-               titleStyle = {{ color: '#fff' }}
-               onRight = {() => null}
-               backButtonImage = { BackButtom } 
-               renderBackButton={IconBack}                
-               renderRightButton = {IconSearch}/>
-            <Scene
-              key = 'place'
-              component = { PlaceView }
-              backButtonImage = { BackButtom } 
-              renderBackButton = { IconBack} 
-              
-              leftTitle = ' '/>
-              <Scene
-                key = 'about'
-                component = { About }
-                title = 'Acerca de Skrapp'
-                titleStyle={{color: '#fff'}}
-                backButtonImage = { BackButtom }
-                renderBackButton = { IconBack} 
-                leftTitle = ' '/>
-                <Scene
-                  key = 'myFavorites'
-                  title = 'Mis Favoritos'
-                  titleStyle = {{ color: '#fff'}}
-                  backButtonImage = { BackButtom } 
-                  renderBackButton= { IconBack } 
-                  component = { MyFavoriteView }
+        <Scene 
+          key='root' 
+          navigationBarStyle={{ backgroundColor: '#f99800' }} 
+          titleStyle = {{ color: '#fff' }} 
+          statusBarStyle = 'red' >
+        <Scene
+          key = 'login'
+          component = { LoginView }
+          hideNavBar 
+          initial = { !login } />
 
-                />
-              <Scene
-                hideNavBar
-                key = 'search'
-                component = { Search }/>
+        <Scene
+          key = 'register'
+          component = { RegistryView }
+          hideNavBar />
+        <Scene
+          key = "drawer"
+          drawer
+          contentComponent = { Menu }
+          hideNavBar
+          drawerImage = { MenuIcon }
+          initial = { login }
+          drawerWidth = {250}>
             <Scene
-              key = 'myVIP'
-              title = 'VIP'
-              titleStyle = {{ color: '#fff'}}
-              backButtonImage = { BackButtom } 
-              renderBackButton= { IconBack }
-              initial = {true} 
-              component = { Vip }/>
-            <Scene
-              key = 'settings'
-              component = { Settings }
-              title = 'Ajustes'
-              backButtonImage = { BackButtom } 
-              renderBackButton={IconBack} 
-              titleStyle = {{ color: '#fff' }} />
-            <Scene
-              key = 'map'
-              title = 'Mapa'
-              component = { MapView }
-              backButtonImage = { BackButtom } 
-              renderBackButton={IconBack} 
-              titleStyle = {{ color: '#fff' }} />
-            
-              <Scene
-                key = 'website'
-                component = { WebSite }
-                backButtonImage = { BackButtom } 
-                renderBackButton = { IconBack } 
-                titleStyle = {{ color: '#fff' }} />
-              <Scene
-                key = 'review'
-                component = { Review }
-                title = 'Reseñar'
-                backButtonImage = { BackButtom } 
-                renderBackButton = { IconBack }                 
-                leftTitle = ''
-                titleStyle = {{ color: '#fff' }} />
+              key = 'categories'
+              component = { CategoriesView }
+              title = 'Categorias'
+              hideBackImage = { true }
+              titleStyle={{alignSelf: 'center' , color: '#fff'}}
+              renderRightButton = {IconSearch}
+              onRight = { () => alert('hola') }
+            />
           </Scene>
+          <Scene
+            key = 'detailCategory'
+            component = { DetailCategory }
+            leftTitle = ""
+              titleStyle = {{ color: '#fff' }}
+              onRight = {() => null}
+              backButtonImage = { BackButtom } 
+              renderBackButton={IconBack}                
+              renderRightButton = {IconSearch}/>
+          <Scene
+            key = 'place'
+            component = { PlaceView }
+            backButtonImage = { BackButtom } 
+            renderBackButton = { IconBack} 
+            leftTitle = ' '/>
+          <Scene
+            key = 'about'
+            component = { About }
+            title = 'Acerca de Skrapp'
+            titleStyle={{color: '#fff'}}
+            backButtonImage = { BackButtom }
+            renderBackButton = { IconBack} 
+            leftTitle = ' '/>
+          <Scene
+            key = 'myFavorites'
+            title = 'Mis Favoritos'
+            titleStyle = {{ color: '#fff'}}
+            backButtonImage = { BackButtom } 
+            renderBackButton= { IconBack } 
+            component = { MyFavoriteView }
+          />
+        <Scene
+          hideNavBar
+          key = 'search'
+          component = { Search }/>
+        <Scene
+          key = 'myVIP'
+          title = 'VIP'
+          titleStyle = {{ color: '#fff'}}
+          backButtonImage = { BackButtom } 
+          renderBackButton= { IconBack }
+          // initial={true}
+          component = { Vip }/>
+          
+          <Scene
+            key='descriptionOfert'
+            title='Descripción '
+            titleStyle={{ color: '#fff' }}
+            backButtonImage={BackButtom}
+            renderBackButton={IconBack}
+            // initial={true}
+            component = { DescriptionOfert } />
+        <Scene
+          key = 'settings'
+          component = { Settings }
+          title = 'Ajustes'
+          backButtonImage = { BackButtom } 
+          renderBackButton={IconBack} 
+          titleStyle = {{ color: '#fff' }} />
+        <Scene
+          key = 'map'
+          title = 'Mapa'
+          component = { MapView }
+          backButtonImage = { BackButtom } 
+          renderBackButton={IconBack} 
+          titleStyle = {{ color: '#fff' }} />
+      
+        <Scene
+          key = 'website'
+          component = { WebSite }
+          backButtonImage = { BackButtom } 
+          renderBackButton = { IconBack } 
+          titleStyle = {{ color: '#fff' }} />
+        <Scene
+          key = 'review'
+          component = { Review }
+          title = 'Reseñar'
+          backButtonImage = { BackButtom } 
+          renderBackButton = { IconBack }                 
+          leftTitle = ''
+          titleStyle = {{ color: '#fff' }} />
+        </Scene>
       </Router>
     )
   }
