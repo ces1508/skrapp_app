@@ -28,14 +28,14 @@ export default class CardVip extends Component {
     super(props)
   }
 
-  descriptionOfert() {
-    Actions.descriptionOfert()
+  descriptionOfert(data) {
+    Actions.descriptionOfert({ data })
   }
   render() {
     const { title } = this.props.data
     
     return (
-      <TouchableOpacity onPress={() => this.descriptionOfert()}>
+      <TouchableOpacity onPress={() => this.descriptionOfert(this.props.data)}>
         <View style={styles.containerCard}>
 
           <View style={styles.containerHeader}>

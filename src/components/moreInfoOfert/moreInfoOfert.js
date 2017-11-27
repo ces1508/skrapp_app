@@ -3,44 +3,34 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
-  ScrollView,
   Platform,
-  TouchableOpacity,
-  FlatList,
-  Dimensions,
 } from 'react-native'
 
-export default class Vip extends Component {
-  constructor(props) {
-    super(props)
-  }
-  render() {
-    return (
-      <View  style = { styles.container }>
-        <View style = { styles.containerInfo}>
-          <Text style={styles.title}> Now, if you are interested in being the best player, getting really good money and knowing some tricks </Text>
+export default MoreInfoOffert = (props) => {
+  return (
+    <View  style = { styles.container }>
+      <View style = { styles.containerInfo}>
+        <Text style={styles.title}> { props.offert.title }  </Text>
 
-          <View style = { styles.containerDiscount }> 
+        <View style = { styles.containerDiscount }> 
 
-            <View style = { styles.containerBeforeAfter}> 
-              <Text style = { styles.before }> $40.000</Text>
-              <Text style = { styles.after }>$20.000 </Text>
-            </View>
-
-            <View style = { styles.porcentage }>
-              <Text style = { styles.textPorcentage }> 50%</Text>
-            </View>
-
+          <View style = { styles.containerBeforeAfter}> 
+            <Text style = { styles.before }> $40.000</Text>
+            <Text style = { styles.after }>$20.000 </Text>
           </View>
-        </View>
 
-        <View style = { styles.button }>
-          <Text style = { styles.textButtom }> Donde comprar</Text>
+          <View style = { styles.porcentage }>
+            <Text style = { styles.textPorcentage }> 50%</Text>
+          </View>
+
         </View>
       </View>
-    )
-  }
+
+      <View style = { styles.button }>
+        <Text style = { styles.textButtom }> Donde comprar</Text>
+      </View>
+    </View>
+  )
 }
 
 

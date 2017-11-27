@@ -44,8 +44,7 @@ export default class DescriptionOfert extends Component {
             <ProductSlider />
           </View>
 
-          <MoreInfoOfert />
-
+          <MoreInfoOfert offert = { this.props.data }/>
 
           <View style = { styles.containerMoreArticles}>
             <Text style = { styles.titleMoreArticles}> Más artículos del vendedor </Text>

@@ -1,16 +1,8 @@
 import React, { Component } from 'react'
 import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ScrollView,
-  Platform,
-  TouchableOpacity,
   FlatList
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import Rating from 'react-native-easy-rating'
+
 import CardVip from '../../components/cardVip/'
 
 
@@ -18,10 +10,6 @@ import CardVip from '../../components/cardVip/'
 export default class DescriptionOfert extends Component {
   constructor(props) {
     super(props)
-  }
-
-  descriptionOfert() {
-    Actions.descriptionOfert()
   }
 
   render() {
@@ -33,9 +21,7 @@ export default class DescriptionOfert extends Component {
         keyExtractor = { this._keyExtractor}
         renderItem = {({ item }) => {
           return (
-            <TouchableOpacity onPress={() => this.descriptionOfert()}>
-              <CardVip data = { item } />
-            </TouchableOpacity>
+            <CardVip data = { item } />
           )
         }} />
     )
