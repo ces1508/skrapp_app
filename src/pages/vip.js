@@ -8,11 +8,15 @@ import {
   Platform,
   TouchableOpacity,
   FlatList,
+  Dimensions,
 } from 'react-native'
-
+import Swiper from 'react-native-swiper'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Rating from 'react-native-easy-rating'
 import CardVip from '../components/cardVip/'
+import ProductSlider from '../components/productSlider'
+
+const { width } = Dimensions.get('window')
 
 const vip = {
   porciento: ' 50%',
@@ -34,17 +38,19 @@ export default class Vip extends Component {
   render(){
     return(
       <View style = { styles.container }> 
+        <View style = { styles.wrapperContainer }> 
+          <ProductSlider />
+        </View>
+
         <FlatList
           data = { vips }
           // horizontal = { true }
           numColumns = { 2 }
           renderItem = {({ item }) => {
-
             return (
               <CardVip vip = { vip }/>
             )
           }} />
-     
       </View>
     )
   }
@@ -53,10 +59,13 @@ export default class Vip extends Component {
 
 const styles =  StyleSheet.create({
   container: {
-    // borderWidth: 1,
     borderColor: 'red',
     alignItems: 'center',
-    
   },
+  wrapperContainer: {
+    height: 200,
+    marginBottom: 10,
+  },
+
   
 })
