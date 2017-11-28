@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
     borderRadius: 4,
     marginHorizontal: 10,
     marginTop: 15,
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     padding: 10,
+    backgroundColor: 'white'
   },
   ReviewCommentImage: {
     width: 50,
@@ -67,7 +69,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingBottom: 10,
     paddingLeft: 5,
-    // borderWidth: 1
   },
   TextTitle: {
     fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',

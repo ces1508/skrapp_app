@@ -15,7 +15,7 @@ export default Comment = (props) => {
       </View>
       <View style = { styles.comment }>
         <Text>{props.userData? props.userData.name: ''}</Text>
-        <Rating rating = { props.rating }  iconSelected = { require('../../../assets/images/star.png') } editable = {false} iconWidth = { 25 } iconHeight = { 25 }/>
+        <Rating rating = { props.rating }  iconSelected = { require('../../../assets/images/star.png') } editable = {false} iconWidth = { 18 } iconHeight = { 18 }/>
         <Text style = {{ flexWrap: 'wrap', lineHeight: 20,}}> {props.comment} </Text>
       </View>
     </View>
@@ -24,6 +24,7 @@ export default Comment = (props) => {
 
 const styles = StyleSheet.create({
   review: {
+    backgroundColor: 'white',
     flex: 1,
     flexDirection: 'row',
     marginHorizontal: 10,
