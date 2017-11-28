@@ -43,10 +43,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 55,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   row:{
-    flexDirection: 'row'
+    flexDirection: 'row',
+    padding: 10,
   },
   textBtn: {
     fontSize: 17,

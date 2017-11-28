@@ -127,11 +127,11 @@ const styles = StyleSheet.create({
   btn: {
     width: width - 40,
     marginTop: 15,
-    height: 45,
+    height: height <= 480 ? 35 : 45,
     borderRadius: 40,
     ...Platform.select({
       ios: {
-        paddingTop: 11
+        paddingTop: height <= 480 ? 7 : 11
       },
     }),
   },

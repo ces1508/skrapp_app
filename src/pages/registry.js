@@ -8,7 +8,8 @@ import {
   StatusBar,
   Image,
   TextInput,
-  Platform
+  Platform,
+  ScrollView
 
 } from 'react-native'
 import RegistryForm from '../components/registryform'
@@ -26,19 +27,21 @@ export default class RegistryView extends Component{
     return(
       <View> 
         <ImageBackground source={require('../../assets/images/bglogin.png')} style={styles.background} >
-          <StatusBar
-            backgroundColor="transparent"
-            barStyle="light-content"
-            translucent={true}
-          />
-          <View style={{ flex: 1 }}>
-            <View style={styles.containerLogo}>
-              <Image style={styles.logo} source={require('../../assets/images/skrapp.png')} />
+          <ScrollView>
+            <StatusBar
+              backgroundColor="transparent"
+              barStyle="light-content"
+              translucent={true}
+            />
+            <View style={{ flex: 1 }}>
+              <View style={styles.containerLogo}>
+                <Image style={styles.logo} source={require('../../assets/images/skrapp.png')} resizeMode = 'contain'/>
+              </View>
+              <RegistryForm />
+              <LoginSocial />
+              <SectionLogin />
             </View>
-            <RegistryForm />
-            <LoginSocial />
-            <SectionLogin />
-          </View>
+          </ScrollView>
         </ImageBackground>
       </View>
     )
@@ -53,7 +56,6 @@ const styles = StyleSheet.create({
   },
   containerLogo: {
     flexDirection: 'row',
-    // borderWidth: 1,
     paddingBottom: 6,
 
     height: (height / 3.1),

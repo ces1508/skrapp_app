@@ -114,7 +114,7 @@ export default class RegistryForm extends Component{
 const styles = StyleSheet.create({
   
   form: {
-    height: (height / 2.75),
+    height: (height / 3),
     alignItems: 'center',
     // borderWidth: 1,
   },
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.17)',
     color: '#fff',
     width: width - 40,
-    height: 45,
+    height: height <= 480 ? 35 : 45,
     borderRadius: 4,
     paddingLeft: 20,
     fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
@@ -134,12 +134,12 @@ const styles = StyleSheet.create({
   },
   btn: {
     width: width - 40,
-    marginTop: 15,
-    height: 45,
+    marginTop: height <= 480 ? -5 : 10,
+    height: height <= 480 ? 35 : 45,
     borderRadius: 40,
     ...Platform.select({
       ios: {
-        paddingTop: 11
+        paddingTop: height <= 480 ? 7 : 11
       },
     }),
   },

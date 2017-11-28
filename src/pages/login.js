@@ -8,7 +8,8 @@ import {
   Image,
   TextInput,
   Platform,
-  StatusBar
+  StatusBar,
+  ScrollView 
 } from 'react-native'
 import LoginForm from '../components/loginForm'
 import ButtomIcon, { Buttom } from '../components/buttom'
@@ -23,23 +24,27 @@ export default class LoginView extends Component {
 
   render() {
     return(
+      
       <ImageBackground  source = { require('../../assets/images/bglogin.png') } style = { styles.background } >
-         { Platform.OS === 'android'?
-            <StatusBar
-              backgroundColor="transparent"
-              barStyle="light-content"
-              translucent={true}
-            />
-          : null
-        }
-        <View style = {{ flex: 1 }}>
-          <View style = { styles.containerLogo }>
-            <Image  style = { styles.logo } source = { require('../../assets/images/skrapp.png') } />
-          </View>
-          <LoginForm />
-          <LoginSocial />
-          <SectionRegister />
-        </View>
+        <ScrollView > 
+          { Platform.OS === 'android'?
+              <StatusBar
+                backgroundColor="transparent"
+                barStyle="light-content"
+                translucent={true}
+              />
+            : null
+          }
+        
+            <View style = {{ flex: 1 }}>
+              <View style = { styles.containerLogo }>
+                <Image  style = { styles.logo } source = { require('../../assets/images/skrapp.png') } resizeMode = 'contain' />
+              </View>
+              <LoginForm />
+              <LoginSocial />
+              <SectionRegister />
+            </View>
+          </ScrollView>
       </ImageBackground>
     )
   }
@@ -56,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // borderWidth: 1,
 
-    height: ( height/3  ),
+    height: ( height / 3  ),
     justifyContent: 'center',
     alignItems: 'flex-end',
     paddingBottom: 11,
@@ -68,7 +73,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
   },
   form: {
-    height: ( height/3 ),
+    height: ( height / 3 ),
     alignItems: 'center',
   },
   input: {
@@ -85,11 +90,11 @@ const styles = StyleSheet.create({
   btn: {
     width: width - 40,
     marginTop: 15,
-    height: 45,
+    height: height <= 480 ? 35 : 45,
     borderRadius: 40,
     ...Platform.select({
       ios: {
-        paddingTop: 16
+        paddingTop: height <= 480 ? 7 : 11
       },
     }),
   },
