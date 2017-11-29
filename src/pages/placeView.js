@@ -11,21 +11,29 @@ let { width } = Dimensions.get('window')
 import Api from '../api'
 import { Actions } from 'react-native-router-flux'
 import { ButtomIcon } from '../components/buttom'
-import { LaunchMap } from '../utils'
+import { LaunchMap, AlreadyUser } from '../utils'
 export default class PlaceView extends Component {
   constructor(props) {
     super(props)
-    this.state = { favorited: false }
+    this.state = { favorited: false , userAlreadySigin: false}
     this.toogleFavorite = this.toogleFavorite.bind(this)
     this.alreadyLiked = this.alreadyLiked.bind(this)
     this.onShare = this.onShare.bind(this)
     this.onReview = this.onReview.bind(this)
+    this.userAlreadySigin = this.userAlreadySigin.bind(this)
   }
 
-  componentWillMount() {
+  componentWillMount(){
+    this.userAlreadySigin()
+  }
+  componentDidMount() {
     this.alreadyLiked()
   }
   
+  async userAlreadySigin() {
+    let userAlreadySigin = await AlreadyUser()
+    this.setState({ userAlreadySigin })
+  }
   showMap () {
     let { location } = this.props.data
     LaunchMap(location)
@@ -33,6 +41,10 @@ export default class PlaceView extends Component {
 
 
   async toogleFavorite() {
+    let { userAlreadySigin } = this.state
+    if (!userAlreadySigin) {
+      return Actions.login({ ensureLogin: true })
+    }
     let like = await Api.likePlace(this.props.data)
     if (like.status === 'success') {
       like.data.action === 'like'?
@@ -44,9 +56,11 @@ export default class PlaceView extends Component {
   }
 
   async alreadyLiked () {
-    let liked = await Api.placeAlradyLiked(this.props.data)
-    if (liked.status === 'success' && liked.liked === true) {
-      this.setState({ favorited: true })
+    if (this.state.userAlreadySigin) {
+      let liked = await Api.placeAlradyLiked(this.props.data)
+      if (liked.status === 'success' && liked.liked === true) {
+        this.setState({ favorited: true })
+      }
     }
   }
 
@@ -62,8 +76,12 @@ export default class PlaceView extends Component {
     })
   }
   
-  onReview() {
-    Actions.review({ place: this.props.data })
+  async onReview() {
+    let { userAlreadySigin } = this.state
+    if (userAlreadySigin) {
+      return Actions.review({ place: this.props.data })
+    }
+    Actions.login({ ensureLogin: true })
   }
 
   render() {

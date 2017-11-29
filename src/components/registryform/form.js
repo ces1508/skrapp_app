@@ -114,7 +114,7 @@ export default class RegistryForm extends Component{
 const styles = StyleSheet.create({
   
   form: {
-    height: (height / 3),
+    height: (height / 2.9),
     alignItems: 'center',
     // borderWidth: 1,
   },
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
-    marginBottom: 15,
+    marginBottom: 12,
   }, 
   btnSubmit: {
     backgroundColor: '#f98d2c',

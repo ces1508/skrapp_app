@@ -16,7 +16,14 @@ import { Actions } from 'react-native-router-flux'
 const { width, height } = Dimensions.get('window')
 
 export default class LoginSocial extends Component {
+  whitOutLogin(){
+    Actions.drawer()
+  }
 
+  static defaultProps = {
+    ensureLogin: false
+  }
+  
   async handleFacebookLogin() {
     try {
       let result = await LoginManager.logInWithReadPermissions(['public_profile'])
@@ -30,7 +37,6 @@ export default class LoginSocial extends Component {
       let request = await fetch(`https://graph.facebook.com/v2.11/me?fields=name,email&access_token=${fbTokens.accessToken}`)
       let fbProfiele = await request.json()
       let sigin = await Api.loginFacebook(fbTokens, fbProfiele)
-      console.log(fbProfiele)
       if (sigin.error) {
           if (sigin.code === 203) {
            return Alert.alert(
@@ -64,6 +70,21 @@ export default class LoginSocial extends Component {
       )
     }
   }
+
+  renderWithOutLogin () {
+    let { ensureLogin } = this.props
+    if (!ensureLogin) {
+      return <TouchableOpacity onPress={() => this.whitOutLogin()}>
+        <ButtomIcon
+          styleBtn={[styles.btnSocial, styles.btnLoginGoogle]}
+          styleText={[styles.textBtn, styles.textBtnGoogle]}
+          icon='user' text='Continuar sin registro'
+          iconSize = { 25 }
+          colorIcon='#f98d2c' />
+      </TouchableOpacity>
+    }
+    return null
+  }
   render() {
     return(
       <View style = { styles.container }>
@@ -71,13 +92,7 @@ export default class LoginSocial extends Component {
         <TouchableOpacity onPress = {() => this.handleFacebookLogin()}>
           <ButtomIcon  styleBtn = { styles.btnSocial } iconSize = { 25 } colorIcon = "#fff" styleText = { styles.textBtn } icon = 'facebook-official' text = 'Iniciar sesión con Facebook' onPress = { this.handleFacebookLogin } />
         </TouchableOpacity>
-        {
-          // <ButtomIcon
-          //   styleBtn = {[ styles.btnSocial, styles.btnLoginGoogle ]}
-          //   styleText = {[styles.textBtn, styles.textBtnGoogle]}
-          //   icon = 'google' text = 'Iniciar sesión con Google'
-          //    colorIcon = '#7f7f7f' />
-        }
+        { this.renderWithOutLogin() }
       </View>
     )
   }
@@ -85,9 +100,10 @@ export default class LoginSocial extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: height / 3.1,
+    height: height / 2.9,
     alignItems: 'center',
-    marginTop: 15,
+    // borderWidth: 1,
+    // borderColor: 'red'
 
   },
   btnSocial: {
@@ -97,13 +113,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#2159c9',
-    marginBottom: Platform.OS === 'android' ? 10 : 15,
+    marginBottom: Platform.OS === 'android' ? 10 : 0,
     paddingLeft: Platform.OS === 'android' ? 20 : 0,
   },
   btnLoginGoogle: {
     backgroundColor: '#fff',
     alignItems: 'flex-start',
-    paddingRight: 30,
+    paddingRight: 20,
   },
   textBtnGoogle: {
     color: '#454545',
@@ -118,3 +134,4 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   }
 })
+

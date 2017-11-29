@@ -13,9 +13,7 @@ import{
 import Icon from 'react-native-vector-icons/FontAwesome'
 import IonicIcon from 'react-native-vector-icons/Ionicons'
 import { Actions } from 'react-native-router-flux'
-import { DestroySession } from '../../utils'
-import { getProfile } from '../../utils'
-
+import { DestroySession, AlreadyUser, getProfile } from '../../utils'
 
 const { width, height } = Dimensions.get('window')
 export default class Menu extends Component {
@@ -23,7 +21,8 @@ export default class Menu extends Component {
     super(props)
     this.state = {
       username: '',
-      picture: require('../../../assets/images/avatar.png')
+      picture: require('../../../assets/images/avatar.png'),
+      login: false
     }
   }
   myFavorites() {
@@ -37,12 +36,18 @@ export default class Menu extends Component {
   settings () {
     Actions.settings()
   }
-
+  
   async componentWillMount() {
-    let profile = await getProfile()
-    let picture = profile.picture? { uri:  profile.picture.data.url  } : this.state.picture
-    this.setState({ username: profile.name, picture })
+    let login = await AlreadyUser()
+    if(login) {
+      let profile = await getProfile()
+      let picture = profile.picture? { uri:  profile.picture.data.url  } : this.state.picture
+      this.setState({ login })
+    } else {
+      this.setState({ login })
+    }
   }
+
   async destroySession () {
     let out = await DestroySession()
     if (out) {
@@ -53,16 +58,21 @@ export default class Menu extends Component {
       'tenemos un problema para cerrar tu sesión, por favor intentalo más tarde'
     )
   }
-
+  
+  signIn(){
+    Actions.login({ ensureLogin: true })
+  }
+  
   map () {
-    Actions.drawerClose( )
+    Actions.drawerClose()
     Actions.map()
   }
+
 
   render() {
    return(
      <ScrollView contentContainerStyle={styles.container} style={{ backgroundColor: '#2b2631'}}>
-      <View style={{ flex: 1, paddingVertical: 20,}}>
+      <View style={{ flex: 1, paddingVertical: 20, }}>
           <View style = {[ styles.itemImage]}>
             <Image source = { this.state.picture } style = { styles.imageProfile } defaultSource = {require('../../../assets/images/avatar.png')}/>
            <Text style={styles.textPerfil}> {this.state.username } </Text>
@@ -111,19 +121,18 @@ export default class Menu extends Component {
             <Text style = { styles.text }>ACERCA DE SKRAPP</Text>
             </View>
         </TouchableOpacity>
+         <TouchableOpacity onPress={() => this.state.login? this.destroySession() : this.signIn()}>
+           <View style={styles.item}>
+             <IonicIcon
+               style={styles.iconMenu}
+               name={this.state.login ? 'md-log-out' : 'ios-add-circle-outline'}
+               size={25}
+               color='#ff5353' />
 
-        <TouchableOpacity onPress = { () => this.destroySession() }>
-          <View style = { styles.item }>
-          <IonicIcon
-            style = { styles.iconMenu }
-            name='md-log-out'
-            size={25}
-            color= '#ff5353'/>
-
-            <Text style = { styles.text }>CERRAR SESIÓN</Text>
-          </View>
-        </TouchableOpacity>
-
+             <Text style={styles.text}>{this.state.login ? 'CERRAR SESIÓN' : 'INICIAR SESION' } </Text>
+           </View>
+         </TouchableOpacity>
+         
       </View>
      </ScrollView>
    )

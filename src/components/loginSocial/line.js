@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
    flexDirection: 'row', 
    paddingHorizontal: 20, 
    //borderWidth: 1,
-   marginBottom: Platform.OS === 'android' ? 5 : 15,
+   marginBottom: Platform.OS === 'android' ? 5 : 0,
    marginTop: Platform.OS === 'android' ? 20 : 15,
   },
   text: {

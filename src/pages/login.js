@@ -41,7 +41,7 @@ export default class LoginView extends Component {
                 <Image  style = { styles.logo } source = { require('../../assets/images/skrapp.png') } resizeMode = 'contain' />
               </View>
               <LoginForm />
-              <LoginSocial />
+              <LoginSocial {...this.props}/>
               <SectionRegister />
             </View>
           </ScrollView>

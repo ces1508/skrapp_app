@@ -16,7 +16,6 @@ export default class SectionLogin extends Component {
 
   handlePress() {
     Actions.login()
-    // alert('enviando a la vista de login')
   }
 
   render() {

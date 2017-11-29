@@ -3,7 +3,8 @@ import { View, Text, ActivityIndicator } from 'react-native'
 import Api from '../api'
 import ListPlaces from '../components/listPlaces'
 import SearchNotFound from '../components/searchnotfound'
-import { getCurrentPosition, getLastPosition } from '../utils'
+import { getCurrentPosition, getLastPosition, AlreadyUser } from '../utils'
+import { Actions } from 'react-native-router-flux';
 export default class MyFavorites extends Component {
   constructor(props){
     super()
@@ -11,6 +12,7 @@ export default class MyFavorites extends Component {
       places: [],
       loading: true,
       error: false,
+      text: 'Aun no tienes Favoritos',
       currentPosition: {error: true}
     }
     this.renderContent = this.renderContent.bind(this)
@@ -35,8 +37,14 @@ export default class MyFavorites extends Component {
     this.setState({ currentPosition: position })
   }
 
-  componentDidMount() {
-    this.getFavorites()
+  async componentDidMount() {
+    let userAlreadySignin = await AlreadyUser()
+    if(userAlreadySignin) {
+      this.getFavorites()
+    } else {
+      this.setState({ loading: false, text: 'Primero debes iniciar sesión ' })
+      return Actions.login({ ensureLogin: true })
+    }
   }
 
   renderContent() {
@@ -49,7 +57,7 @@ export default class MyFavorites extends Component {
       } else {
         return(
           <View style = {{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-            <SearchNotFound text = 'Aun no tienes Favoritos'/>
+            <SearchNotFound text = { this.state.text }/>
           </View>
         )
       }
