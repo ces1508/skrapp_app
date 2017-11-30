@@ -125,12 +125,12 @@ export const getLastPosition = async () =>  {
 
 export const getProfile = async () => {
   let profile = await Api.getProfile()
-  // if (profile.authData) {
-  //   let { access_token } = profile.authData.facebook
-  //   let request = await fetch(`https://graph.facebook.com/v2.11/me?access_token=${access_token}&fields=name,picture{url}`)
-  //   let fbProfile = await request.json()
-  //   return fbProfile
-  // }
+  if (profile.authData) {
+    let { access_token } = profile.authData.facebook
+    let request = await fetch(`https://graph.facebook.com/v2.11/me?access_token=${access_token}&fields=name,picture{url}`)
+    let fbProfile = await request.json()
+    return fbProfile
+  }
   return profile
 }
 

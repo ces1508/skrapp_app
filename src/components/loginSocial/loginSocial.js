@@ -34,7 +34,7 @@ export default class LoginSocial extends Component {
       )
       } else {
       let fbTokens = await AccessToken.getCurrentAccessToken()
-      let request = await fetch(`https://graph.facebook.com/v2.11/me?fields=name,email&access_token=${fbTokens.accessToken}`)
+      let request = await fetch(`https://graph.facebook.com/v2.11/me?fields=name,picture&access_token=${fbTokens.accessToken}`)
       let fbProfiele = await request.json()
       let sigin = await Api.loginFacebook(fbTokens, fbProfiele)
       if (sigin.error) {

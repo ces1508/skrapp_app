@@ -39,12 +39,10 @@ export default class Menu extends Component {
   
   async componentWillMount() {
     let login = await AlreadyUser()
-    if(login) {
+    if (login) {
       let profile = await getProfile()
       let picture = profile.picture? { uri:  profile.picture.data.url  } : this.state.picture
-      this.setState({ login })
-    } else {
-      this.setState({ login })
+      this.setState({ picture, username: profile.name, login })
     }
   }
 
@@ -60,7 +58,7 @@ export default class Menu extends Component {
   }
   
   signIn(){
-    Actions.login({ ensureLogin: true })
+    Actions.login({ ensureLogin: true, type: 'replace' })
   }
   
   map () {
@@ -121,15 +119,14 @@ export default class Menu extends Component {
             <Text style = { styles.text }>ACERCA DE SKRAPP</Text>
             </View>
         </TouchableOpacity>
-         <TouchableOpacity onPress={() => this.state.login? this.destroySession() : this.signIn()}>
+         <TouchableOpacity onPress={() => this.state.login? this.destroySession():this.signIn()}>
            <View style={styles.item}>
              <IonicIcon
                style={styles.iconMenu}
-               name={this.state.login ? 'md-log-out' : 'ios-add-circle-outline'}
+               name={this.state.login? 'md-log-in' :'ios-add-circle-outline'}
                size={25}
                color='#ff5353' />
-
-             <Text style={styles.text}>{this.state.login ? 'CERRAR SESIÓN' : 'INICIAR SESION' } </Text>
+             <Text style={styles.text}> {this.state.login? 'Cerra Sesion' : 'INICIAR SESION'} </Text>
            </View>
          </TouchableOpacity>
          
@@ -151,25 +148,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 35
-    // borderRadius: Platform.OS === 'android' ? 20 : 30,
-    // borderWidth: 1
   },
   item: {
     height: (height - 10) / 7.4,
     justifyContent: 'center',
     alignItems: 'center',
-    // borderWidth: 1,
-    // borderColor: 'white'
   },
   imageProfile: {
     width: 60,
     height: 60,
-    // backgroundColor: 'white',
-    // borderRadius: Platform.OS === 'android' ? 50 : 30,
     borderRadius: 30,
     borderWidth: 3,
     borderColor: '#fff',
-    // marginTop: 15,
     marginBottom: 5,
     marginTop: 60,
   },
@@ -180,7 +170,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
     fontWeight: '400',
-    // letterSpacing: .2
   },
   text: {
     color: '#fff',
@@ -193,7 +182,6 @@ const styles = StyleSheet.create({
   iconMenu: {
     width: 25,
     height: 25,
-    // borderWidth: 1,
     textAlign: 'center',
   }
 })
