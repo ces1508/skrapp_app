@@ -39,7 +39,7 @@ export default class LoginView extends Component {
         
             {this.props.ensureLogin?  
               <View style = { styles.back }>
-                <Icon name='ios-arrow-back-outline' size={35} color='#fff' onPress = {() => alert('llendo hacia atras')}  />
+                <Icon name='ios-arrow-back-outline' size={35} color='#fff' onPress = {() => Actions.drawer() }  />
               </View>
               : null
             }
