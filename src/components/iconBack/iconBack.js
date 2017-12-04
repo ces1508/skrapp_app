@@ -10,7 +10,7 @@ import {
 const IconBack = (props) => {
   return(
     <TouchableOpacity onPress = { () => Actions.pop() }> 
-      < View style = { styles.iconContainer }>
+      <View style = { props.style ? props.style: styles.iconContainer }>
         <Icon name= 'ios-arrow-back-outline' size = {35} color = '#fff'/>
       </View>
     </TouchableOpacity>

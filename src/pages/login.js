@@ -11,12 +11,13 @@ import {
   StatusBar,
   ScrollView 
 } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 import LoginForm from '../components/loginForm'
 import ButtomIcon, { Buttom } from '../components/buttom'
 import LoginSocial from '../components/loginSocial'
 import SectionRegister from '../components/SectionRegister'
 const { width, height } = Dimensions.get('window')
-
+import { Actions } from 'react-native-router-flux'
 export default class LoginView extends Component {
   constructor(props) {
     super(props)
@@ -36,6 +37,12 @@ export default class LoginView extends Component {
             : null
           }
         
+            {this.props.ensureLogin?  
+              <View style = { styles.back }>
+                <Icon name='ios-arrow-back-outline' size={35} color='#fff' onPress = {() => alert('llendo hacia atras')}  />
+              </View>
+              : null
+            }
             <View style = {{ flex: 1 }}>
               <View style = { styles.containerLogo }>
                 <Image  style = { styles.logo } source = { require('../../assets/images/skrapp.png') } resizeMode = 'contain' />
@@ -148,5 +155,14 @@ const styles = StyleSheet.create({
     height: 0.5,
     backgroundColor: '#fff',
     flex: 1,
+  },
+  back: {
+    position: 'absolute', 
+    top: 20, 
+    left: 0, 
+    width: 40, 
+    paddingLeft: 10, 
+    backgroundColor: 'transparent',
+    zIndex: 100,
   }
 })

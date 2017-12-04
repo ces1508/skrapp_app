@@ -123,10 +123,10 @@ export default class Menu extends Component {
            <View style={styles.item}>
              <IonicIcon
                style={styles.iconMenu}
-               name={this.state.login? 'md-log-in' :'ios-add-circle-outline'}
+               name={this.state.login ? 'md-log-out' :'md-log-in'}
                size={25}
-               color='#ff5353' />
-             <Text style={styles.text}> {this.state.login? 'Cerra Sesion' : 'INICIAR SESION'} </Text>
+               color={this.state.login ? '#ff5353' : '#f98d2c'} />
+             <Text style={styles.text}> {this.state.login? 'CERRAR SESIÓN' : 'INICIAR SESIÓN'} </Text>
            </View>
          </TouchableOpacity>
          
