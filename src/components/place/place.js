@@ -34,13 +34,13 @@ export default class Place extends Component {
     this.setState({ unidad })
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.Unidad()
     if (this.props.currentPosition.hasOwnProperty('error') === false) {
       this.calculeDistance()
     }
-
   }
+
 
   render() {
     let { data } = this.props

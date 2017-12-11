@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, StyleSheet, Dimensions, Share, TouchableOpacity, Platform} from 'react-native'
+import { View, ScrollView, StyleSheet, Dimensions, Share, TouchableOpacity, Platform, Text} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import PlaceHeeader from '../components/placeHeader'
 import ActionsPlace from '../components/actionsPlace'
@@ -15,19 +15,31 @@ import { LaunchMap, AlreadyUser } from '../utils'
 export default class PlaceView extends Component {
   constructor(props) {
     super(props)
-    this.state = { favorited: false , userAlreadySigin: false}
+    this.state = { loading : true, favorited: false , userAlreadySigin: false, data: {}}
     this.toogleFavorite = this.toogleFavorite.bind(this)
     this.alreadyLiked = this.alreadyLiked.bind(this)
     this.onShare = this.onShare.bind(this)
     this.onReview = this.onReview.bind(this)
     this.userAlreadySigin = this.userAlreadySigin.bind(this)
+    this.loadPlace = this.loadPlace.bind(this)
   }
 
   componentWillMount(){
     this.userAlreadySigin()
+    this.loadPlace()
   }
   componentDidMount() {
     this.alreadyLiked()
+  }
+
+  async loadPlace() {
+    let data = this.props.data
+    if (this.props.placeId) {
+      data = await Api.getPlace(this.props.placeId)
+      console.log(data)
+    } 
+      
+    this.setState({ data, loading: false })
   }
   
   async userAlreadySigin() {
@@ -65,7 +77,8 @@ export default class PlaceView extends Component {
   }
 
   onShare() {
-    let { website, title, description } = this.props.data
+    let data = this.props.placeId ? this.props.data : this.state.data
+    let { website, title, description } = data
     Share.share({
       message:`skrapp te recomienda ${title}\n
       ${description} \n 
@@ -85,47 +98,60 @@ export default class PlaceView extends Component {
   }
 
   render() {
-    let { data } = this.props
-    let imageBanner = data.imageTwo? data.imageTwo.url: data.image.url
-    return(
-      <ScrollView>
-        <PlaceHeeader
-          banner = { imageBanner }
-          profileImage =  { data.imageThumb.url }
-         />
-         <View style = { styles.main }>
-            <PlaceInfo
-              title = { data.title }
-              description = { data.description }
-              address = { data.address } />
-            <View style = {{flex: 1, marginTop: 15, flexDirection: 'row', justifyContent: 'space-between', }}>
-              <ActionsPlace
-                handleFavorite = {this.toogleFavorite}
-                onShare = { this.onShare }
-                onReview = { this.onReview }
-                favorited = { this.state.favorited } />
+    let { data } = this.state
+    if (!this.state.loading) {
+      if (!data.error) {
+        let imageBanner = data.imageTwo? data.imageTwo.url: data.image.url
+        return(
+          <ScrollView>
+            <PlaceHeeader
+              banner = { imageBanner }
+              profileImage =  { data.imageThumb.url }
+             />
+             <View style = { styles.main }>
+                <PlaceInfo
+                  title = { data.title }
+                  description = { data.description }
+                  address = { data.address } />
+                <View style = {{flex: 1, marginTop: 15, flexDirection: 'row', justifyContent: 'space-between', }}>
+                  <ActionsPlace
+                    handleFavorite = {this.toogleFavorite}
+                    onShare = { this.onShare }
+                    onReview = { this.onReview }
+                    favorited = { this.state.favorited } />
+                </View>
+                <View style = {{ marginTop: 20 }}>
+                  <PlaceBoxInfo 
+                    title = 'Más Información' 
+                    location = {data.location } 
+                    address = { data.address }  
+                    website = { data.website }  
+                    phone = { data.phone } />
+                  {/* <PlaceBoxSocial title = 'Redes Sociales' /> */}
+                </View>
+                <View>
+                  <Map title = { data.title } location = { data.location } description = { data.description } />
+                  <View style = {{ position: 'absolute', right: 5, top: 10 }}>
+                  <TouchableOpacity  onPress = { () => this.showMap() }>
+                    <ButtomIcon iconSize = {20} text = 'Indicaciones' icon = 'location-arrow' colorIcon = 'white' styleBtn = { styles.styleBtn  }/>
+                  </TouchableOpacity>
+                  </View>
+                </View>
             </View>
-            <View style = {{ marginTop: 20 }}>
-              <PlaceBoxInfo 
-                title = 'Más Información' 
-                location = {data.location } 
-                address = { data.address }  
-                website = { data.website }  
-                phone = { data.phone } />
-              {/* <PlaceBoxSocial title = 'Redes Sociales' /> */}
-            </View>
-            <View>
-              <Map title = { data.title } location = { data.location } description = { data.description } />
-              <View style = {{ position: 'absolute', right: 5, top: 10 }}>
-              <TouchableOpacity  onPress = { () => this.showMap() }>
-                <ButtomIcon iconSize = {20} text = 'Indicaciones' icon = 'location-arrow' colorIcon = 'white' styleBtn = { styles.styleBtn  }/>
-              </TouchableOpacity>
-              </View>
-            </View>
-        </View>
-
-      </ScrollView>
-    )
+    
+          </ScrollView>
+        )
+      } else {
+        return(
+          <View style = {{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+             <Text> {data.status === 404? 'No Hemos encontrado el lugar': 'Ups !, nuestros servidores estan al maximo, por favor intenta mas tarde'} </Text>
+          </View>
+        )
+      }
+      
+    } else {
+      return null
+    }
   }
 }
 

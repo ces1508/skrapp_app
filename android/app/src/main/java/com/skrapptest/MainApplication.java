@@ -3,6 +3,7 @@ package com.skrapptest;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 
@@ -41,6 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RCTCameraPackage(),
             new ReactNativeOneSignalPackage(),
             new OrientationPackage(),
             new VectorIconsPackage(),

@@ -14,6 +14,7 @@ import Search from '../pages/search'
 import Settings from '../pages/settings'
 import MapView from '../pages/map'
 import WebSite from '../pages/website'
+import QrReader from '../pages/qrReader'
 import { AlreadyUser, setMapStyle, setUnidad } from '../utils'
 import Review from '../pages/review'
 import {
@@ -151,6 +152,11 @@ export default class Routes extends Component {
                 renderBackButton = { IconBack }                 
                 leftTitle = ''
                 titleStyle = {{ color: '#fff' }} />
+              <Scene 
+                key = 'qrReader'
+                title = 'Scanear Codigo'
+                component = {QrReader} 
+                titleStyle = {{ color:'#fff' }}/>
           </Scene>
       </Router>
     )

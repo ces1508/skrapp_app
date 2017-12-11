@@ -6,7 +6,8 @@ import {
   Dimensions,
   AsyncStorage,
   ScrollView,
-  Platform
+  Platform,
+  TouchableOpacity
 } from 'react-native'
 import Api from '../api'
 import CheckBox from '../components/checkbox'
@@ -14,7 +15,7 @@ import HeaderProfileUser from '../components/headerProfileUser'
 import { getUnidad, getMapStyle, setMapStyle, setUnidad} from '../utils'
 import Avatar from '../../assets/images/avatar.png'
 const { width, height } = Dimensions.get('window')
-
+import { Actions } from 'react-native-router-flux'
 export default class Settings extends Component {
   constructor(props) {
     super(props)
@@ -88,6 +89,11 @@ export default class Settings extends Component {
                 </View>
               </View>
             </View>
+          </View>
+          <View style = { styles.section }>
+            <TouchableOpacity onPress = {() => Actions.qrReader()}>
+                <Text> Scanear codigo QR </Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>

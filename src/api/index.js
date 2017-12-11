@@ -22,7 +22,7 @@ export default class Api {
       return data.results
       return []
     } catch (e) {
-      console.log('error', e)
+      console.log('error', e.response)
       return []
     }
   }
@@ -68,6 +68,22 @@ export default class Api {
       console.log('error', e)
       return []
     }
+  }
+
+  static async getPlace (id) {
+    let endpoint = `${API_SKRAPP}/classes/Place/${id}`
+    try {
+      let request = await axios(endpoint, {
+        headers: {
+          "content-type": "application/json",
+          "X-Parse-Application-Id": APPLICATION_ID
+        }
+      })
+      return request.data
+    } catch (e) {
+      let { status } = e.request
+      return { error: true, status }
+    } 
   }
 
   static async filterPlaceByName (text, categoryId, position ) {
@@ -162,7 +178,7 @@ export default class Api {
       let data = request.data
       return data.results
     } catch (e) {
-      console.log('error', e,response)
+      console.log('error', e.response)
       return []
     }
   }

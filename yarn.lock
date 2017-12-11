@@ -3589,6 +3589,12 @@ react-native-button@^2.0.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-camera@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-0.12.0.tgz#51afa8acf1696d9d973074b6454c5ba2cce6ac18"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-communications@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
@@ -3644,6 +3650,12 @@ react-native-progress@^3.4.0:
   resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-3.4.0.tgz#c002e6efb2f0b82dd6889510e669c492da2718ac"
   dependencies:
     prop-types "^15.5.8"
+
+react-native-qrcode-scanner@0.0.26:
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/react-native-qrcode-scanner/-/react-native-qrcode-scanner-0.0.26.tgz#55712964a2f8fd1f6deaa8a1aed0863ef4baa58a"
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-router-flux@^4.0.0-beta.22:
   version "4.0.0-beta.22"
