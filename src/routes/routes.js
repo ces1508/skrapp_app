@@ -88,8 +88,8 @@ export default class Routes extends Component {
                 title = 'Categorias'
                 hideBackImage = { true }
                 titleStyle={{alignSelf: 'center' , color: '#fff'}}
-                renderRightButton = {IconSearch}
-                onRight = { () => this.goToSearch() }
+                // renderRightButton = {IconSearch}
+                // onRight = { () => this.goToSearch() }
               />
             </Scene>
             <Scene

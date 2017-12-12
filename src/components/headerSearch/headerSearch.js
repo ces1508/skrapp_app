@@ -2,27 +2,58 @@ import React from 'react'
 import {
   View,
   TextInput,
-  StyleSheet
+  StyleSheet,
+  Text,
+  Platform
 } from 'react-native'
-import Icons from 'react-native-vector-icons/FontAwesome'
+import Icons from 'react-native-vector-icons/Ionicons'
 export default HeaderSearch = (props) => {
   console.log(props)
   return(
-    <View style = {{ flexDirection: 'row', paddingHorizontal: 10, backgroundColor:'#5D6D7E', height: 50, paddingVertical: 10 }}>
-      <TextInput 
-        style = {{ flex: 1, paddingHorizontal: 30, backgroundColor: '#AEB6BF', borderRadius: 15, height: 30 }}
-        placeholder = 'Buscar Categorias'
-        value = { props.value }
-        placeholderTextColor = '#fff'
-        ref={input => { this.textInput = input }} 
-        underlineColorAndroid = 'transparent'
-        clearButtonMode = 'while-editing'
-        onChangeText = {(text) => props.handleFilter(text)}
-      />
-      <Icons name = 'search' size = {20}  style = {{ position: 'absolute', top: 15, left: 18, backgroundColor: 'transparent' }}/>
+    <View style = { styles.containerSearch }>
+      <View style = { styles.containerinput}> 
+        <Icons name='ios-search' size={18} style={styles.iconSearch} />      
+        <TextInput 
+          style = { styles.inputText }
+          placeholder = 'Buscar categorias'
+          value = { props.value }
+          placeholderTextColor= '#a8a8a8'
+          ref={input => { this.textInput = input }} 
+          underlineColorAndroid = 'transparent'
+          clearButtonMode = 'while-editing'
+          onChangeText = {(text) => props.handleFilter(text)}
+        />
+      </View>
      
     </View>
   )
 }
 const styles = StyleSheet.create({
+  containerSearch: {
+    flexDirection: 'row', 
+    alignItems: 'center',
+    paddingHorizontal: 10, 
+    backgroundColor: 'rgba(0, 0 , 0 , .1)', 
+    height: 50, 
+    paddingVertical: 10
+  },
+  containerinput: {
+    backgroundColor: '#fff', 
+    flex: 1,
+    flexDirection: 'row',
+    borderRadius: 5, 
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputText : {
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
+    fontWeight: '400',
+    height: 32,
+  },
+  iconSearch: {
+    paddingHorizontal: 7,
+    color: '#a8a8a8',
+    fontSize: 20,
+    backgroundColor: 'transparent',
+  }
 })
