@@ -28,7 +28,7 @@ export default class Api {
   }
 
 
-  static async getItemsByCategory(id, location = null)  {
+  static async getItemsByCategory(id, location = null, skip = 1, limit = 8)  {
     let where = {}
     if (location) {
       where = {
@@ -55,7 +55,9 @@ export default class Api {
       let endpoint = `${API_SKRAPP}/classes/Place`
       let request = await axios.get(endpoint, {
         params: {
-          where: where
+          where: where,
+          limit,
+          skip
         },
         headers: {
           "content-type": "application/json",
@@ -70,7 +72,7 @@ export default class Api {
     }
   }
 
-  static async filterPlaceByName (text, categoryId, position ) {
+  static async filterPlaceByName (text,  position, skip = 1, limit = 50) {
     let where = {}
     let title = text.toLowerCase()
     if (!position) {
@@ -97,7 +99,9 @@ export default class Api {
       let endpoint = `${API_SKRAPP}/classes/Place`
       let request = await axios.get(endpoint, {
         params: {
-          where: where
+          where: where,
+          limit, 
+          skip
         },
         headers: {
           "content-type": "application/json",
@@ -132,7 +136,7 @@ export default class Api {
     }
   }
 
-  static async getPlacesByPosition (location) {
+  static async getPlacesByPosition (location, skip = 1, limit = 4) {
     let where = {}
     if (location) {
       where = {
@@ -151,7 +155,9 @@ export default class Api {
       let request = await axios.get(endpoint, {
         params: {
           include: 'category',
-          where: where
+          where: where,
+          limit: limit, 
+          skip: skip
         },
         headers: {
           "content-type": "application/json",

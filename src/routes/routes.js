@@ -31,6 +31,12 @@ export default class Routes extends Component {
      }
   }
 
+  goToSearch() {
+    let { data }  = this.state
+    Actions.search({ typeSearch: 'place' })
+  }
+
+
   async setValues() {
     await Promise.all([setMapStyle(), setUnidad()])
   }
@@ -83,7 +89,7 @@ export default class Routes extends Component {
                 hideBackImage = { true }
                 titleStyle={{alignSelf: 'center' , color: '#fff'}}
                 renderRightButton = {IconSearch}
-                onRight = { () => alert('hola') }
+                onRight = { () => this.goToSearch() }
               />
             </Scene>
             <Scene
@@ -93,7 +99,8 @@ export default class Routes extends Component {
                titleStyle = {{ color: '#fff' }}
                onRight = {() => null}
                backButtonImage = { BackButtom } 
-               renderBackButton={IconBack}                
+               renderBackButton={IconBack}
+               onRight = { () => this.goToSearch() }                
                renderRightButton = {IconSearch}/>
             <Scene
               key = 'place'

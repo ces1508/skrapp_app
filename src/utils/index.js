@@ -56,7 +56,8 @@ export const getCurrentPosition = async () =>  {
       .catch()
       return resolve(data)
     }, (e) => {
-        return resolve({error: true})
+
+        return resolve(getLastPosition())
     })
   })
 }

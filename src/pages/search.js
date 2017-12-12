@@ -5,7 +5,8 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Platform
+  Platform,
+  ActivityIndicator
 
 } from 'react-native'
 import Icons from 'react-native-vector-icons/Ionicons'
@@ -20,79 +21,76 @@ export default class Search extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: this.props.data,
+      data: [],
       typeSearch: this.props.typeSearch,
-      filterData: [],
       q: '',
+      refreshing: false, 
+      skip: 1,
       loading: false,
-      filter: false,
-      position: {}
+      position: {error: true}
     }
     this.renderRows = this.renderRows.bind(this)
-    this.filterCategories = this.filterCategories.bind(this)
-    this.filterData = this.filterData.bind(this)
-    this.filterPlaces = this.filterPlaces.bind(this)
+    this.filter = this.filter.bind(this)
     this.handleInput = this.handleInput.bind(this)
     this.clearInput = this.clearInput.bind(this)
+    this.loadMore = this.loadMore.bind(this)
+    this.onRefresh = this.onRefresh.bind(this)
   }
 
-  filterCategories (xt) {
-    let { data, q } = this.state
-    let rgx =  new RegExp(q, 'gi')
-    let filterData = data.filter((row) => {
-      if (row.title.match(rgx) !== null) {
-        return row
-      }
+
+  async filter() {
+    let { skip } = this.state
+    let position = await getCurrentPosition()
+    if (this.state.q.length >=2 ) {
+      this.setState({ loading: true })
+      let data = await Api.filterPlaceByName(this.state.q, null, skip, 50)
+      this.setState({ data, position, loading: false })
+    }
+  }
+
+  loadMore () {
+   return null
+    this.setState({ 
+      skip: this.state.skip  + this.state.limit,
+      loading: false,
+      refreshing: false,
+      position: this.state.currentPosition
+    }, () => { this.filter() })
+  }
+
+  onRefresh () {
+    this.setState({
+      position: this.state.position,
+
     })
-    this.setState({ filterData, filter: true })
-  }
-
-  async filterPlaces() {
-    let currentPosition = await getCurrentPosition()
-    let lastPosition = await getLastPosition()
-    let position = { error: true}
-    let data = []
-    if (!currentPosition.error) {
-      position = currentPosition
-    }
-    if (!lastPosition.error) {
-      position = lastPosition
-    }
-    let filter = await Api.filterPlaceByName(this.state.q, this.props.categoryId)
-    this.setState({ filterData: filter, position })
   }
 
   handleInput (value) {
-    let filter = false
-    if (value.trim().length > 0) {
-      filter = true
-    }
-    this.setState({ q: value, filter })
-    this.filterData()
+    this.setState({ q: value })
+    this.filter()
   }
 
   clearInput() {
-    this.setState({ q: '', filterData: [] })
+    this.setState({ q: '', data: [] })
   }
 
   handleBack () {
     Actions.pop()
   }
-  filterData () {
-    let { typeSearch } = this.state
-    if (typeSearch === 'categories') {
-      this.filterCategories()
-    } else {
-      this.filterPlaces()
-    }
-  }
 
   renderRows () {
-    let { filter, data, filterData, typeSearch } = this.state
-    if (typeSearch === 'categories') {
-      return <Categories  data = { filter? filterData : data } />
+    let { loading,  data } = this.state
+    if (loading) {
+      return <ActivityIndicator animating size="large" />
     }
-    return <ListPlaces data = { filter? filterData : data } currentPosition = {this.state.position }/>
+    if(!loading  &&  data.length > 0) {
+      return <ListPlaces 
+        data = { data }
+        loadMore = { this.loadMore } 
+        currentPosition = {this.state.position }
+      />
+    }
+    return null
   }
   render() {
     return(
@@ -137,8 +135,6 @@ const styles = StyleSheet.create({
   searchContainer:{
     backgroundColor: '#e79d39',
     paddingTop: Platform.OS === 'android' ? 0 : 20,
-    // borderBottomWidth: 1,
-    // borderBottomColor: '#c7c7c7'
   },
   containerInput:{
     height: 50,
@@ -151,7 +147,6 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     color: "#4a4a4a",
     paddingTop: 5,
-    // borderWidth: 1,
     paddingHorizontal: 10,  
   },
   input:{
@@ -160,17 +155,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: 50,
     fontStyle: 'italic',
-    // borderWidth: 1,
   },
   inputIconClear: {
 
     color: '#4a4a4a',
     marginRight: 10,
-    // paddingVertical: 10,
     paddingHorizontal: 13,
     paddingTop: 5,
-    // borderWidth: 1,
-    // paddingRight: 20,
   }
-
 })

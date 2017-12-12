@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ListPlaces  from '../components/listPlaces'
 import Api from '../api'
-import { View, Text } from 'react-native'
+import { View, Text, ActivityIndicator } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { getCurrentPosition, getLastPosition } from '../utils'
 import Load from '../components/load'
@@ -13,28 +13,34 @@ export default class DetailCategrory extends Component {
     this.state = ({
       data: [],
       loading: true,
+      limit: 10,
+      skip: 1,
+      currentPosition: null,
+      refreshing: false
     })
     this.getData = this.getData.bind(this)
+    this.loadMore = this.loadMore.bind(this)
+    this.onRefresh = this.onRefresh.bind(this)
   }
 
 
   async getData() {
-    let currentPosition = await getCurrentPosition()
-    let lastPosition = await getLastPosition()
+    let { limit, skip, currentPosition} = this.state
+    if (currentPosition === null) {
+      currentPosition = await getCurrentPosition()
+    }
     let data = []
     if (!currentPosition.error) {
-      data = await Api.getItemsByCategory(this.props.id, currentPosition )
-    } else if (!lastPosition.error) {
-      currentPosition = lastPosition
-      data = await Api.getItemsByCategory(this.props.id, lastPosition)
+      data = await Api.getItemsByCategory(this.props.id, currentPosition, skip, limit)
     } else {
-      data = await Api.getItemsByCategory(this.props.id, )
+      data = await Api.getItemsByCategory(this.props.id, null, skip, limit)
     }
-    this.setState({ loading: false, data, currentPosition: currentPosition  })
-  }
-
-  componentWillMount() {
-    Actions.refresh({onRight: () => this.goToSearch() })
+    this.setState({ 
+      loading: false,
+      refreshing: false, 
+      data: skip === 1? data : [...this.state.data, ...data], 
+      currentPosition: currentPosition  
+    })
   }
 
   componentDidMount() {
@@ -45,9 +51,28 @@ export default class DetailCategrory extends Component {
     Actions.search({ typeSearch: 'places' , categoryId: this.props.id})
   }
 
+
+  loadMore () {
+    this.setState({ 
+      skip: this.state.skip  + this.state.limit,
+      loading: true,
+      refreshing: false,
+      currentPosition: this.state.currentPosition
+    }, () => { this.getData() })
+  }
+   onRefresh () {
+    this.setState({ 
+      limit: 10,
+      refreshing: true, 
+      skip: 1 , 
+    },
+      () => { this.getData() }
+    )
+  }
+
   renderContent() {
-    let { loading } = this.state
-    if (loading ) {
+    let { loading, skip } = this.state
+    if (loading && skip === 1) {
       return(
         <View>
           <Load />
@@ -57,7 +82,15 @@ export default class DetailCategrory extends Component {
     } else if(this.state.data.length > 0) {
       return (
         <View  >
-          <ListPlaces  data={this.state.data} handleClick={this.nextPage}  currentPosition = { this.state.currentPosition }  />
+          <ListPlaces 
+            loading = { this.state.loading }
+            data={this.state.data} 
+            handleClick={this.nextPage}  
+            loadMore = {() => this.loadMore}
+            currentPosition = { this.state.currentPosition }
+            onRefresh = { this.onRefresh }
+            refreshing = { this.state.refreshing }  
+          />
         </View>
       )
     } else {
