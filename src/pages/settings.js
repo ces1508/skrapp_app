@@ -68,10 +68,17 @@ export default class Settings extends Component {
     return(
       <View>
         <ScrollView>
-          <View style = { styles.hedaer } >
-            <HeaderProfileUser height = { height / 3}  username = { this.state.username } avatar = { this.state.social? {uri: this.state.profileImage} : Avatar}/>
+        <View style = { styles.hedaer } >
+        <HeaderProfileUser height = { height / 3}  username = { this.state.username } avatar = { this.state.social? {uri: this.state.profileImage} : Avatar}/>
+        </View>
+        
+        <TouchableOpacity onPress = {() => Actions.qrReader()}>
+          <View style = { styles.containerQR}> 
+              <Text style={ [styles.text , styles.section]} > Scanear código QR </Text>
           </View>
-          <View style = { styles.settings }>
+        </TouchableOpacity>
+
+        <View style = { styles.settings }>
             <View style = { styles.settingCard }>
               <View style = { styles.section }>
                 <Text style = { styles.sectionTitle } > Unidad de Distancia </Text>
@@ -89,11 +96,6 @@ export default class Settings extends Component {
                 </View>
               </View>
             </View>
-          </View>
-          <View style = { styles.section }>
-            <TouchableOpacity onPress = {() => Actions.qrReader()}>
-                <Text> Scanear codigo QR </Text>
-            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
@@ -114,6 +116,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fefefe',
     paddingVertical: 10,
     paddingHorizontal: 20,
+    borderRadius: 4,
     
   },
   section: {
@@ -132,5 +135,29 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderWidth: 0.5,
     backgroundColor: '#e1e1e1'
+  },
+  cardBackground: {
+    backgroundColor: '#fefefe',
+    marginTop: 10,
+    borderRadius: 5,
+
+
+  },
+  text: {
+    fontSize: 18,
+    color: '#fff',
+    fontFamily: Platform.OS === 'android' ? 'RobotoCondensed-Regular' : 'RobotoCondensed-Regular',
+    fontWeight: '400',
+    paddingBottom: 13,
+  },
+  containerQR: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#4A90E2',
+    marginHorizontal: 50,
+    marginTop: 10,
+    borderRadius: 5,
   }
+  
 })

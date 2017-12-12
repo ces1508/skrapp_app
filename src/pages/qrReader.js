@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import{ View, StyleSheet, Text } from 'react-native'
+import{ View, StyleSheet, Text, Dimensions } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import QrCodeScanner from 'react-native-qrcode-scanner'
+import RectangleQR from '../components/rectangleQR'
+
 
 export default class QrReader extends Component {
   _onRead(e) {
@@ -9,9 +11,14 @@ export default class QrReader extends Component {
   }
   render() {
     return(
-      <View style = { StyleSheet.main } >
-          <Text style = { styles.text } onPress = {()=> Actions.place({ placeId: 'ju5Xg3XSRy' })}> Test </Text>
-          <QrCodeScanner 
+      <View style = { styles.main } >
+          {
+            // <Text style = { styles.text } onPress = {()=> Actions.place({ placeId: 'ju5Xg3XSRy' })}> Test </Text>
+          }
+            
+          <QrCodeScanner
+            cameraStyle = { styles.qrContainer}
+            customMarker = { <RectangleQR /> }
             reactivate = { false }
             onRead = { this._onRead.bind(this) }
             showMarker = { true } />
@@ -22,7 +29,17 @@ export default class QrReader extends Component {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1
+    flex: 1,
+  },
+  qrContainer: {
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
+    paddingBottom: 50,
+  },
+  rectangle: {
+    borderWidth: 2,
+    borderColor: 'red',
+    backgroundColor: '#fff'
   },
   text: {
     marginTop: 55,

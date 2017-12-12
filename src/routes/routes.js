@@ -154,7 +154,9 @@ export default class Routes extends Component {
                 titleStyle = {{ color: '#fff' }} />
               <Scene 
                 key = 'qrReader'
-                title = 'Scanear Codigo'
+                title = 'Scanear Código'           
+                backButtonImage = { BackButtom } 
+                renderBackButton = { IconBack }                     
                 component = {QrReader} 
                 titleStyle = {{ color:'#fff' }}/>
           </Scene>
